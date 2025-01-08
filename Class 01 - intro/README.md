@@ -4,7 +4,7 @@
 
 What we’ll cover today: Introduction, syllabus, and mutual expectations
 
-**I. Introduction – about me**
+## **I. Introduction – about me**
 
 My name is Shahar Sukenik (please call me Shahar). I started as faculty at UCM in 2018. My lab is part of the Chemistry and Biochemistry department. We use simulations, in vitro experiments and live cell microscopy to study how the cellular environment regulates protein function.
 
@@ -14,7 +14,7 @@ Please keep in mind that this course is a work in progress, and some parts may n
 
 You can contact me any time via email: [ssukenik@syr.edu](mailto:ssukenik@syr.edu). Be sure to include CHEM260 in the email subject! Since my lab is on campus, I meet students before or after class. Best to coordinate this with me via email.
 
-**II. Course logistics (**grade weighting for each activity given in posted policies**)**
+## **II. Course logistics (**grade weighting for each activity given in posted policies**)**
 
 1. **Attendance is mandatory**. You can’t pass the course if you miss more than 3 classes (and don’t do the makeup assignments).
 2. Class **assignments must be completed the same week.** The classes are designed in a way that lets you work independently and finish the tasks within a week. Some students may finish them in class, others will need to spend some time at home to get it done.
@@ -24,7 +24,7 @@ You can contact me any time via email: [ssukenik@syr.edu](mailto:ssukenik@syr.ed
 6. I’m available all semester to help with this course—**be sure to seek help as soon as you feel lost.** I can help with homework assignments only after you’ve tried to write some code and do not wait until the last minute.
 7. Note that there are many different sets of tools and ways to solve the problems we’ll discuss, but during this class be sure to use the tools we’re covering
 
-**III. Introduction – about the course**
+## **III. Introduction – about the course**
 
 1. This course will teach you how to use a set of tools. Much like learning to play an instrument or how to use a piece of hardware, you need to learn by doing. The course moves rapidly, and shifts between different programs and coding environments. Be sure to keep up!
     1. The course is designed to help you with your research!
@@ -44,7 +44,7 @@ You can contact me any time via email: [ssukenik@syr.edu](mailto:ssukenik@syr.ed
     3. **Note:** For most users, Linux is not a satisfactory replacement for also having a Windows or Mac system for music, video, games, (standardized) document preparation, etc.
     4. **You can use any computer and OS you would like in this course.** Keep in mind that there may be some compatibility issues. All students in the course will also get a login to a linux server that is hosted on campus.
 
-**IV. Syllabus**
+## **IV. Syllabus**
 
 1. The syllabus is designed to cover the following:
     1. Linux command line basics – with the goal of performing quick and efficient manipulation of text-based data (like the one that comes out of the measurements you take!)
@@ -52,7 +52,7 @@ You can contact me any time via email: [ssukenik@syr.edu](mailto:ssukenik@syr.ed
     3. Algorithms for scientific computing – with the goal of giving you some ideas of how to come up with a model for your data
 2. The sullabus is likely to change based on how quickly we proceed through the materials, and your own interests. An updated version of the syllabus can always be found on CatCourses.
 
-**V. What you’ll need for next week (and the weeks after that):**
+## **V. What you’ll need for next week (and the weeks after that):**
 
 1. A linux shell.
     1. For Windows users – please install the windows subsystem for linux (WSL). Instructions [here](https://learn.microsoft.com/en-us/windows/wsl/install)
