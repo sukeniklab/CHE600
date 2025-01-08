@@ -1,6 +1,6 @@
-CHEM260 F23 Class 1
+# CHEM260 F23 Class 1
 
-WELCOME!
+## WELCOME!
 
 What we’ll cover today: Introduction, syllabus, and mutual expectations
 
@@ -12,7 +12,7 @@ I have learned how to code out of necessity – the need for rapid data analysis
 
 Please keep in mind that this course is a work in progress, and some parts may not work as well or be as clear as others. I would like to hear your comments, questions, and suggestions at any point in the course!
 
-You can contact me any time via email: [ssukenik@ucmerced.edu](mailto:ssukenik@ucmerced.edu). Be sure to include CHEM260 in the email subject! Since my lab is on campus, I meet students before or after class. Best to coordinate this with me via email.
+You can contact me any time via email: [ssukenik@syr.edu](mailto:ssukenik@syr.edu). Be sure to include CHEM260 in the email subject! Since my lab is on campus, I meet students before or after class. Best to coordinate this with me via email.
 
 **II. Course logistics (**grade weighting for each activity given in posted policies**)**
 
@@ -55,9 +55,9 @@ You can contact me any time via email: [ssukenik@ucmerced.edu](mailto:ssukenik@u
 **V. What you’ll need for next week (and the weeks after that):**
 
 1. A linux shell.
-    1. For Windows users – please install the windows subsystem for linux (WSL). Instructions here: <https://learn.microsoft.com/en-us/windows/wsl/install>
-    2. For Mac users, you already have a terminal installed by default. Read more about it here: <http://osxdaily.com/2017/04/28/howto-ssh-client-mac/>.
-2. Anaconda python distribution (we’ll get to it later). Get it from [https://www.anaconda.com/distribution](https://www.anaconda.com/distribution/#download-section). We’ll use the python 3.8 distribution. It is important that you do not have python already installed on your computer, or there may be clashes. If you have python, and do not want to uninstall it you are free to use your own build – just know that the class will be using the Spyder IDE that comes with Anaconda.
+    1. For Windows users – please install the windows subsystem for linux (WSL). Instructions [here](https://learn.microsoft.com/en-us/windows/wsl/install)
+    2. For Mac users, you already have a terminal installed by default. Read more about it [here](http://osxdaily.com/2017/04/28/howto-ssh-client-mac/).
+2. Anaconda python distribution (we’ll get to it later). Get it [here](https://www.anaconda.com/distribution/#download-section). We’ll use the python 3.8 distribution. It is important that you do not have python already installed on your computer, or there may be clashes. If you have python, and do not want to uninstall it you are free to use your own build – just know that the class will be using the Spyder IDE that comes with Anaconda.
 3. Make sure you can log into the linux shell.
     1. Activate WSL or the OS/X shell.
     2. WSL requires you to set a password – please set it and don’t forget it!
