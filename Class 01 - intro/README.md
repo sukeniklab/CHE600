@@ -55,10 +55,11 @@ You can contact me any time via email: [ssukenik@syr.edu](mailto:ssukenik@syr.ed
 
 ## **V. What you’ll need for next week (and the weeks after that):**
 
-1. A linux shell.
-    1. For Windows users – please install the windows subsystem for linux (WSL). Instructions [here](https://learn.microsoft.com/en-us/windows/wsl/install)
-    2. For Mac users, you already have a terminal installed by default. Read more about it [here](http://osxdaily.com/2017/04/28/howto-ssh-client-mac/).
-2. Anaconda python distribution (we’ll get to it later). Get it [here](https://www.anaconda.com/distribution/#download-section). We’ll use the python 3.8 distribution. It is important that you do not have python already installed on your computer, or there may be clashes. If you have python, and do not want to uninstall it you are free to use your own build – just know that the class will be using the Spyder IDE that comes with Anaconda.
-3. Make sure you can log into the linux shell.
-    1. Activate WSL or the OS/X shell.
-    2. WSL requires you to set a password – please set it and don’t forget it!
+1. Login to course server.
+    1. The course has a dedicated server (a.k.a Virtual Machine or <b>VM</b>) managed by IT. To log in, you will need to use either:
+        a. the Remote Desktop Server (RDS) (see details [here](https://su-jsm.atlassian.net/wiki/spaces/ITHELP/pages/159941534/Remote+Desktop+Services+RDS))
+        b. A computer in the computer room
+        c. Another computer managed by SU IT
+    2. Load Putty on the RDS (or you can use your own shell if you are on a manged computer running OS/X or Linux). To do this:
+        a. Open the start menu and type in "putty" - you can pin the app to your start bar
+        b. In the first window, insert the VM's ip address: as-che600-lvm.ad.syr.edu ![image](./images/putty_01.png)
