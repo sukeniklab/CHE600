@@ -62,4 +62,4 @@ You can contact me any time via email: [ssukenik@syr.edu](mailto:ssukenik@syr.ed
         c. Another computer managed by SU IT
     2. Load Putty on the RDS (or you can use your own shell if you are on a manged computer running OS/X or Linux). To do this:
         a. Open the start menu and type in "putty" - you can pin the app to your start bar
-        b. In the first window, insert the VM's ip address: as-che600-lvm.ad.syr.edu ![image](./images/putty_01.png)
+        b. In the first window, insert the VM's ip address: as-che600-lvm.ad.syr.edu <img src="./images/putty_01.png" width="200"/>
