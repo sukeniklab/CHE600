@@ -53,13 +53,24 @@ You can contact me any time via email: [ssukenik@syr.edu](mailto:ssukenik@syr.ed
     3. Algorithms for scientific computing – with the goal of giving you some ideas of how to come up with a model for your data
 2. The sullabus is likely to change based on how quickly we proceed through the materials, and your own interests. An updated version of the syllabus can always be found on CatCourses.
 
-## **V. What you’ll need for next week (and the weeks after that):**
+## **V. Logging in to the course server:**
 
-1. Login to course server.
-    1. The course has a dedicated server (a.k.a Virtual Machine or <b>VM</b>) managed by IT. To log in, you will need to use either:
-        a. the Remote Desktop Server (RDS) (see details [here](https://su-jsm.atlassian.net/wiki/spaces/ITHELP/pages/159941534/Remote+Desktop+Services+RDS))
-        b. A computer in the computer room
-        c. Another computer managed by SU IT
-    2. Load Putty on the RDS (or you can use your own shell if you are on a manged computer running OS/X or Linux). To do this:
-        a. Open the start menu and type in "putty" - you can pin the app to your start bar
-        b. In the first window, insert the VM's ip address: as-che600-lvm.ad.syr.edu <img src="./images/putty_01.png" width="200"/>
+1. The course has a dedicated server (a.k.a Virtual Machine or <b>VM</b>) managed by IT. To log in, you will need to use either:
+    1. the Remote Desktop Server (RDS) (see details [here](https://su-jsm.atlassian.net/wiki/spaces/ITHELP/pages/159941534/Remote+Desktop+Services+RDS))
+    2. A computer in the computer room
+    3. Another computer managed by SU IT
+2. Connecting to VM using the RDS:
+    1. Open the start menu and type in "putty" - you can pin the app to your start bar
+    2. In the first ("Session") window, insert the VM's ip address: as-che600-lvm.ad.syr.edu 
+    <img src="./images/putty_01.png" width="300"/>
+    3. Next, go to the "X11 option in the option tree, and mark "Enable X11 Forwarding". This will allow Putty to transmit graphics
+    <img src="./images/putty_02.png" width="300"/>
+    4. Finally, go back to the "Session" window. Type "CHE600 in the "Saved Sessions" textbox, and hit "Save"
+    <img src="./images/putty_03.png" width="300"/>
+    5. Now, double click the CHE600 session, and a window will open up
+    <img src="./images/putty_04.png" width="300"/>
+    6. You should be able to log in using your SUID and password!
+3. If you are using a manged computer running OS/X or Linux you can use your own shell and connect directly with: 
+    '''bash
+    ssh as-che600-lvm.ad.syr.edu
+    '''
