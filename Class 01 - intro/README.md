@@ -61,15 +61,11 @@ You can contact me any time via email: [ssukenik@syr.edu](mailto:ssukenik@syr.ed
     3. Another computer managed by SU IT
 2. Connecting to VM using the RDS:
     1. Open the start menu and type in "putty" - you can pin the app to your start bar
-    2. In the first ("Session") window, insert the VM's ip address: as-che600-lvm.ad.syr.edu 
-    <img src="./images/putty_01.png" width="300"/>
-    3. Next, go to the "X11 option in the option tree, and mark "Enable X11 Forwarding". This will allow Putty to transmit graphics<br>
-    <img src="./images/putty_02.png" width="300"/>
-    4. Finally, go back to the "Session" window. Type "CHE600" in the "Saved Sessions" textbox, and hit "Save"<br>
-    <img src="./images/putty_03.png" width="300"/>
-    5. Now, double click the CHE600 session, and a window will open up<br>
-    <img src="./images/putty_04.png" width="300"/>
-    6. You should be able to log in using your SUID and password!
+    2. In the first ("Session") window, insert the VM's ip address: as-che600-lvm.ad.syr.edu <br><img src="./images/putty_01.png" width="300"/>
+    3. Next, go to the "X11 option in the option tree, and mark "Enable X11 Forwarding". This will allow Putty to transmit graphics<br><img src="./images/putty_02.png" width="300"/>
+    4. Finally, go back to the "Session" window. Type "CHE600" in the "Saved Sessions" textbox, and hit "Save"<br><img src="./images/putty_03.png" width="300"/>
+    5. Now, double click the CHE600 session, and a window will open up<br><img src="./images/putty_04.png" width="300"/>
+    6. You should be able to log in using your SUID and password!<br><img src="./images/putty_05.png" width="300"/>
 3. If you are using a manged computer running OS/X or Linux you can use your own shell and connect directly with: 
     '''bash
     ssh as-che600-lvm.ad.syr.edu
