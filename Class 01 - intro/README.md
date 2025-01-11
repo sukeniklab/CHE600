@@ -67,6 +67,6 @@ You can contact me any time via email: [ssukenik@syr.edu](mailto:ssukenik@syr.ed
     5. Now, double click the CHE600 session, and a window will open up<br><img src="./images/putty_04.png" width="300"/>
     6. You should be able to log in using your SUID and password!<br><img src="./images/putty_05.png" width="300"/>
 3. If you are using a manged computer running OS/X or Linux you can use your own shell and connect directly with: 
-    '''bash
+    ```bash
     ssh as-che600-lvm.ad.syr.edu
-    '''
+    ```
