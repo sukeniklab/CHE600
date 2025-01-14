@@ -12,7 +12,7 @@ I have learned how to code out of necessity - the need for rapid data analysis, 
 
 Please keep in mind that this course is always a work in progress, and some parts may not work as well or be as clear as others. I would like to hear your comments, questions, and suggestions at any point in the course!
 
-You can contact me any time via email: [ssukenik@syr.edu](mailto:ssukenik@syr.edu). Be sure to include CHE600 in the email subject! Since my lab is on campus, I meet students before or after class. Best to coordinate this with me via email.
+You can contact me any time via email: [ssukenik@syr.edu](mailto:ssukenik@syr.edu). Be sure to include CHEM260 in the email subject! Since my lab is on campus, I meet students before or after class. Best to coordinate this with me via email.
 
 ## **II. Course logistics (**grade weighting for each activity given in posted policies**)**
 
