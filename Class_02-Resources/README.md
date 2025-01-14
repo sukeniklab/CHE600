@@ -1,6 +1,6 @@
 # CHEM260 F23 Class 2
 
-## Resources
+# Resources
 
 What we’ll cover today: What resources should you use during this course (and for when you're coding for your own purposes)
 
@@ -12,8 +12,9 @@ What we’ll cover today: What resources should you use during this course (and 
 
 ## **IV. Text books/online documents**
 
-## **V. Logging in to the course server:**
+# **Working on the server:**
 
+## **I. Logging in**
 1. The course has a dedicated server (a.k.a Virtual Machine or <b>VM</b>) managed by IT. To log in, you will need to use either:
     1. the Remote Desktop Server (RDS) (see details [here](https://su-jsm.atlassian.net/wiki/spaces/ITHELP/pages/159941534/Remote+Desktop+Services+RDS))
     2. A computer in the computer room
@@ -29,3 +30,4 @@ What we’ll cover today: What resources should you use during this course (and 
     ```bash
     ssh as-che600-lvm.ad.syr.edu
     ```
+## **II. The linux environment **
