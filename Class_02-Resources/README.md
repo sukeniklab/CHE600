@@ -1,8 +1,38 @@
 # CHEM260 F23 Class 2
 
-# Resources
-
 What we’ll cover today: What resources should you use during this course (and for when you're coding for your own purposes)
+
+# **Logging in**
+1. The course has a dedicated server (a.k.a Virtual Machine or <b>VM</b>) managed by IT. To log in, you will need to use either:
+    1. the Remote Desktop Server (RDS, see below) 
+    2. A computer in the computer room
+    3. Another computer managed by SU IT
+
+## **I. Remote desktop server**
+1. SU provides all faculty and staff with a "remote desktop" - a windows computer that is housed on a server and to which you can log in from
+anywhere using your netid.
+2. You can log in through a [remote desktop web server](http://rds.syr.edu), or through a [dedicated app](https://su-jsm.atlassian.net/wiki/spaces/ITHELP/pages/159941283/Connecting+to+RDS+using+the+Windows+App)
+3. Use your netid and password to log in
+4. The server should have a program called "Putty" that will let you connect to the server
+
+## **II. A computer in the computer room**
+1. The lab takes place in LSC 215 which is a computer class
+2. You can log in to any of the computers using your netid and password - this will log you on to your remote desktop
+3. It doesn't matter whcih computer you use - the desktop is associated with your account!
+
+## **III. Connecting to CHE600 server (aka virtual machine, VM):**
+    1. Start a remote desktop session (see items I or II)
+    2. Open the start menu and type in "putty" - this will search for the [putty app](https://www.putty.org/). you can pin the app to your start bar
+    3. In the first ("Session") window, insert the VM's ip address: as-che600-lvm.ad.syr.edu <br><img src="./images/putty_01.png" width="300"/>
+    4. Next, go to the "X11 option in the option tree, and mark "Enable X11 Forwarding". This will allow Putty to transmit graphics<br><img src="./images/putty_02.png" width="300"/>
+    5. Finally, go back to the "Session" window. Type "CHE600" in the "Saved Sessions" textbox, and hit "Save"<br><img src="./images/putty_03.png" width="300"/>
+    6. Now, double click the CHE600 session, and a window will open up<br><img src="./images/putty_04.png" width="300"/>
+    7. You should be able to log in using your SUID and password!<br><img src="./images/putty_05.png" width="300"/>
+
+    8. If you are using a manged computer running OS/X or Linux you can use your own shell and connect directly with: 
+    ```bash
+    ssh as-che600-lvm.ad.syr.edu
+    ```
 
 ## **I. Google searches**
 
@@ -14,22 +44,7 @@ What we’ll cover today: What resources should you use during this course (and 
 
 # **Working on the server:**
 
-## **I. Logging in**
-1. The course has a dedicated server (a.k.a Virtual Machine or <b>VM</b>) managed by IT. To log in, you will need to use either:
-    1. the Remote Desktop Server (RDS) (see details [here](https://su-jsm.atlassian.net/wiki/spaces/ITHELP/pages/159941534/Remote+Desktop+Services+RDS))
-    2. A computer in the computer room
-    3. Another computer managed by SU IT
-2. Connecting to VM using the RDS:
-    1. Open the start menu and type in "putty" - you can pin the app to your start bar
-    2. In the first ("Session") window, insert the VM's ip address: as-che600-lvm.ad.syr.edu <br><img src="./images/putty_01.png" width="300"/>
-    3. Next, go to the "X11 option in the option tree, and mark "Enable X11 Forwarding". This will allow Putty to transmit graphics<br><img src="./images/putty_02.png" width="300"/>
-    4. Finally, go back to the "Session" window. Type "CHE600" in the "Saved Sessions" textbox, and hit "Save"<br><img src="./images/putty_03.png" width="300"/>
-    5. Now, double click the CHE600 session, and a window will open up<br><img src="./images/putty_04.png" width="300"/>
-    6. You should be able to log in using your SUID and password!<br><img src="./images/putty_05.png" width="300"/>
-3. If you are using a manged computer running OS/X or Linux you can use your own shell and connect directly with: 
-    ```bash
-    ssh as-che600-lvm.ad.syr.edu
-    ```
+
 ## **II. The linux environment **
 CHE600 F23 Class 2
 
