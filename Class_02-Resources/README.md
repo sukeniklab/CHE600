@@ -7,9 +7,9 @@ What we’ll cover today:
 
 # **Logging in**
 1. The course has a dedicated server (a.k.a Virtual Machine or <b>VM</b>) managed by IT. To log in, you will need to use either:
-    1. [the Remote Desktop Server](#) (RDS, see below)
-    2. A computer in the computer room
-    3. Another computer managed by SU IT
+    1. [the Remote Desktop Server](#i-remote-desktop-server) (RDS, see below)
+    2. [A computer in the computer room](#ii-a-computer-in-the-computer-room)
+    3. Another computer managed by SU IT (see me for details)
 
 ## **I. Remote desktop server**
 1. SU provides all faculty and staff with a "remote desktop" - a windows computer that is housed on a server and to which you can log in from
