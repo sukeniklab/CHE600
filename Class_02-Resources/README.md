@@ -1,6 +1,9 @@
 # CHEM260 F23 Class 2
 
-What we’ll cover today: What resources should you use during this course (and for when you're coding for your own purposes)
+What we’ll cover today: 
+- logging in to the remote server
+- resources you should you use during this course
+- first taste of linux command line
 
 # **Logging in**
 1. The course has a dedicated server (a.k.a Virtual Machine or <b>VM</b>) managed by IT. To log in, you will need to use either:
@@ -23,7 +26,7 @@ anywhere using your netid.
 ## **III. Connecting to CHE600 server (aka virtual machine, VM):**
 1. Start a remote desktop session (see items I or II)
 2. Open the start menu and type in "putty" - this will search for the [putty app](https://www.putty.org/). you can pin the app to your start bar
-3. In the first ("Session") window, insert the VM's ip address: as-che600-lvm.ad.syr.edu <br><img src="./images/putty_01.png" width="300"/>
+3. In the first "Session" window, insert the VM's ip address: as-che600-lvm.ad.syr.edu <br><img src="./images/putty_01.png" width="300"/>
 4. Next, go to the "X11 option in the option tree, and mark "Enable X11 Forwarding". This will allow Putty to transmit graphics<br><img src="./images/putty_02.png" width="300"/>
 5. Finally, go back to the "Session" window. Type "CHE600" in the "Saved Sessions" textbox, and hit "Save"<br><img src="./images/putty_03.png" width="300"/>
 6. Now, double click the CHE600 session, and a window will open up<br><img src="./images/putty_04.png" width="300"/>
