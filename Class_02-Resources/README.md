@@ -1,13 +1,13 @@
 # CHEM260 F23 Class 2
 
 What we’ll cover today: 
-- logging in to the remote server
-- resources you should you use during this course
-- first taste of linux command line
+* logging in to the remote server
+* resources you should you use during this course
+* first taste of linux command line
 
 # **Logging in**
 1. The course has a dedicated server (a.k.a Virtual Machine or <b>VM</b>) managed by IT. To log in, you will need to use either:
-    1. the Remote Desktop Server (RDS, see below) 
+    1. [the Remote Desktop Server](#) (RDS, see below)
     2. A computer in the computer room
     3. Another computer managed by SU IT
 
