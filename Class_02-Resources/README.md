@@ -13,7 +13,7 @@ What we’ll cover today: What resources should you use during this course (and 
 anywhere using your netid.
 2. You can log in through a [remote desktop web server](http://rds.syr.edu), or through a [dedicated app](https://su-jsm.atlassian.net/wiki/spaces/ITHELP/pages/159941283/Connecting+to+RDS+using+the+Windows+App)
 3. Use your netid and password to log in
-4. The server should have a program called "Putty" that will let you connect to the server
+4. The server should have a program called "Putty" that will let you connect to the server (see item III)
 
 ## **II. A computer in the computer room**
 1. The lab takes place in LSC 215 which is a computer class
@@ -21,18 +21,18 @@ anywhere using your netid.
 3. It doesn't matter whcih computer you use - the desktop is associated with your account!
 
 ## **III. Connecting to CHE600 server (aka virtual machine, VM):**
-    1. Start a remote desktop session (see items I or II)
-    2. Open the start menu and type in "putty" - this will search for the [putty app](https://www.putty.org/). you can pin the app to your start bar
-    3. In the first ("Session") window, insert the VM's ip address: as-che600-lvm.ad.syr.edu <br><img src="./images/putty_01.png" width="300"/>
-    4. Next, go to the "X11 option in the option tree, and mark "Enable X11 Forwarding". This will allow Putty to transmit graphics<br><img src="./images/putty_02.png" width="300"/>
-    5. Finally, go back to the "Session" window. Type "CHE600" in the "Saved Sessions" textbox, and hit "Save"<br><img src="./images/putty_03.png" width="300"/>
-    6. Now, double click the CHE600 session, and a window will open up<br><img src="./images/putty_04.png" width="300"/>
-    7. You should be able to log in using your SUID and password!<br><img src="./images/putty_05.png" width="300"/>
+1. Start a remote desktop session (see items I or II)
+2. Open the start menu and type in "putty" - this will search for the [putty app](https://www.putty.org/). you can pin the app to your start bar
+3. In the first ("Session") window, insert the VM's ip address: as-che600-lvm.ad.syr.edu <br><img src="./images/putty_01.png" width="300"/>
+4. Next, go to the "X11 option in the option tree, and mark "Enable X11 Forwarding". This will allow Putty to transmit graphics<br><img src="./images/putty_02.png" width="300"/>
+5. Finally, go back to the "Session" window. Type "CHE600" in the "Saved Sessions" textbox, and hit "Save"<br><img src="./images/putty_03.png" width="300"/>
+6. Now, double click the CHE600 session, and a window will open up<br><img src="./images/putty_04.png" width="300"/>
+7. You should be able to log in using your SUID and password!<br><img src="./images/putty_05.png" width="300"/>
 
-    8. If you are using a manged computer running OS/X or Linux you can use your own shell and connect directly with: 
-    ```bash
-    ssh as-che600-lvm.ad.syr.edu
-    ```
+8. If you are using a manged computer running OS/X or Linux you can use your own shell and connect directly with: 
+```bash
+ssh as-che600-lvm.ad.syr.edu
+```
 
 ## **I. Google searches**
 
