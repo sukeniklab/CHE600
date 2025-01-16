@@ -98,7 +98,12 @@ cd class02
 /home/yourname/CHE600/class02
 ```
 
-7. In the directory structure / is the main directory (aka the "root" of the directory tree). Then home/ is the directory that holds all user folders, then yourname/ is your own home directory. Then CHE600/ is a subdirectory in your home directory, and class02/ is a subdirectory within that subdirectory! All this directory structure is important because you'll need to keep it in mind as you navigate. For example:
+7. In the directory structure / is the main directory (aka the "root" of the directory tree). 
+    - Then home/ is the directory that holds all user folders
+        - yourname/ is your own home directory. 
+            - CHE600/ is a subdirectory in your home directory 
+                - class02/ is a subdirectory within that subdirectory! 
+All this directory structure is important because you'll need to keep it in mind as you navigate. For example:
 
 ```bash 
 cd ..
