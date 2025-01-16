@@ -222,7 +222,7 @@ awk '{FS=",";sum += $4; count += 1}END{print sum/count}' UP000464024.dc
 
 21. This command uses the ```awk``` program. We will learn all about it in the coming weeks – this is just meant as a demonstration of the power of bash! What is the average fraction of disordered proteins in the SARS-CoV-2 proteome?
 
-# **III. On your own: The bash shell**
+# **III. The bash shell - a bit deeper**
 
 1. Before we start, we need to know how to kill or exit running programs so we don’t get stuck. Some keys to press when you find yourself stuck on a Linux system:
     * ctrl-c (i.e. hold the Ctrl key and hit “c”; kills current command)
@@ -259,5 +259,23 @@ awk '{FS=",";sum += $4; count += 1}END{print sum/count}' UP000464024.dc
         2.  .py (a python script)
         3.  .c (a C program)
 
+## **IV. Bashing on your own**
 
+1. To try and assimilate the exercises we went through today, let's do an individual exercise. You'll notice that when we ran the ```getProteomeDisorder.sh``` command, we provided it with a proteome accession number (UPUP000464024). We could run this on any proteome code we wanted, and following the same awk command and workflow, calculated the average disorder for multiple organisms. This is what you'll need to do!
 
+2. Adapt the commands and get the average disorder for the following organisms: 
+<center>
+| Proteome Id | Organism |
+| --- | --- |
+| UP000150494 | Rhinolophus affinis coronavirus |
+| UP000154720 | BtRf-BetaCoV/HeB2013 |
+| UP000118579 | SARS coronavirus PUMC02 |
+| UP000168969 | SARS coronavirus Sino3-11 |
+| UP000174731 | Bat SARS-like coronavirus YNLF_31C |
+| UP000827403 | Staphylococcus phage vB_SarS_BM31 |
+| UP000000354 | Severe acute respiratory syndrome coronavirus (SARS-CoV) |
+| UP000128606 | BtRs-BetaCoV/YN2013 |
+| UP000147828 | SARS coronavirus PUMC03 |
+| UP000170944 | SARS coronavirus PUMC01 |
+| UP000099142 | SARS coronavirus ZJ02 |
+</center>
