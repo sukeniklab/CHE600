@@ -126,70 +126,73 @@ cd ~/CHE600/class02
 
 9. Note that you only have full permissions in your own home directory – which means that you can delete all your work, but you can’t delete anyone else’s work (or the entire filesystem or the root!) without admin privileges.
 
-**III. Task 1: Example of real-world scientific workflow using Bash and Python**
+10. Now that we've got a handle on how to maneuver within the linux system, we can start working!
+
+## **III. Task 1: Example of real-world scientific workflow using Bash and Python**
+The first task is really just a demonstration of how we can use powerful linux commands to create useful tools. As I've told you, my lab is interested in disordered proteins. There are thousands of proteins, but it's not always easy to know what parts of those proteins is well-folded and what parts do not have a structure. Luckily, there is a database called [Mobidb](https://mobidb.org) that has predictions of disordered for nearly every known protein. It has these predictions even for entire proteomes. We can view it online, but can we turn this into numbers that we can then analyze?
 
 1. We will pull data from an online database and calculate the average disordered in the SARS-CoV-2 proteome
-    1. On the workstation open a browser and go to:
+    1. On the local browser (**not the Putty shell!**) go to:
 
 [https://mobidb.bio.unipd.it/](https://mobidb.bio.unipd.it/%20)
 
-- 1. Scroll down to “Proteomes”, and click on the SARS-CoV-2 proteome
+2. Scroll down to “Proteomes”, and click on the SARS-CoV-2 proteome
 
 <img src="./images/mobidb_CoV2_proteome.png" width="300"/>
 
-- 1. Look at the list of proteins – there are 15 proteins listed. Click on any one of them
-  2. The entry contains information about the sequence – primarily whether the sequence is disordered.
+3. Look at the list of proteins – there are 15 proteins listed. Click on any one of them
 
-1. The MobiDB website contains a RESTful API (application programming interface). Essentially, this allows you to access this database from the linux command line by formatting the correct address string. Many bioinformatic databases use this format.
-2. We can use this interface to look at the dirsorder prediction for a single protein. For example, the SARS-CoV2 nucleoprotein. Enter the following address into your browser: (ok to copy and paste or just click the link!)
+4. The entry contains information about the sequence – primarily whether the sequence is disordered.
+
+5. The MobiDB website contains a RESTful API (application programming interface). Essentially, this allows you to access this database from the linux command line by formatting the correct address string. Many bioinformatic databases use this format.
+
+6. We can use this interface to look at the dirsorder prediction for a single protein. For example, the SARS-CoV2 nucleoprotein. Enter the following address into your browser: (ok to copy and paste or just click the link!)
 
 [**https://mobidb.bio.unipd.it/api/download?proteome=UP000464024**](https://mobidb.bio.unipd.it/api/download?proteome=UP000464024)
 
-1. This output is just barely human-readable, and if we had to parse dozens of these it would be very difficult. Instead, let’s do this programmatically! We will now download the entire SARS-CoV-2 proteome to a subdirectory within our home directories. (**Note that when you see mono-spaced fonts** like_this_one **this is a command to type into the terminal!**)
-2. Let’s get the proteome from MobiDB using the curl command. This command pulls up data from a HTTP address. Type (all in one line):
+7. This output is just barely human-readable, and if we had to parse dozens of these it would be very difficult. Instead, let’s do this programmatically! We will now download the entire SARS-CoV-2 proteome to a subdirectory within our home directories. 
+
+8. Let’s get the proteome from MobiDB using the ```curl``` command. The ```curl``` command pulls up data from a HTTP address. We need to provide an output file name (using the -o <i>flag</i>). This will be the file in which to write the contents of the http address. We'll name it ```CoV2.dat```. The final command should look like this (all in one line):
 
 ```bash
 curl -o CoV2.dat <https://mobidb.org/api/download?proteome=UP000464024>
 ```
 
-1. Look at the available files
-
-```bash
-ls (first character is a lower case “L”)
-```
-
-1. You can also see more information about the files with some flags:
+9. Now let's list the content of the current directory using the ```ls``` command. Can you see the CoV2.dat file?
+You can also see more information about the files with some flags:
 
 ```bash
 ls -ltrh
 ```
 
-1. We will now have a look at the file you downloaded using the more command. This is a viewer for text files:
+10. To look at the contents of the CoV2.dat file we can use the ```more``` command. This is a viewer for text files:
 
 ```bash
 more CoV2.dat
 ```
 (press space to scroll down)
 
-Seems like a mess, right? Do you identify anything in this? Turns out using some handy bash commands. I’ve compiled some parsing commands into a handy script called **getProteomeDisorder.sh**. This is available in /usr/CHE600 directory.
+11. Seems like a mess, right? Do you identify anything in this? Turns out using some handy bash commands. I’ve compiled some parsing commands into a handy script called ```getProteomeDisorder.sh```. This is available in ```/usr/CHE600/class02``` directory.
 
-1. To copy the script to your class02 directory, use the copy (cp) command. This will copy from the source (first argument) to the target (second argument):
+12. To copy the script to your class02 directory, use the copy (```cp```) command. This will copy from the source (first argument) to the target (second argument). For the source we use the full path. For the target, we use the shortcut for our home directory (~) followed by the subdirectory for class02. Notice that if the directory doesn't exist, the command will throw an error.
 
 ```bash
 cp /usr/CHE600/getProteomeDisorder.sh ~/CHE600/class02
 ```
 
-1. Type ls in your **/CHE600/class02** directory. The file should be there.
-2. In the shell, let’s look at the contents of this script by typing:
+13. Now go to you class02 directory using ```cd``` and list the files using ```ls```. The getProteomeDisorder.sh file should be there. Let’s look at the contents of this script by using another program that prints our file contents, ```cat```:
 
 ```bash
 cat getProteomeDisorder.sh
 ```
-1. **getProteomeDisorder.sh** is a bash shell script (indicated by the “shebang” notation in the first line: **#!/bin/bash**.
 
-The script runs several linux commands which we will cover later, including **sed**, **grep**, and **cut**. Each of these commands manipulates the initial download to extract some information. In the end we use the paste command to attach everything together. Notice that in several places in the script we use the wildcard **$1** – this is a reserved variable name for the first argument passed to this program (see below).
+* note that ```cat``` and ```more``` are not the same. cat will print out the file and scroll down the window, never stopping. More waits for you to press the spacebar once it filled the screen before moving on to the next screen. You'll be surprised that each is useful for specific purposes.
 
-1. Before running this script, we need to tell linux that it can be executed (is an executable). We do this with the change mode (chmod) command. Make sure you are in the /class02 directory and type:
+14. **getProteomeDisorder.sh** is a bash shell script (indicated by the “shebang” notation in the first line: **#!/bin/bash**.
+
+The script runs several linux commands which we will cover later, including ```sed```, ```grep```, and ```cut```. Each of these commands manipulates the initial download to extract some information. In the end we use the paste command to attach everything together. Notice that in several places in the script we use the wildcard **$1** – this is a reserved variable name for the first argument passed to this script (see below).
+
+15. Before running this script, we need to tell linux that it can be executed (is an executable). Note that unlike Windows or Macs, linux doesn't care what the file name is - you can execute any file (or try to!) so long as you mark it as an executable. To do this with the change mode command ```chmod```. Make sure you are in the /class02 directory and type:
 
 ```bash
 ls -ltrh
@@ -197,208 +200,64 @@ chmod +x getProteomeDisorder.sh
 ls -ltrh
 ```
 
-1. Notice that before and after the change mode an “x” was added to the file permissions in the file list. Now run the Bash script to get the proteome of the SARS-CoV-2 virus and map protein names and disorder:
+16. Notice that before and after the change mode an “x” was added to the file permissions in the file list. Now run the Bash script to get the proteome of the SARS-CoV-2 virus and map protein names and disorder:
 
 ```bash
 ./getProteomeDisorder.sh UP000464024
 ```
 
-Note that ./ is a notation meaning “this directory”. This will only work if **getProteomeDisorder.sh** file is in the current working directory.
+Note that ./ is a notation telling linux to run the executable located in “this directory”. This will only work if **getProteomeDisorder.sh** file is in the current working directory.
 
-1. What is the output of this script? Check by looking for new files in your directory (using the **ls -ltrh** command)
-2. The output file **UP000464024.dc** is a csv (comma separated value) file with protein ID, protein name, length, and disordered amino acid fraction fields. Type it out with the **more** or **cat** command.
-3. What happened? Using a few simple one-line commands and access to a well-curated online database we downloaded relevant bioinformatic data, parsed it from its initial, barely readable format, extracted the information we wanted. This was all done by **creating a custom tool that can be used again to extract the proteome of any organism**!
-4. We now want to get the average disorder fraction in all these proteins. To do that, paste the following command into your shell:
+17. Did any new files pop up as a result of running the script? Check by looking for new files in your directory (using the ```ls -ltrh``` command)
+
+18. The output file ```UP000464024.dc``` is a csv (comma separated value) file with protein ID, protein name, length, and disordered amino acid fraction fields. Type it out with the ```more``` or ```cat``` command. 
+
+19. What happened? Using a few simple one-line commands and access to a well-curated online database we downloaded relevant bioinformatic data, parsed it from its initial, barely readable format, extracted the information we wanted. This was all done by **creating a custom tool that can be used again to extract the proteome of any organism**!
+
+20. We now want to get the average disorder fraction in all these proteins. To do that, paste the following command into your shell:
 
 ```bash
 awk '{FS=",";sum += $4; count += 1}END{print sum/count}' UP000464024.dc
 ```
-1. This command uses the awk program. We will learn all about it in the coming weeks – this is just meant as a demonstration of the power of bash! What is the average fraction of disordered proteins in the SARS-CoV-2 proteome?
 
-**III. On your own: The bash shell**
+21. This command uses the ```awk``` program. We will learn all about it in the coming weeks – this is just meant as a demonstration of the power of bash! What is the average fraction of disordered proteins in the SARS-CoV-2 proteome?
+
+# **III. On your own: The bash shell**
 
 1. Before we start, we need to know how to kill or exit running programs so we don’t get stuck. Some keys to press when you find yourself stuck on a Linux system:
-2. ctrl-c (i.e. hold the Ctrl key and hit “c”; kills current command)
-3. :q (To exit certain programs like vi, less, and man)
-4. Esc (i.e. the Esc key on the upper left of your keyboard; escape input mode)
-5. Ctrl-z (put current process in background)
-6. Ctrl-d to exit some applications (eg python shell)
-7. Your prompt is customized to tell you the name of the computer you are on and the directory you are currently in:
+    * ctrl-c (i.e. hold the Ctrl key and hit “c”; kills current command)
+    * :q (To exit certain programs like vi, less, and man)
+    * Esc (i.e. the Esc key on the upper left of your keyboard; escape input mode)
+    * Ctrl-z (put current process in background)
+    * Ctrl-d to exit some applications (eg python shell)
 
-ssukenik@as-che600-lvm:~$ (“ssukenik” will be your own username, “@as-che600-lvm” is the server name, and “~” means your home directory)
+2. Your shell prompt is customized to tell you the name of the computer you are on and the directory you are currently in:
 
-ssukenik@as-che600-lvm:~/CHE600/class02$ (same as above but you’re in the /CHE600/class02 directory.
+    ```ssukenik@as-che600-lvm:~$``` (“ssukenik” will be your own username, “@as-che600-lvm” is the server name, and “~” means your home directory)
 
-1. You can scroll through your previous commands by using the “up” and “down” arrows on the keyboard. You can edit a command using the “left” or “right” arrows and the “Delete” and “Backspace” keys. Try it now.
-2. You can look through your entire history by typing history. This will be powerful in conjunction with some text finding programs like grep which we will learn later in the course.
-3. You can also use the reverse-i-search by hitting “ctrl-r” – this will search through your history for the most recent command the contains the string you type into it. Keep hitting ctrl-r to go further back in history.
-4. To find out about any Linux commands use one of the options below (won’t work on everything!) (**note that when you see italic text you need to replace the text with your own input to run the command!)**
-5. google search on “_command_” or “_command_ tutorial”
-6. man _command_
-7. _command_ \--help
-8. _command_ -h
-9. Directory based file system (a “directory” is the same as a “folder”)
-10. Directory names
-    - 1. Any combination of letters, numbers and symbols (avoid /><:&|\*)
-      2. **You cannot use spaces** in folder or file names!! Underscore “\_” is a common replacement.
-      3. Everything in linux is case sensitive! That means directory is not the same file as Directory
-      4. In most situations hitting the tab key will complete dir or file name or give you options
-11. Paths:
-12. Absolute paths (relative to root “/” directory)  
-    **/home/CHE600/ssukenik  
-    /usr/local/gromacs**
-13. Relative paths:  
-    **../** (one directory up)  
-    **../../** (two directories up)
-14. Home directory:  
-    ~ (Home directory)  
-    ~/class02 (Directory under home directory)
-15. You have full access to your home directory and subdirectories, but many directories that do not belong to you are write protected or sometimes even read-protected.
-16. Changing your directorycd _path_  
-    cd - (return to last directory)  
-    cd ~/_directory_ (go to directory in home directory)  
-    cd (go to root directory)
-17. Go back one directory:
+    ```ssukenik@as-che600-lvm:~/CHE600/class02$``` (same as above but you’re in the ```/CHE600/class02``` directory.
 
-cd .. one directory up
+3. Command history is always accessible, and should be used!
+    * You can scroll through your previous commands by using the “up” and “down” arrows on the keyboard. You can edit a command using the “left” or “right” arrows and the “Delete” and “Backspace” keys. Try it now.
+    * You can look through your entire history by typing history. This will be powerful in conjunction with some text finding programs like grep which we will learn later in the course.
+    * You can also use the reverse-i-search by hitting “ctrl-r” – this will search through your history for the most recent command the contains the string you type into it. Keep hitting ctrl-r to go further back in history.
 
-cd ../../ two directories up
+4. Completion of filenames is available upon hitting the **tab** key. If there are more than one matches, hit the tab key twice to get a list of all matches. This is very useful, and you are encouraged to get used to doing this instead of typing the full file name every time!
 
-cd ../../../ well, you get the point.
+5. Getting help about any Linux commands is easy. Try using one of the options below (won’t work on everything!) (**note that when you see italic text you need to replace the text with your own input to run the command!)**
+    * google search on “_command_” or “_command_ tutorial”
+    * ```man``` _command_
+    * _command_ ```\--help```
+    * _command_ ```-h```
 
-1. Print current directory:**  
-    pwd**
-2. Make a directory:**mkdir _directory or directories_** (separated by space)
-3. Remove a directory (which must be empty):  
-    **rmdir _directory or directories_** (separated by space)
-4. Try out some combinations of these commands:
+6. Filenames
+    * File names can be any combination of letters, numbers and symbols (avoid /><:&|)
+    * You cannot use spaces in file names!! Underscore “\_” is a common replacement.
+    * All file and directory names are Case sensitive ("Hello" is not the same as "hello")
+    * Suffixes (the bit at the end of the file name) don’t matter, but are helpful when used to indicate the file type, for example:
+        1. .sh (a bash shell script)
+        2.  .py (a python script)
+        3.  .c (a C program)
 
-**cd ~/class02  
-mkdir results  
-cd results  
-mkdir expt1 expt2  
-mkdir expt1/data  
-cd expt1/data  
-pwd**
 
-**rmdir ../../expt2**
 
-1. Programming example, make 200 directories under current directory. Take note that this is the first time we’re using a for loop – this is an essential tool!:
-
-**cd ~/CHE600/class02**
-
-**for i in {1..200}  
-do  
-mkdir dir.$i  
-done**
-
-**l**
-
-1. Programming example, make a hierarchy of 10 directories under current directory:
-
-**  
-for i in {1..10}  
-do  
-mkdir rdir.$i  
-cd rdir.$i**
-
-**done**
-
-**pwd**
-
-1. Great! Now how do you clean up this mess??
-2. Working with files
-3. Filenames
-4. Any combination of letters, numbers and symbols (avoid /><:&|)
-5. You cannot use spaces in file names!! Underscore “\_” is a common replacement.
-6. Everything is Case sensitive
-7. Suffixes don’t matter, but are helpful when used to indicate the file type, for example:
-    - - 1. .sh (Bash shell script)
-            2.  .py (Python program)
-            3.  .c (C program)
-8. In most situations **hitting the tab key** will complete the filename or give you options
-9. An asterisk “\*” is a wildcard for any number of any characters – you can use this to make multiple matches for a single command
-10. More on wildcards later
-11. List files:**ls** _path/filename/pattern_  
-    **ls –lh** _path/filename/pattern (_A more informative file list. Will tell you if a file is a directory and its permissions)
-
-**ls -ltrh** _path/filename/pattern (_same as -lh but lists in reverse chronological order (most recent file last))
-
-**l** (a non-standard but useful shortcut for **ls -ltrh)**
-
-**ls -d \*/** (list only directories)
-
-1. Copy files:**cp** _filename destination_ (note there are 2 arguments)
-2. Remove files:**rm** _filename/pattern_ (remove file or files)**rm -r** _directory/pattern_ (remove all files and directories below _directory_)
-
-**rm -rf** _directory/pattern_ (force remove all files and directories. Careful with this one‼)
-
-1. Size of a file (line/word/character count):  
-    **wc** _filename/pattern_ (number of lines/words/characters in the file)
-
-**wc \-l** _filename/pattern_ (number of lines only in the file)
-
-Scroll through a file:  
-**cat** _filename/pattern_
-
-**more** _filename/pattern_
-
-1. Filename auto-completion (**Tab** or **2xTab** for list of matches)
-2. **Now use these commands to get rid of all the directories you made!** Make sure you don’t delete everything in your directory! (Though if you do it’s not a big deal – we can restore it easily!). Also make sure you are running your commands in the right directory!
-3. One of the reasons linux is so powerful is that commands can be strung together. We will use this ability extensively throughout the course.
-4. Pipes transfer the output of one command into the next command:  
-    _command1_ | _command2_
-
-In the example below, the results of the directory listing shortcut **l** are piped into the word count command **wc** (you can always type **wc --help** to see more info about the command)  
-**l | wc**
-
-1. Redirects direct the output of a certain command to a specific location or file instead of to your screen  
-    _command_ > _outfile_ (Makes new outfile)  
-    _command_ >> _outfile_ (Appends to existing outfile)
-
-In the example below the output of the directory listing shortcut **l** are directed to a file called wc.out
-
-**ls > l.out**
-
-1. In the **getProteomeDisorder.sh** there are several pipes and redirects used to format the output from the proteome files. We will make extensive use of them later over the next few classes.
-
-**IV. In-class Mini Project—collecting data from multiple proteomes**
-
-- - 1. Please make sure you read the line, think about what it will do, then type it into your terminal. If you don’t know what a command does, or expected something but something else happened, please scroll back and review what we learned, or use google the command/use the **man** command/type the command with the flag **\--help** at the end
-        2.  Create and go to a subdirectory called proteomes:
-
-**cd ~/CHE600/class02**
-
-**mkdir proteomes**
-
-**cd proteomes**
-
-- - 1. Download proteomes.dat from Canvas, and place it in this directory. I can help with this if you don’t know how to find the correct directory!
-        2.  In the terminal, use the **cat** command to see the contents of that file and do the same for another file:
-
-**cat proteomes.dat**
-
-- - 1. We want to feed the output of the cat command into our **getProteomeDisorder.sh** script to extract the disorder for the proteome of different organisms. To do this, we iteratively feed the **proteomes.dat** file into the variable **i** with a **for** loop. Let’s first print out the variable **i** just to get a feel:
-
-**for i in \`cat proteomes.dat\`**
-
-**do**
-
-**echo "this proteome code is $i"**
-
-**done**
-
-The echo command prints a string to the terminal (kind of like a “print” command)
-
-- - 1. Next, adapt this loop in such a way that instead of printing out the value of **i**, we will use it as a parameter for **getProteomeDisorder.sh**. Make sure you have the script in your current directory, or otherwise call it from the correct directory.
-        2.  If you ran it properly, the command should take a little while to run as you pull entire proteomes off the MobiDB website!
-        3.  Once the script has finished running, report how many proteins exist in each proteome using the **wc -l \*.dc** command. Redirect this result into a file called **proteomes.len**
-        4.  Next, calculate the average disorder of each proteome by using the **awk** script we’ve used in class (it’s still in your history! No need to type it in from scratch again). You can do this manually, but it would be best if you can do this with a for loop! How can you do that?
-        5.  One you’re sure your awk script works properly, **redirect** (**\>**) the results into a file called **proteomes.dc**
-        6.  Paste all the files starting with “proteomes” together using **paste:**
-
-**paste proteomes\* > proteomes.all**.
-
-- - 1. Print out proteomes.all using the cat command. Which proteome is most disordered? Which is least disordered? You can always look up which proteome is which by googling the proteome code! Upload proteomes.dc and answer these questions using the submission link for class 2 in Canvas.
-
-Didn’t finish the exercises? Please be sure you are finished with everything by next week! I’m **always** happy to help once you’ve given it a few tries!
