@@ -26,7 +26,7 @@ In the past two years LLMs have entered every aspect of our life. Coding is no e
 5. Finally, make sure you can test that the code works the way you want it. In many cases, you will be able to run "sanity checks" to see if things work as they should.
 6. For complicated tasks, or when you use uncommon libraries or commands, LLMs may not be able to help. Even when that's the case, they will try to, by making up code that won't work as intended or using commands that don't actually exist in the code.
 
-## **IV. Text books/online documents**
+## **III. Text books/online documents**
 * There are a few good online textbooks for [bash](https://books.goalkicker.com/BashBook/) and [python](https://pythonbooks.org/free-books/) that are available as free pdf's.
 * There are good books printed on dead trees - but I'm not sure you need to use those. If you really want to have a hard copy, O'Reilly books are highly recommended.
 
@@ -36,25 +36,24 @@ In the past two years LLMs have entered every aspect of our life. Coding is no e
 3. To log in, you will need to use either:
     * [the Remote Desktop Server](#i-remote-desktop-server) (RDS, see below)
     * [A computer in the computer room](#ii-a-computer-in-the-computer-room)
-    * Another computer managed by SU IT (see me for details)
+    * Another computer managed by SU IT (see me for details if this is your case)
 
 
 ## **I. Remote desktop server**
-1. SU provides all faculty and staff with a "remote desktop" - a windows computer that is housed on a server and to which you can log in to from anywhere using your netid.
+1. SU provides all students with access to a "remote desktop" - a windows desktop that is housed on a server and to which you can log in to from anywhere using your netid.
 2. You can log in through a [remote desktop web server](http://rds.syr.edu), or through a [dedicated app](https://su-jsm.atlassian.net/wiki/spaces/ITHELP/pages/159941283/Connecting+to+RDS+using+the+Windows+App) that will run on your computer (available for Mac or Windows)
 3. Use your netid and password to log in
-4. The server should have a program called "Putty" that will let you connect to the server (see item III)
-5. If Putty can't be located, please come see me.
 
 ## **II. A computer in the computer room**
 1. The lab takes place in LSC 215 which is a computer class
-2. You can log in to any of the computers using your netid and password - this will log you on to your remote desktop
-3. It doesn't matter whcih computer you use - the desktop is associated with your account!
+2. You can log in to any of the computers using your netid and password
+3. You will log on to the computer (this is **not** your remote desktop), which can then access the server directly
 
 ## **III. Connecting to CHE600 server (aka virtual machine, VM):**
 1. Once you are on one of these "IT-managed" computers, you will need to connect to the VM. To do this, we use a protocol called ssh (acronym for "secure shell"). This is a network protocol that allows secured communication between two computers.
-2. While there are many ssh commands, I recommend you use a software called [Putty](https://www.putty.org/) to connect to the VM. All remote desktops and classroom computers should have Putty installed. If not - please let me know!
-3. Open the start menu and type in "putty" - this will search for the [putty app]. you can pin the app to your start bar
+2. The [Putty](https://www.putty.org/) software is the ssh application we will use to connect to the VM. All remote desktops and classroom computers should have Putty installed (icon shown below). 
+<img src="./images/putty.png" width="300"/>
+3. Open the start menu and type in "putty" - this will search for the [putty app]. you can pin the app to your start bar. If you cannot locate the software - please let me know! We will work with IT to quickly install it.
 4. In the first "Session" window, insert the VM's ip address: as-che600-lvm.ad.syr.edu <br><img src="./images/putty_01.png" width="300"/>
 5. Next, expand to the "SSH" option in the option tree, then to "X11", then on the righthand side mark "Enable X11 Forwarding". This will allow Putty to transmit graphics<br><img src="./images/putty_02.png" width="300"/>
 6. Finally, go back to the "Session" window. Type "CHE600" in the "Saved Sessions" textbox, and hit "Save"<br><img src="./images/putty_03.png" width="300"/>
@@ -63,13 +62,13 @@ In the past two years LLMs have entered every aspect of our life. Coding is no e
 
 # **First taste of linux**
 
-## ** I. The linux philosophy **
+## **I. The linux philosophy**
 
 1. Commands do just one thing, but do it well
 2. Commands can be stringed together to perform powerful operations
 3. Commands are meant to be run with all parameters provided. In this way, commands never wait for user input.
 
-## **II. The linux file and directory system**
+## **II. The linux directory system**
 
 1. In any operating system (OSX, Windows, or linux), files are stored in directories. 
     - Any directory can contain multiple files.
