@@ -72,7 +72,7 @@ In the past two years LLMs have entered every aspect of our life. Coding is no e
 
 1. Most linux systems have the following file structure:
 
-<img src="./images/linux_tree.png" width="300"/>
+<img src="./images/linux_tree.png" width="600"/>
 
 1. We’ll start in our own home directories. To make sure you are there, change directory (using cd) to your home directory (symbolized as ~), then print out your current directory (using pwd). The output from pwd should be a directory like /home/&lt;your username&gt;:
 
