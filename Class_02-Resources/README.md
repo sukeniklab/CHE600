@@ -3,7 +3,9 @@
 What we’ll cover today: 
 * [resources](#resources) you should you use during this course
 * [logging in](#logging-in) to the remote server
-* [first taste](#first-taste-of-linux) of linux command line
+* [first example](#iii-task-1-example-of-real-world-scientific-workflow-using-bash-and-python) of the power of bash
+* [linux files and commands](#iii-the-bash-shell---a-bit-deeper)
+* [Working on your own](#iv-bashing-on-your-own)
 
 
 # **Resources**
