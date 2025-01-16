@@ -1,20 +1,34 @@
 # CHEM260 F23 Class 3
 
 What we’ll cover today: 
-* [The linux philosphy](#the-linux-philosophy)
-* [The bash shell](#the-bash-shell)
+* [Linux native text editors]
+* [Slicing and dicing text files]
+* [Pipes and redirects]
+* [System commands]
 
-# The linux philosophy
-1. Commands do just one thing, but do it well
-2. Allow each command to act as a filter so commands can be easily connected to do more powerful operations
-3. Interfacing with the linux system is text-based, through the command line (aka the shell)
-4. Using Avoid “captive” command interfaces to allow “scripting”
 
-# The bash shell
-We will now work independently with linux commands. Remember that you can't cause any catastrophies (you do not have permissions to alter any files other than the ones in your home directory)
-## 1. How to escape when you're stuck
+# **Linux text editors
+Often we will want to edit text in our shell. This lets us quickly make changes to files with the need to download or upload files to the server. Since there is no graphical user interface (GUI) for our shell, there are several text-based editors available be default.
 
-6. Programming example, make 200 directories under current directory. Take note that this is the first time we’re using a for loop – this is an essential tool!:
+## **I. Reminder about printing out text files**
+Remember from class - we learned about the ```cat``` and ```more``` commands to print out the contents of a text file. These are very useful, but only let us view, and not edit the contents. We will continuously use these tools, but now we want to edit!
+
+## **II. The nano text editor**
+A simple, native text editor we can use in linux is ```nano```. The functionalities are very basic, but it is also very easy and intuitive to use.
+
+1. First, let's create a text file by using ```echo``` (we did this last class!)
+
+```bash
+echo "This is our first text file!" > text1.txt
+```
+
+2. Use ```cat``` out the file to verify its contents, then open the nano editor using the following command:
+
+```bash
+nano text1.txt
+```
+
+3. Programming example, make 200 directories under current directory. Take note that this is the first time we’re using a for loop – this is an essential tool!:
 
 ```bash
 cd ~/CHE600/class02**

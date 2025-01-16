@@ -25,6 +25,7 @@ In the past two years LLMs have entered every aspect of our life. Coding is no e
 4. Once you get a bit of code from the LLM, try running it. If any errors are thrown, you can report these to the LLM in the same conversation, and it will try to debug it.
 5. Finally, make sure you can test that the code works the way you want it. In many cases, you will be able to run "sanity checks" to see if things work as they should.
 6. For complicated tasks, or when you use uncommon libraries or commands, LLMs may not be able to help. Even when that's the case, they will try to, by making up code that won't work as intended or using commands that don't actually exist in the code.
+7. See an good primer on this [here](https://www.geeksforgeeks.org/how-to-use-chatgpt-to-write-code/)
 
 ## **III. Text books/online documents**
 * There are a few good online textbooks for [bash](https://books.goalkicker.com/BashBook/) and [python](https://pythonbooks.org/free-books/) that are available as free pdf's.
