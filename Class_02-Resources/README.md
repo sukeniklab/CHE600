@@ -325,7 +325,7 @@ awk '{FS=",";sum += $4; count += 1}END{print sum/count}' UP000464024.dc
 
 21. This command uses the ```awk``` program. We will learn all about it in the coming weeks – this is just meant as a demonstration of the power of bash! What is the average fraction of disordered proteins in the SARS-CoV-2 proteome?
 
-# **Bashing on your own**
+# **Bashing on your own - class assignment**
 
 1. To try and assimilate the exercises we went through today, let's do an individual exercise. You'll notice that when we ran the ```getProteomeDisorder.sh``` command, we provided it with a proteome accession number (UPUP000464024). We could run this on any proteome code we wanted, and following the same awk command and workflow, calculated the average disorder for multiple organisms. This is what you'll need to do!
 
