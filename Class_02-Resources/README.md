@@ -201,6 +201,33 @@ ls
 
 11. At this point, our class02 directory should have only a subdirectory called texts and no other files in it.
 
+# **III. The bash shell - a bit deeper**
+
+1. Before we start, we need to know how to kill or exit running programs so we don’t get stuck. Some keys to press when you find yourself stuck on a Linux system:
+    * ctrl-c (i.e. hold the Ctrl key and hit “c”; kills current command)
+    * :q (To exit certain programs like vi, less, and man)
+    * Esc (i.e. the Esc key on the upper left of your keyboard; escape input mode)
+    * Ctrl-z (put current process in background)
+    * Ctrl-d to exit some applications (eg python shell)
+
+2. Your shell prompt is customized to tell you the name of the computer you are on and the directory you are currently in:
+
+    ```ssukenik@as-che600-lvm:~$``` (“ssukenik” will be your own username, “@as-che600-lvm” is the server name, and “~” means your home directory)
+
+    ```ssukenik@as-che600-lvm:~/CHE600/class02$``` (same as above but you’re in the ```/CHE600/class02``` directory.
+
+3. Command history is always accessible, and should be used!
+    * You can scroll through your previous commands by using the “up” and “down” arrows on the keyboard. You can edit a command using the “left” or “right” arrows and the “Delete” and “Backspace” keys. Try it now.
+    * You can look through your entire history by typing history. This will be powerful in conjunction with some text finding programs like grep which we will learn later in the course.
+    * You can also use the reverse-i-search by hitting “ctrl-r” – this will search through your history for the most recent command the contains the string you type into it. Keep hitting ctrl-r to go further back in history.
+
+
+5. Getting help about any Linux commands is easy. Try using one of the options below (won’t work on everything!) (**note that when you see italic text you need to replace the text with your own input to run the command!)**
+    * google search on “_command_” or “_command_ tutorial”
+    * ```man``` _command_
+    * _command_ ```\--help```
+    * _command_ ```-h```
+    
 ## **III. Example of real-world scientific workflow using Bash and Python**
 The first task is really just a demonstration of how we can use powerful linux commands to create useful tools. As I've told you, my lab is interested in disordered proteins. There are thousands of proteins, but it's not always easy to know what parts of those proteins is well-folded and what parts do not have a structure. Luckily, there is a database called [Mobidb](https://mobidb.org) that has predictions of disordered for nearly every known protein. It has these predictions even for entire proteomes. We can view it online, but can we turn this into numbers that we can then analyze?
 
@@ -294,33 +321,6 @@ awk '{FS=",";sum += $4; count += 1}END{print sum/count}' UP000464024.dc
 ```
 
 21. This command uses the ```awk``` program. We will learn all about it in the coming weeks – this is just meant as a demonstration of the power of bash! What is the average fraction of disordered proteins in the SARS-CoV-2 proteome?
-
-# **III. The bash shell - a bit deeper**
-
-1. Before we start, we need to know how to kill or exit running programs so we don’t get stuck. Some keys to press when you find yourself stuck on a Linux system:
-    * ctrl-c (i.e. hold the Ctrl key and hit “c”; kills current command)
-    * :q (To exit certain programs like vi, less, and man)
-    * Esc (i.e. the Esc key on the upper left of your keyboard; escape input mode)
-    * Ctrl-z (put current process in background)
-    * Ctrl-d to exit some applications (eg python shell)
-
-2. Your shell prompt is customized to tell you the name of the computer you are on and the directory you are currently in:
-
-    ```ssukenik@as-che600-lvm:~$``` (“ssukenik” will be your own username, “@as-che600-lvm” is the server name, and “~” means your home directory)
-
-    ```ssukenik@as-che600-lvm:~/CHE600/class02$``` (same as above but you’re in the ```/CHE600/class02``` directory.
-
-3. Command history is always accessible, and should be used!
-    * You can scroll through your previous commands by using the “up” and “down” arrows on the keyboard. You can edit a command using the “left” or “right” arrows and the “Delete” and “Backspace” keys. Try it now.
-    * You can look through your entire history by typing history. This will be powerful in conjunction with some text finding programs like grep which we will learn later in the course.
-    * You can also use the reverse-i-search by hitting “ctrl-r” – this will search through your history for the most recent command the contains the string you type into it. Keep hitting ctrl-r to go further back in history.
-
-
-5. Getting help about any Linux commands is easy. Try using one of the options below (won’t work on everything!) (**note that when you see italic text you need to replace the text with your own input to run the command!)**
-    * google search on “_command_” or “_command_ tutorial”
-    * ```man``` _command_
-    * _command_ ```\--help```
-    * _command_ ```-h```
 
 ## **IV. Bashing on your own**
 
