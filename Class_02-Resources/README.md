@@ -1,9 +1,9 @@
 # CHEM260 F23 Class 2
 
 What we’ll cover today: 
-* logging in to the remote server
-* resources you should you use during this course
-* first taste of linux command line
+* [logging in](#logging-in) to the remote server
+* [resources](#resources) you should you use during this course
+* [first taste](#first-taste-of-linux) of linux command line
 
 # **Logging in**
 1. The course has a dedicated server (a.k.a Virtual Machine or <b>VM</b>) managed by IT. To log in, you will need to use either:
@@ -13,11 +13,11 @@ What we’ll cover today:
 2. Use putty to [connect to the server](#iii-connecting-to-che600-server-aka-virtual-machine-vm)
 
 ## **I. Remote desktop server**
-1. SU provides all faculty and staff with a "remote desktop" - a windows computer that is housed on a server and to which you can log in from
-anywhere using your netid.
-2. You can log in through a [remote desktop web server](http://rds.syr.edu), or through a [dedicated app](https://su-jsm.atlassian.net/wiki/spaces/ITHELP/pages/159941283/Connecting+to+RDS+using+the+Windows+App)
+1. SU provides all faculty and staff with a "remote desktop" - a windows computer that is housed on a server and to which you can log in to from anywhere using your netid.
+2. You can log in through a [remote desktop web server](http://rds.syr.edu), or through a [dedicated app](https://su-jsm.atlassian.net/wiki/spaces/ITHELP/pages/159941283/Connecting+to+RDS+using+the+Windows+App) that will run on your computer (available for Mac or Windows)
 3. Use your netid and password to log in
 4. The server should have a program called "Putty" that will let you connect to the server (see item III)
+5. If Putty can't be located, please come see me.
 
 ## **II. A computer in the computer room**
 1. The lab takes place in LSC 215 which is a computer class
@@ -31,39 +31,42 @@ anywhere using your netid.
 4. Next, go to the "X11 option in the option tree, and mark "Enable X11 Forwarding". This will allow Putty to transmit graphics<br><img src="./images/putty_02.png" width="300"/>
 5. Finally, go back to the "Session" window. Type "CHE600" in the "Saved Sessions" textbox, and hit "Save"<br><img src="./images/putty_03.png" width="300"/>
 6. Now, double click the CHE600 session, and a window will open up<br><img src="./images/putty_04.png" width="300"/>
-7. You should be able to log in using your SUID and password!<br><img src="./images/putty_05.png" width="300"/>
+7. You should be able to log in using your **netid** and password!<br><img src="./images/putty_05.png" width="300"/>
 
-8. If you are using a manged computer running OS/X or Linux you can use your own shell and connect directly with: 
-```bash
-ssh as-che600-lvm.ad.syr.edu
-```
+# **Resources**
 
 ## **I. Google searches**
+Googling how to write code is easy and convenient. Google now integrates results from it's LLM Gemini into the search, so that is also helpful (see below).
+1. A useful thing to google is the syntax of linux commands or python functions. To do this, simply write the function name (with the language if there's multiple hits). [Example](https://www.google.com/search?q=echo+linux)  for the linux echo command
+2. Another useful thing to look up are errors. For this, you will want to search the error in quotes. Sometimes (especially in python), error messages can be very long, and it will take some skill to identify the cause, which you can then google. We will go over this.
+3. Identifying how to fix errors is probably one of the most useful things to google. In general it will bring you to a website that details questions from other coders, like [Stack Overflow](https://stackoverflow.com). It is worthwhile going over the structure of this website to understand where to look for the answer. See example [here](https://stackoverflow.com/questions/38835483/confusion-about-pandas-copy-of-slice-of-dataframe-warning)
+4. Googling specific tasks (e.g. plugging in a homework assignment to the google search bar) is generally very ineffective. LLMs are much better for open ended questions.
 
 ## **II. LLMs**
-
-## **III. Syllabus**
+In the past two years LLMs have entered every aspect of our life. Coding is no exception - programming itself is a language like any other, and with countless examples on line, this is one of the best uses of LLMS.
+1. Since LLMs like [Claude](https://claude.ai/new) or [chatGPT](https://chatgpt.com/) have a conversation history, it makes sense to keep your coding conversation in the same window. It will remember past code, libraries you used, and variables.
+2. Make sure you specify what language you want your code in! (bash/python/something else)
+3. When asking an LLM for a bit of code, it's important to break the task down into smaller bits. Think of each coding task as a function, explain what the input is (including syntax) and what you want the output to be (including syntax).
+4. Once you get a bit of code from the LLM, try running it. If any errors are thrown, you can report these to the LLM in the same conversation, and it will try to debug it.
+5. Finally, make sure you can test that the code works the way you want it. In many cases, you will be able to run "sanity checks" to see if things work as they should.
+6. For complicated tasks, or when you use uncommon libraries or commands, LLMs may not be able to help. Even when that's the case, they will try to, by making up code that won't work as intended or using commands that don't actually exist in the code.
 
 ## **IV. Text books/online documents**
+* There are a few good online textbooks for [bash](https://books.goalkicker.com/BashBook/) and [python](https://pythonbooks.org/free-books/) that are available as free pdf's.
+* There are good books printed on dead trees - but I'm not sure you need to use those. If you really want to have a hard copy, O'Reilly books are highly recommended.
 
-# **Working on the server:**
-
+# **First taste of linux**
 
 ## **II. The linux environment **
-CHE600 F23 Class 2
 
-What we’ll cover today: Get to know the Linux command line!
-
-**I. Let’s start using Linux**
-
-1. The Linux command philosophy
+1. The Linux philosophy
     1. Commands do just one thing, but do it well
     2. Allow each command to act as a filter so commands can be easily connected to do more powerful operations
     3. Avoid “captive” command interfaces to allow “scripting”
 2. How to get to a Linux prompt: log in to the VM
     1. Open up the terminal (Putty on the classroom computers)
     2. Login to the vm (as-che600-lvm.ad.syr.edu)
-    3. Your SUID and password should get you in!
+    3. Your **netid** and password should get you in!
 
 **II. The linux file system**
 
