@@ -52,13 +52,14 @@ In the past two years LLMs have entered every aspect of our life. Coding is no e
 ## **III. Connecting to CHE600 server (aka virtual machine, VM):**
 1. Once you are on one of these "IT-managed" computers, you will need to connect to the VM. To do this, we use a protocol called ssh (acronym for "secure shell"). This is a network protocol that allows secured communication between two computers.
 2. The [Putty](https://www.putty.org/) software is the ssh application we will use to connect to the VM. All remote desktops and classroom computers should have Putty installed (icon shown below). 
-<img src="./images/putty.png" width="300"/>
+<img src="./images/putty.png" width="600"/>
 3. Open the start menu and type in "putty" - this will search for the [putty app]. you can pin the app to your start bar. If you cannot locate the software - please let me know! We will work with IT to quickly install it.
-4. In the first "Session" window, insert the VM's ip address: as-che600-lvm.ad.syr.edu <br><img src="./images/putty_01.png" width="300"/>
+4. In the first "Session" window, insert the VM's ip address: as-che600-lvm.ad.syr.edu <br><img src="./images/putty_01.png" width="600"/>
 5. Next, expand to the "SSH" option in the option tree, then to "X11", then on the righthand side mark "Enable X11 Forwarding". This will allow Putty to transmit graphics<br><img src="./images/putty_02.png" width="300"/>
-6. Finally, go back to the "Session" window. Type "CHE600" in the "Saved Sessions" textbox, and hit "Save"<br><img src="./images/putty_03.png" width="300"/>
-7. Now, double click the CHE600 session, and a window will open up<br><img src="./images/putty_04.png" width="300"/>
-8. You should be able to log in using your **netid** and password!<br><img src="./images/putty_05.png" width="300"/>
+6. Finally, go back to the "Session" window. Type "CHE600" in the "Saved Sessions" textbox, and hit "Save"<br><img src="./images/putty_03.png" width="600"/>
+7. Now, double click the CHE600 session, and a window will open up<br><img src="./images/putty_04.png" width="600"/>
+8. You should be able to log in using your netid (the first part of your syr.edu email) and password!<br><img src="./images/putty_05.png" width="600"/>
+9. Please let me know if this doesn't work for you!
 
 # **First taste of linux**
 
@@ -129,7 +130,78 @@ cd ~/CHE600/class02
 
 10. Now that we've got a handle on how to maneuver within the linux system, we can start working!
 
-## **III. Task 1: Example of real-world scientific workflow using Bash and Python**
+## **III. The linux file system**
+Files are stored in the directories we create. Let's learn some basics and commands related to files.
+
+1. First, lets create a file. We will use the ```echo``` command to print some text into a file:
+
+```bash
+cd ~/CHE600/class02
+echo "hello world" > text1.txt
+```
+
+2. Use the ```ls``` command to check if the file was created in your current working directory - this lists all contents of a directory (files **and** subdirectories). You should see a file called ```text1.txt``` listed in the directory. Note that you can get more info about the files by asking ls for some more options:
+
+```bash
+ls
+ls -ltrh
+```
+
+3. Let's print out the contents of the file using the ```more``` command. This is a viewer for text files:
+
+```bash
+more text1.txt
+```
+
+4. Congrats! you created a file! Breaking down the command, we used echo to print out a line, and sent the output 0(using the > operator which we will learn more about later) to the text file.
+
+5. General rules regarding linux filenames
+    * File names can be any combination of letters, numbers and symbols (avoid /><:&|)
+    * You cannot use spaces in file names!! Underscore “\_” is a common replacement.
+    * All file and directory names are Case sensitive ("Hello" is not the same as "hello")
+    * Suffixes (the bit at the end of the file name) don’t matter, but are helpful when used to indicate the file type, for example:
+        1. .sh (a bash shell script)
+        2.  .py (a python script)
+        3.  .c (a C program)
+        
+6. Completion of filenames is available upon hitting the **tab** key. If there are more than one matches, hit the tab key twice to get a list of all matches. This is very useful, and you are encouraged to get used to doing this instead of typing the full file name every time!
+
+7.  Let's make a copy of the file we created. We will use the ```cp``` command, providing it with the source filename (which must exist) and the copy target (which must not exist yet). Make sure you list the directory contents to make sure your file is indeed copied!
+
+```bash
+cp text1.txt text1_copy.txt
+ls
+```
+
+8. We can rename and/or move files with the ```mv``` command. Notice that this will remove the original file!
+
+```bash
+mv text1_copy.txt text2.txt
+ls
+```
+
+9. We can perform operations on multiple files using wildcards. To showcase this, do the following:
+- Use ```mkdir``` to create a new subdirectory in our class02 directory called ```texts```. Check this worked with ```ls```
+- Use ```cp``` to copy all files ending with txt into the new subdirectory. To do this in a single line, we will use a wildcard (\*)
+    
+```bash
+cp *.txt ./texts
+ls
+ls ./texts
+```
+
+What did we do? We copied all files **ending with .txt*** into the ./texts subdirectory, then listed our current directory and the /texts subdirectory. 
+
+10. If this worked well, let's now remove all .txt files from the main class02 directory using the ```rm``` command:
+
+```bash
+rm *.txt'
+ls
+```
+
+11. At this point, our class02 directory should have only a subdirectory called texts and no other files in it.
+
+## **III. Example of real-world scientific workflow using Bash and Python**
 The first task is really just a demonstration of how we can use powerful linux commands to create useful tools. As I've told you, my lab is interested in disordered proteins. There are thousands of proteins, but it's not always easy to know what parts of those proteins is well-folded and what parts do not have a structure. Luckily, there is a database called [Mobidb](https://mobidb.org) that has predictions of disordered for nearly every known protein. It has these predictions even for entire proteomes. We can view it online, but can we turn this into numbers that we can then analyze?
 
 1. We will pull data from an online database and calculate the average disordered in the SARS-CoV-2 proteome
@@ -166,7 +238,7 @@ You can also see more information about the files with some flags:
 ls -ltrh
 ```
 
-10. To look at the contents of the CoV2.dat file we can use the ```more``` command. This is a viewer for text files:
+10. To look at the contents of the CoV2.dat file we can use the ```more``` command. 
 
 ```bash
 more CoV2.dat
@@ -243,22 +315,12 @@ awk '{FS=",";sum += $4; count += 1}END{print sum/count}' UP000464024.dc
     * You can look through your entire history by typing history. This will be powerful in conjunction with some text finding programs like grep which we will learn later in the course.
     * You can also use the reverse-i-search by hitting “ctrl-r” – this will search through your history for the most recent command the contains the string you type into it. Keep hitting ctrl-r to go further back in history.
 
-4. Completion of filenames is available upon hitting the **tab** key. If there are more than one matches, hit the tab key twice to get a list of all matches. This is very useful, and you are encouraged to get used to doing this instead of typing the full file name every time!
 
 5. Getting help about any Linux commands is easy. Try using one of the options below (won’t work on everything!) (**note that when you see italic text you need to replace the text with your own input to run the command!)**
     * google search on “_command_” or “_command_ tutorial”
     * ```man``` _command_
     * _command_ ```\--help```
     * _command_ ```-h```
-
-6. Filenames
-    * File names can be any combination of letters, numbers and symbols (avoid /><:&|)
-    * You cannot use spaces in file names!! Underscore “\_” is a common replacement.
-    * All file and directory names are Case sensitive ("Hello" is not the same as "hello")
-    * Suffixes (the bit at the end of the file name) don’t matter, but are helpful when used to indicate the file type, for example:
-        1. .sh (a bash shell script)
-        2.  .py (a python script)
-        3.  .c (a C program)
 
 ## **IV. Bashing on your own**
 
