@@ -10,8 +10,8 @@ Class sessions: Tuesdays and Thursdays, 12:30-1:50 PM, LSC 215
 | **Date** | **Unit** | **Class** | **Topics** |
 | --- | --- | --- | --- |
 | 1/14 | [Intro](./Class%2001%20-%20intro/) | 1   | Introduction, syllabus, course expectations |
-| 1/16 | [Resources](./Class_02-Resources/) | 2   | Accessing the server, google/AI coding resources |
-| 1/21,1/23 | Linux I | 3-4 | Linux commands for files & directories, pipes, text editors, slicing & dicing files, system commands. Introduction to Bash programming; for loops & if statements |
+| 1/16 | [Resources](./Class_02-Resources/) | 2   | Accessing the server, google/AI coding resources, Linux basic commands for files & directories |
+| 1/21,1/23 | [Linux I](./Class_03_Linux_I) | 3-4 | Text editors, slicing & dicing files, piping commands, and system commands. Introduction to Bash programming; for loops & if statements |
 | 1/28,1/30 | Linux II | 5-6 | Bash variables, Data processing with sed and awk |
 | 2/4,2/6 | Python I | 7-8 | Introduction to Python<br><br>Python overview—using the Spyder IDE<br><br>Python control flow, data types, and variable scoping<br><br>Python functions and modules, molecular dynamics program |
 | 2/11,2/13 | Python II | 9-10 | Numpy and Matplotlib |
