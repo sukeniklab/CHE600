@@ -201,7 +201,7 @@ ls
 
 11. At this point, our class02 directory should have only a subdirectory called texts and no other files in it.
 
-# **III. The bash shell - a bit deeper**
+## **IV. The bash shell**
 
 1. Before we start, we need to know how to kill or exit running programs so we don’t get stuck. Some keys to press when you find yourself stuck on a Linux system:
     * ctrl-c (i.e. hold the Ctrl key and hit “c”; kills current command)
@@ -233,7 +233,7 @@ ls
     * To paste, simply click the right mouse button. This will place the text wherever your cursor (not mouse!) is placed.
     * If you're copying from another window (ie not the shell), you will still need to copy with ctrl-C, but pasting will be done with the right mouse button.
 
-## **III. Example of real-world scientific workflow using Bash and Python**
+## **V. Example of real-world scientific workflow using Bash and Python**
 The first task is really just a demonstration of how we can use powerful linux commands to create useful tools. As I've told you, my lab is interested in disordered proteins. There are thousands of proteins, but it's not always easy to know what parts of those proteins is well-folded and what parts do not have a structure. Luckily, there is a database called [Mobidb](https://mobidb.org) that has predictions of disordered for nearly every known protein. It has these predictions even for entire proteomes. We can view it online, but can we turn this into numbers that we can then analyze?
 
 1. We will pull data from an online database and calculate the average disordered in the SARS-CoV-2 proteome
@@ -325,7 +325,7 @@ awk '{FS=",";sum += $4; count += 1}END{print sum/count}' UP000464024.dc
 
 21. This command uses the ```awk``` program. We will learn all about it in the coming weeks – this is just meant as a demonstration of the power of bash! What is the average fraction of disordered proteins in the SARS-CoV-2 proteome?
 
-## **IV. Bashing on your own**
+# **Bashing on your own**
 
 1. To try and assimilate the exercises we went through today, let's do an individual exercise. You'll notice that when we ran the ```getProteomeDisorder.sh``` command, we provided it with a proteome accession number (UPUP000464024). We could run this on any proteome code we wanted, and following the same awk command and workflow, calculated the average disorder for multiple organisms. This is what you'll need to do!
 
