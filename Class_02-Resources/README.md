@@ -263,7 +263,7 @@ awk '{FS=",";sum += $4; count += 1}END{print sum/count}' UP000464024.dc
 
 1. To try and assimilate the exercises we went through today, let's do an individual exercise. You'll notice that when we ran the ```getProteomeDisorder.sh``` command, we provided it with a proteome accession number (UPUP000464024). We could run this on any proteome code we wanted, and following the same awk command and workflow, calculated the average disorder for multiple organisms. This is what you'll need to do!
 
-2. Adapt the commands and get the average disorder for the following organisms: 
+2. Adapt the commands and get the **average disorder** (using the ```awk``` command we used before) for the following organisms: 
 
 | Proteome Id | Organism |
 | --- | --- |
@@ -279,3 +279,4 @@ awk '{FS=",";sum += $4; count += 1}END{print sum/count}' UP000464024.dc
 | UP000170944 | SARS coronavirus PUMC01 |
 | UP000099142 | SARS coronavirus ZJ02 |
 
+3. Summarize the disorder score in a table, and briefly describe if you see any changes in disorder between species of coronavirus. You can look into the .dc files to see how many proteins in each proteome. Submit your results to the blackboard submission link.
