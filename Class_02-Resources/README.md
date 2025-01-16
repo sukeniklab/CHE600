@@ -61,7 +61,7 @@ In the past two years LLMs have entered every aspect of our life. Coding is no e
 
 # **First taste of linux**
 
-## **I. The linux philosophy **
+## ** I. The linux philosophy **
 
 1. Commands do just one thing, but do it well
 2. Commands can be stringed together to perform powerful operations
@@ -76,7 +76,7 @@ In the past two years LLMs have entered every aspect of our life. Coding is no e
 2. Most linux systems have the following directory structure:
 <img src="./images/linux_tree.png" width="600"/>
 
-3. When you log in to the VM, by default you will be in your own home directory. To make sure you are there, print out your current directory using ```pwd``` (aka "print working directory") - a specialized linux command that does one thing: it prints out the full <i>path</i> of your current directory. The output from pwd should be a directory like ```/home/&lt;your username&gt;```.
+3. When you log in to the VM, by default you will be in your own home directory. To make sure you are there, print out your current directory using ```pwd``` (aka "print working directory") - a specialized linux command that does one thing: it prints out the full <i>path</i> of your current directory. The output from pwd should be a directory like ```/home/yournetid```.
 
 4. Next, we will create a subdirectory for the course. To do this, we use the ```mkdir``` command, and move into it (using ```cd```, the change directory command)
 
@@ -92,15 +92,15 @@ mkdir class02
 cd class02
 ```
 
-6. Make sure you’re in the right place by printing the working directory (using pwd again). This should return something like (yourname will be your own netid)
+6. Make sure you’re in the right place by printing the working directory (using pwd again). This should return something like (yournetid will be your own netid)
 
 ```bash
-/home/yourname/CHE600/class02
+/home/yournetid/CHE600/class02
 ```
 
 7. In the directory structure / is the main directory (aka the "root" of the directory tree). 
     - Then home/ is the directory that holds all user folders
-        - yourname/ is your own home directory. 
+        - yournetid/ is your own home directory. 
             - CHE600/ is a subdirectory in your home directory 
                 - class02/ is a subdirectory within that subdirectory! 
 
