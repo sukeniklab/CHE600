@@ -76,29 +76,49 @@ In the past two years LLMs have entered every aspect of our life. Coding is no e
 2. Most linux systems have the following directory structure:
 <img src="./images/linux_tree.png" width="600"/>
 
-3. When you log in to the VM, by default you will be in your own home directory. To make sure you are there, print out your current directory using ```pwd``` (aka "print working directory") - a specialized linux command that does one thing: it prints out the full <i>path</i> of your current directory. The output from pwd should be a directory like /home/&lt;your username&gt;:
+3. When you log in to the VM, by default you will be in your own home directory. To make sure you are there, print out your current directory using ```pwd``` (aka "print working directory") - a specialized linux command that does one thing: it prints out the full <i>path</i> of your current directory. The output from pwd should be a directory like ```/home/&lt;your username&gt;```.
 
-cd ~
-
-pwd
-
-1. Next, we will create a subdirectory for the course (using mkdir), then changing directory into it (using cd), then repeating the process to create another subdirectory for this class:
+4. Next, we will create a subdirectory for the course. To do this, we use the ```mkdir``` command, and move into it (using ```cd```, the change directory command)
 
 ```bash
 mkdir CHE600
 cd CHE600
+```
+
+5. We'll make one more subdirectory in the /CHE600 directory called class02.
+
+```bash
 mkdir class02
 cd class02
 ```
 
-1. Make sure you’re in the right place by printing the working directory (using pwd again). This should return something like
+6. Make sure you’re in the right place by printing the working directory (using pwd again). This should return something like (yourname will be your own netid)
 
-```
-/home/&lt;username&gt;/CHE600/class02
+```bash
+/home/yourname/CHE600/class02
 ```
 
-1. Finally, we can list all files in the directory using the ls command.
-2. Note that you only have full permissions in your own home directory – which means that you can delete all your work, but you can’t delete anyone else’s work (or the entire filesystem!) without admin privileges.
+7. In the directory structure / is the main directory (aka the "root" of the directory tree). Then home/ is the directory that holds all user folders, then yourname/ is your own home directory. Then CHE600/ is a subdirectory in your home directory, and class02/ is a subdirectory within that subdirectory! All this directory structure is important because you'll need to keep it in mind as you navigate. For example:
+
+```bash 
+cd ..
+```
+
+will bring you up ONE directory. When you type pwd, you should be in the CHE600/ directory.
+
+```bash
+cd ../..
+```
+
+will bring you up ANOTHER TWO directories. You will now be in the home/ directory! The ~ sign is a shortcut for home directory, so any time you want to return to your own home directory, you can simply type ```cd ~``` to go home! 
+
+8. Finally, you can specify exact folders to go to. For example, to go back into our class02 directory from any directory you're currently in, simply type:
+
+```bash
+cd ~/CHE600/class02
+```
+
+9. Note that you only have full permissions in your own home directory – which means that you can delete all your work, but you can’t delete anyone else’s work (or the entire filesystem or the root!) without admin privileges.
 
 **III. Task 1: Example of real-world scientific workflow using Bash and Python**
 
