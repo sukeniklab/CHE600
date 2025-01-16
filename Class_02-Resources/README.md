@@ -228,7 +228,7 @@ The first task is really just a demonstration of how we can use powerful linux c
 8. Let’s get the proteome from MobiDB using the ```curl``` command. The ```curl``` command pulls up data from a HTTP address. We need to provide an output file name (using the -o <i>flag</i>). This will be the file in which to write the contents of the http address. We'll name it ```CoV2.dat```. The final command should look like this (all in one line):
 
 ```bash
-curl -o CoV2.dat <https://mobidb.org/api/download?proteome=UP000464024>
+curl -o CoV2.dat https://mobidb.org/api/download?proteome=UP000464024
 ```
 
 9. Now let's list the content of the current directory using the ```ls``` command. Can you see the CoV2.dat file?
