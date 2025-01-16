@@ -103,6 +103,7 @@ cd class02
         - yourname/ is your own home directory. 
             - CHE600/ is a subdirectory in your home directory 
                 - class02/ is a subdirectory within that subdirectory! 
+
 All this directory structure is important because you'll need to keep it in mind as you navigate. For example:
 
 ```bash 
