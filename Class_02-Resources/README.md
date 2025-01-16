@@ -222,12 +222,17 @@ ls
     * You can also use the reverse-i-search by hitting “ctrl-r” – this will search through your history for the most recent command the contains the string you type into it. Keep hitting ctrl-r to go further back in history.
 
 
-5. Getting help about any Linux commands is easy. Try using one of the options below (won’t work on everything!) (**note that when you see italic text you need to replace the text with your own input to run the command!)**
+4. Getting help about any Linux commands is easy. Try using one of the options below (won’t work on everything!) (**note that when you see italic text you need to replace the text with your own input to run the command!)**
     * google search on “_command_” or “_command_ tutorial”
     * ```man``` _command_
     * _command_ ```\--help```
     * _command_ ```-h```
-    
+
+5. For copying and pasting, the bash shell works a little bit differently than windows/mac. 
+    * To copy, instead of ctrl-C, simply highlight the text you want to copy. When you're done highlighting, the highlighted text is automatically copied to your clipboard.
+    * To paste, simply click the right mouse button. This will place the text wherever your cursor (not mouse!) is placed.
+    * If you're copying from another window (ie not the shell), you will still need to copy with ctrl-C, but pasting will be done with the right mouse button.
+
 ## **III. Example of real-world scientific workflow using Bash and Python**
 The first task is really just a demonstration of how we can use powerful linux commands to create useful tools. As I've told you, my lab is interested in disordered proteins. There are thousands of proteins, but it's not always easy to know what parts of those proteins is well-folded and what parts do not have a structure. Luckily, there is a database called [Mobidb](https://mobidb.org) that has predictions of disordered for nearly every known protein. It has these predictions even for entire proteomes. We can view it online, but can we turn this into numbers that we can then analyze?
 
@@ -270,14 +275,14 @@ ls -ltrh
 ```bash
 more CoV2.dat
 ```
-(press space to scroll down)
+(press space to scroll down, and if you're tired of watching all that text scroll by, you can exist using the ctrl-C break command)
 
-11. Seems like a mess, right? Do you identify anything in this? Turns out using some handy bash commands. I’ve compiled some parsing commands into a handy script called ```getProteomeDisorder.sh```. This is available in ```/usr/CHE600/class02``` directory.
+11. Seems like a mess, right? Do you identify anything in this? Turns out using some handy bash commands we can make sense of this file. I’ve written a short script called ```getProteomeDisorder.sh``` that will make sense of this data. This is available in ```/usr/CHE600/class02``` directory.
 
-12. To copy the script to your class02 directory, use the copy (```cp```) command. This will copy from the source (first argument) to the target (second argument). For the source we use the full path. For the target, we use the shortcut for our home directory (~) followed by the subdirectory for class02. Notice that if the directory doesn't exist, the command will throw an error.
+12. To copy the script to your class02 directory, use the copy (```cp```) command. For the source we use the full path. For the target, we use the shortcut for our home directory (~) followed by the subdirectory for class02. 
 
 ```bash
-cp /usr/CHE600/getProteomeDisorder.sh ~/CHE600/class02
+cp /usr/CHE600/class02/getProteomeDisorder.sh ~/CHE600/class02
 ```
 
 13. Now go to you class02 directory using ```cd``` and list the files using ```ls```. The getProteomeDisorder.sh file should be there. Let’s look at the contents of this script by using another program that prints our file contents, ```cat```:
@@ -286,11 +291,9 @@ cp /usr/CHE600/getProteomeDisorder.sh ~/CHE600/class02
 cat getProteomeDisorder.sh
 ```
 
-* note that ```cat``` and ```more``` are not the same. cat will print out the file and scroll down the window, never stopping. More waits for you to press the spacebar once it filled the screen before moving on to the next screen. You'll be surprised that each is useful for specific purposes.
+* note that even though both ```cat``` and ```more``` print out the contents of a file, they are not the same. cat will print out the file and scroll down the window, never stopping. More waits for you to press the spacebar once it filled the screen before moving on to the next screen. You'll be surprised that each is useful for specific purposes.
 
-14. **getProteomeDisorder.sh** is a bash shell script (indicated by the “shebang” notation in the first line: **#!/bin/bash**.
-
-The script runs several linux commands which we will cover later, including ```sed```, ```grep```, and ```cut```. Each of these commands manipulates the initial download to extract some information. In the end we use the paste command to attach everything together. Notice that in several places in the script we use the wildcard **$1** – this is a reserved variable name for the first argument passed to this script (see below).
+14. **getProteomeDisorder.sh** is a bash shell script (indicated by the “shebang” notation in the first line: **#!/bin/bash**. The script runs several linux commands which we will cover later, including ```sed```, ```grep```, and ```cut```. Each of these commands manipulates the initial download to extract some information. In the end we use the paste command to attach everything together. Notice that in several places in the script we use the wildcard **$1** – this is a reserved variable name for the first argument passed to this script (see below).
 
 15. Before running this script, we need to tell linux that it can be executed (is an executable). Note that unlike Windows or Macs, linux doesn't care what the file name is - you can execute any file (or try to!) so long as you mark it as an executable. To do this with the change mode command ```chmod```. Make sure you are in the /class02 directory and type:
 
@@ -330,16 +333,26 @@ awk '{FS=",";sum += $4; count += 1}END{print sum/count}' UP000464024.dc
 
 | Proteome Id | Organism |
 | --- | --- |
-| UP000150494 | Rhinolophus affinis coronavirus |
-| UP000154720 | BtRf-BetaCoV/HeB2013 |
-| UP000118579 | SARS coronavirus PUMC02 |
-| UP000168969 | SARS coronavirus Sino3-11 |
-| UP000174731 | Bat SARS-like coronavirus YNLF_31C |
-| UP000827403 | Staphylococcus phage vB_SarS_BM31 |
+| UP000002311 | Baker's yeast |
+| UP001285702 | E.Coli |
+| UP000000803 | Drosophila (fruit fly) |
+| UP000006548 | Arabidopsis (plant) |
+| UP000005640 | Human |
+| UP000001584 | Tuberculosis |
 | UP000000354 | Severe acute respiratory syndrome coronavirus (SARS-CoV) |
-| UP000128606 | BtRs-BetaCoV/YN2013 |
-| UP000147828 | SARS coronavirus PUMC03 |
-| UP000170944 | SARS coronavirus PUMC01 |
-| UP000099142 | SARS coronavirus ZJ02 |
+| UP000004992 | Human adenovirus |
+| UP000000539 | Chicken |
+| UP000000589 | Mouse |
+| UP000001940 | C. elegans (roundworm) |
 
-3. Summarize the disorder score in a table, and briefly describe if you see any changes in disorder between species of coronavirus. You can look into the .dc files to see how many proteins in each proteome. Submit your results to the blackboard submission link.
+3. Count how many proteins in each proteome. Since each line in the .dc file is a single protein, we can simply count the lines. To do this, use the word count command ```wc``` with the ```-l``` flag:
+
+```bash
+wc -l UP000002311.dc
+```
+
+4. Create a table in google sheets or excel with the following information: Organism, number of proteins, average disorder. 
+
+5. Try to think of patterns in this dataset - Which organisms have more disorder? which have less? What would be a folow up analysis you could try?
+
+6. Submit the table and the answer to item 5 to blackboard.
