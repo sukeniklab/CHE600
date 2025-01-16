@@ -1,37 +1,10 @@
 # CHEM260 F23 Class 2
 
 What we’ll cover today: 
-* [logging in](#logging-in) to the remote server
 * [resources](#resources) you should you use during this course
+* [logging in](#logging-in) to the remote server
 * [first taste](#first-taste-of-linux) of linux command line
 
-# **Logging in**
-1. The course has a dedicated server (a.k.a Virtual Machine or <b>VM</b>) managed by IT. To log in, you will need to use either:
-    1. [the Remote Desktop Server](#i-remote-desktop-server) (RDS, see below)
-    2. [A computer in the computer room](#ii-a-computer-in-the-computer-room)
-    3. Another computer managed by SU IT (see me for details)
-2. Use putty to [connect to the server](#iii-connecting-to-che600-server-aka-virtual-machine-vm)
-
-## **I. Remote desktop server**
-1. SU provides all faculty and staff with a "remote desktop" - a windows computer that is housed on a server and to which you can log in to from anywhere using your netid.
-2. You can log in through a [remote desktop web server](http://rds.syr.edu), or through a [dedicated app](https://su-jsm.atlassian.net/wiki/spaces/ITHELP/pages/159941283/Connecting+to+RDS+using+the+Windows+App) that will run on your computer (available for Mac or Windows)
-3. Use your netid and password to log in
-4. The server should have a program called "Putty" that will let you connect to the server (see item III)
-5. If Putty can't be located, please come see me.
-
-## **II. A computer in the computer room**
-1. The lab takes place in LSC 215 which is a computer class
-2. You can log in to any of the computers using your netid and password - this will log you on to your remote desktop
-3. It doesn't matter whcih computer you use - the desktop is associated with your account!
-
-## **III. Connecting to CHE600 server (aka virtual machine, VM):**
-1. Start a remote desktop session (see items I or II)
-2. Open the start menu and type in "putty" - this will search for the [putty app](https://www.putty.org/). you can pin the app to your start bar
-3. In the first "Session" window, insert the VM's ip address: as-che600-lvm.ad.syr.edu <br><img src="./images/putty_01.png" width="300"/>
-4. Next, go to the "X11 option in the option tree, and mark "Enable X11 Forwarding". This will allow Putty to transmit graphics<br><img src="./images/putty_02.png" width="300"/>
-5. Finally, go back to the "Session" window. Type "CHE600" in the "Saved Sessions" textbox, and hit "Save"<br><img src="./images/putty_03.png" width="300"/>
-6. Now, double click the CHE600 session, and a window will open up<br><img src="./images/putty_04.png" width="300"/>
-7. You should be able to log in using your **netid** and password!<br><img src="./images/putty_05.png" width="300"/>
 
 # **Resources**
 
@@ -55,26 +28,55 @@ In the past two years LLMs have entered every aspect of our life. Coding is no e
 * There are a few good online textbooks for [bash](https://books.goalkicker.com/BashBook/) and [python](https://pythonbooks.org/free-books/) that are available as free pdf's.
 * There are good books printed on dead trees - but I'm not sure you need to use those. If you really want to have a hard copy, O'Reilly books are highly recommended.
 
+# **Logging in**
+1. Our first task is to log in to the CHE600 server. This has been an issue on Tuesday, but should have been sorted out!
+2. The dedicated server (a.k.a Virtual Machine or <b>VM</b>) is managed by IT. Unfortunately, because of security concerns, you cannot log into it from anywhere. 
+3. To log in, you will need to use either:
+    * [the Remote Desktop Server](#i-remote-desktop-server) (RDS, see below)
+    * [A computer in the computer room](#ii-a-computer-in-the-computer-room)
+    * Another computer managed by SU IT (see me for details)
+
+
+## **I. Remote desktop server**
+1. SU provides all faculty and staff with a "remote desktop" - a windows computer that is housed on a server and to which you can log in to from anywhere using your netid.
+2. You can log in through a [remote desktop web server](http://rds.syr.edu), or through a [dedicated app](https://su-jsm.atlassian.net/wiki/spaces/ITHELP/pages/159941283/Connecting+to+RDS+using+the+Windows+App) that will run on your computer (available for Mac or Windows)
+3. Use your netid and password to log in
+4. The server should have a program called "Putty" that will let you connect to the server (see item III)
+5. If Putty can't be located, please come see me.
+
+## **II. A computer in the computer room**
+1. The lab takes place in LSC 215 which is a computer class
+2. You can log in to any of the computers using your netid and password - this will log you on to your remote desktop
+3. It doesn't matter whcih computer you use - the desktop is associated with your account!
+
+## **III. Connecting to CHE600 server (aka virtual machine, VM):**
+1. Once you are on one of these "IT-managed" computers, you will need to connect to the VM. To do this, we use a protocol called ssh (acronym for "secure shell"). This is a network protocol that allows secured communication between two computers.
+2. While there are many ssh commands, I recommend you use a software called [Putty](https://www.putty.org/) to connect to the VM. All remote desktops and classroom computers should have Putty installed. If not - please let me know!
+3. Open the start menu and type in "putty" - this will search for the [putty app]. you can pin the app to your start bar
+4. In the first "Session" window, insert the VM's ip address: as-che600-lvm.ad.syr.edu <br><img src="./images/putty_01.png" width="300"/>
+5. Next, expand to the "SSH" option in the option tree, then to "X11", then on the righthand side mark "Enable X11 Forwarding". This will allow Putty to transmit graphics<br><img src="./images/putty_02.png" width="300"/>
+6. Finally, go back to the "Session" window. Type "CHE600" in the "Saved Sessions" textbox, and hit "Save"<br><img src="./images/putty_03.png" width="300"/>
+7. Now, double click the CHE600 session, and a window will open up<br><img src="./images/putty_04.png" width="300"/>
+8. You should be able to log in using your **netid** and password!<br><img src="./images/putty_05.png" width="300"/>
+
 # **First taste of linux**
 
-## **II. The linux environment **
+## **I. The linux philosophy **
 
-1. The Linux philosophy
-    1. Commands do just one thing, but do it well
-    2. Allow each command to act as a filter so commands can be easily connected to do more powerful operations
-    3. Avoid “captive” command interfaces to allow “scripting”
-2. How to get to a Linux prompt: log in to the VM
-    1. Open up the terminal (Putty on the classroom computers)
-    2. Login to the vm (as-che600-lvm.ad.syr.edu)
-    3. Your **netid** and password should get you in!
+1. Commands do just one thing, but do it well
+2. Commands can be stringed together to perform powerful operations
+3. Commands are meant to be run with all parameters provided. In this way, commands never wait for user input.
 
-**II. The linux file system**
+## **II. The linux file and directory system**
 
-1. Most linux systems have the following file structure:
+1. In any operating system (OSX, Windows, or linux), files are stored in directories. 
+    - Any directory can contain multiple files.
+    - Any directory can contain other directories, which will be <i>subdirectories</i> of the that directory.
 
+2. Most linux systems have the following directory structure:
 <img src="./images/linux_tree.png" width="600"/>
 
-1. We’ll start in our own home directories. To make sure you are there, change directory (using cd) to your home directory (symbolized as ~), then print out your current directory (using pwd). The output from pwd should be a directory like /home/&lt;your username&gt;:
+3. When you log in to the VM, by default you will be in your own home directory. To make sure you are there, print out your current directory using ```pwd``` (aka "print working directory") - a specialized linux command that does one thing: it prints out the full <i>path</i> of your current directory. The output from pwd should be a directory like /home/&lt;your username&gt;:
 
 cd ~
 
