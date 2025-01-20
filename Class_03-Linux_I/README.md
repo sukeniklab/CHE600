@@ -85,7 +85,7 @@ wc -c count.txt
 ## **III. Search with grep**
 Sometimes we would like search for a specific word or pattern in our file. For this we use the ```grep``` command, which is a super powerful search engine for text documents. To see the power of this, let's get some more extensive text files:
 
-1.	Use ```cp``` to copy ```1UBQ.pdb``` from /usr/CHE600/class03 into your own class03 directory (```~/CHE600/class03```). Use ```cat``` or ```more``` to view the contxts of this file.
+1.	Use ```cp``` to copy ```1UBQ.pdb``` from ```/usr/CHE600/class03``` into your own class03 directory (```~/CHE600/class03```). Use ```cat``` or ```more``` to view the contxts of this file.
 
 The file ```1UBQ.pdb``` contains the crystal structure of an ubiquitin - a domain that targets proteins for degredation. Let's display the coordinates of atoms belonging to glycine (Gly) amino acids in the structure. To do this, we will simply search for the expression ```GLY``` in the file:
 
