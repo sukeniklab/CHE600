@@ -48,7 +48,7 @@ In the past two years LLMs have entered every aspect of our life. Coding is no e
 ## **II. A computer in the computer room**
 1. The lab takes place in LSC 215 which is a computer class
 2. You can log in to any of the computers using your netid and password
-3. You will log on to the computer (this is **not** your remote desktop), which can then access the server directly
+3. This is a local computer (**not** your remote desktop), which can then access the server directly
 
 ## **III. Connecting to CHE600 server (aka virtual machine, VM):**
 1. Once you are on one of these "IT-managed" computers, you will need to connect to the VM. To do this, we use a protocol called ssh (acronym for "secure shell"). This is a network protocol that allows secured communication between two computers.
