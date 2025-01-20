@@ -15,7 +15,7 @@ Remember from class - we learned about the ```cat``` and ```more``` commands to 
 ## **II. The nano text editor**
 A simple, native text editor we can use in linux is ```nano```. The functionalities are very basic, but it is also very easy and intuitive to use.
 
-1. First, create a new directory in the ~/CHE600 directory called class03 (See how to do this in [class 2](../Class_02-Resources/).
+1. First, create a new directory in the ~/CHE600 directory called class03 (See how to do this in [class 2](https://github.com/sukeniklab/CHE600/tree/main/Class_02-Resources#ii-the-linux-directory-system)).
 
 2. ```cd``` into the class03 directory, and creat a new file using nano editor by typing:
 
@@ -200,3 +200,7 @@ df  -h
 ```
 
 Unless otherwise noted, the main storage is under the root directory (```/```). This has 2 TB of available space.
+
+3. Beyond disk storage, the system has other resources like memory and cache. To view the usage here, use the ```top``` command. The top command in Linux is a system monitoring tool that displays real-time information about system processes and resource usage. It provides a dynamic, real-time view of system activity, including CPU usage, memory usage, and process information. Press ctrl+c to exit the viewer.
+
+4. If you want to see who else is logged in and working on the server, you can do so with the ```who``` command. Redirect the output of this command to a file called ```"who.txt"```
