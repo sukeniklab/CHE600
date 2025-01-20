@@ -15,7 +15,7 @@ Remember from class - we learned about the ```cat``` and ```more``` commands to 
 ## **II. The nano text editor**
 A simple, native text editor we can use in linux is ```nano```. The functionalities are very basic, but it is also very easy and intuitive to use.
 
-1. First, create a new directory in the ~/CHE600 directory called class03 (See how to do this in [class 2](https://github.com/sukeniklab/CHE600/tree/main/Class_02-Resources#ii-the-linux-directory-system)).
+1. First, create a new directory in the ```~/CHE600``` directory called ```class03``` (See how to do this in [class 2](https://github.com/sukeniklab/CHE600/tree/main/Class_02-Resources#ii-the-linux-directory-system)).
 
 2. ```cd``` into the class03 directory, and creat a new file using nano editor by typing:
 
@@ -37,7 +37,7 @@ There are many other editors available in linux. One popular one is ```vi``` whi
 
 Most of our data comes in text format, so it is a good idea to learn how to manipulate files of this type. Lets go over some basic linux commands to chop or parse text files.
 
-1. Let's use a quick for loop (more on this later!) to make a text file. Put the following code into your shell prompt, but make sure yiou are in your ~/CHE600/class03 directory!
+1. Let's use a quick for loop (more on this later!) to make a text file. Put the following code into your shell prompt, but make sure you are in your ```~/CHE600/class03``` directory!
 
 ```bash
 for i in $(seq 1 30); do echo "this is line $i" >> count.txt; done
