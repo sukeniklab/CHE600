@@ -1,10 +1,36 @@
 # CHEM260 F23 Class 4
 
 Today's class will introduce us to script writing in bash. What we’ll cover today: 
+* [Defining and working with variables](#variables-in-bash)
 * [Basics of script writing](#basics-of-script-writing)
-* [Creating executables with input and output](#slicing-and-dicing-text-files)
-* [loops and conditionals](#system-commands)
+* [Creating executables with input and output](#creating-executables-with-input-and-output)
+* [Conditionals](#conditionals)
 
+# **Variables in bash**
+
+Variables are critical to any code. They allow you to store information and recall it within the memory of your application, without writing anything to the disk. 
+
+1. Defining a variable is easy, simply use the equal sign: ```variable_name="this is the value of the variable"```. Try this (notice you can't have any spaces next to the equal sign!):
+
+```bash
+myVar="This is my variable"
+echo myVar
+echo $myVar
+wc -c $myVar
+```
+
+2. We can also direct output into a variable. This is a bit different from directing output to a file, and looks like this:
+
+```bash
+myOtherVar=$(pwd)
+echo $myOtherVar
+```
+
+3. Variables can be called as many times as you want and will remain in memory and can be called so long as you do not log out. They are overwritten if they are defined again. If you want to retain the original value, make sure you include it:
+
+```bash
+myOtherVar=$(echo "the first var was " $myOtherVar)
+```
 # **Basics of script writing**
 
 ## **I. What elements do we need to create powerful, flexible scripts?**
@@ -67,7 +93,7 @@ The script we created is not very useful. For example, usability would be increa
 #!/bin/bash
 echo "Let’s all go to the $1! We can buy some $2"
 ```
-$1 and $2 stand for two inputs that will be supplied by the user following the command. They should be separated by a space.
+$1 and $2 stand for two variables that will be supplied by the user following the command. They should be separated by a space. These are similar to other variables in bash that are called using the \$ sign, but \$1, \$2, and all numbers cannot be used for variables since they are used for argument passing.
 
 2. Make the file executable using 
 
@@ -90,16 +116,9 @@ What are the differences between the different arguments?
     4. ```$#``` - Number of arguments specified in the command line.
     5. ```$?``` - Exit status of the last command
 
-5. You can also define and store new variables within your script. Defining a variable is easy, simply use the equal sign: ```variable_name="this is the value of the variable"```. You can also Edit your adlib.sh script and add the following line at the bottom:
 
-```bash
-combined="$1 and $2"
-echo $combined
-```
-
-6. Run 
 ## **II. Independent work: count amino acids**
-Now you will work independently to create a script. The goal of this script is to count the number of amino acids of a specified type in a given PDB file. 
+Now you will work independently to create a script. The goal of this script is to count the number of amino acids of a specified type in a given PDB file. Your script should be called ```countAA.sh```
 
 1. First, get acquianted with a new command: ```wget```. This command retrieves a file from a web address. The protein data bank (PDB) allows you to download any crystal structure using the wget command. The format is:
 
@@ -114,43 +133,68 @@ and this line will get the crystal structure file with the code "1UBQ" - which i
 count_aa.sh <pdb code> <3-letter amino acid> 
 ```
 
-3. The output should be ```For file <filename>, there are <number> <amino acid>```
+3. The output should be ```<pdb code> has <number> <amino acid>```
 
 4. How do you do this? Your script will need to first download the file using the ```wget``` command. It will then need to search for lines containing the specific amino acid code (GLY for example). Remember that we've done this before when we learned about the ```grep``` command. The counted number will need to passed into a variable (see below), and that variable used as output.
 
-**Hint 1:** It is highly recommended to try out the commands from the command line first to see if it works – before writing it into your script.
+    **Hint 1:** It is highly recommended to try out the commands from the command line first to see if it works – before writing it into your script.
 
-**Hint 2:** searching for “ALA” will return all atoms that belong to alanine residues – there are many. But each amino acid has only one atom named “CA”
+    **Hint 2:** searching for “ALA” will return all atoms that belong to alanine residues – there are many. But each amino acid has only one atom named “CA”
 
-**Hint 3:** tune your grep command such that you get a single line for every amino acid in the PDB file. Then all you need to do is count lines by piping your output through wc -l
+    **Hint 3:** tune your grep command such that you get a single line for every amino acid in the PDB file. Then all you need to do is count lines by piping your output through wc -l
 
-**Hint 4:** Once your one-liner throws out the correct number, you’re good to implement it into your script. To do that, you’ll need to place that number into a variable.
+    **Hint 4:** Once your one-liner throws out the correct number, you’re good to implement it into your script. To do that, you’ll need to place that number into a variable.
 
-Run the script on TEAD.pdb file in your directory, and search for alanines (ALA). How many do you find? Remember you will need to chmod before running! 
+5. Run the script on the following pdbs, and use your script to get the number of ALA in each one. Redirect the output to a results file (use ```>>```) called ```countALA.txt```:
+    1. 1UBQ
+    2. 1PGK
+    3. 9D61
+    4. 8YDS
+    5. 9GPW
+    6. 8QM6
 
-F.	Conditionals: Let’s improve the script by adding some conditionals to test for issues that might arise, such as bad user input. A list of all conditionals in bash is available here: https://www.gnu.org/software/bash/manual/html_node/Bash-Conditional-Expressions.html
+# **Conditionals**
+Conditionals are statements that get evaluated by the interpreter, and performs one action if true and another if false. Scripts often use conditionals as a way to check if a certain condition is met, and by combining conditionals we can get complicated decision trees in our scripts.
 
-G.	Conditionals are statements that get evaluated by the interpreter, and performs one action if true and another if false. Edit the script and add the following right after the first line
+## **I. Using conditionals to "sanitize" user input**
 
+1. The script you've written is great, but what happens if we pass the wrong number of arguments when we run it? Try it out:
+
+```bash
+./countAA.sh too many arguments
+```
+
+2. This causes the script to crash, and the user gets no information about why it crashed. Let’s improve the script ```countAA.sh``` script by adding some conditionals to test for issues that might arise, such as bad user input. A list of all conditionals in bash is available [here](https://www.gnu.org/software/bash/manual/html_node/Bash-Conditional-Expressions.html)
+
+3. Edit the script and add the following right after the first line (right after the hashbang)
+
+```bash
 if [ $# -ne 2 ]; then
-	echo "Script takes 2 arguments, an AA and a pdb file"
+	echo "Script takes 2 arguments, a pdb code and a 3-letter amino acid code"
 	exit 1
 fi
+```
 
-Here the conditional performs the following function: 
-a.	Checks if the number of arguments ($#) does not equal (-ne) 2
-b.	If true – echo error text, then exit with an exit code of 1. (The exit code can help debug a script)
-c.	If false – the script just continues on without exiting. You don’t need an “else” statement here (though those are possible)
-d.	The fi command terminates the conditional.
+4. Here the conditional performs the following function: 
+    a. Checks if the number of arguments ($#) does not equal (-ne) 2
+    b. If true – echo error text, then exit with an exit code of 1. (The exit code can help debug a script)
+    c. If false – the script just continues on without exiting. You don’t need an “else” statement here (though those are possible)
+    d. The fi command terminates the conditional.
+    e. The tabs are not neccessary for bash (which is not true for other languages such as python), but they don't hurt and they increase the readability of our script.
 
-H.	Test the script with the wrong number of arguments. 
+5. Now test the script with the wrong number of arguments. What happens?
 
-I.	Edit the file again and add the following lines after the first conditional
+6. Edit the file again and add the following lines after the wget command:
 
-if [ ! –f $2 ]; then
+if [ ! –f $2.pdb ]; then
 	echo "There is no file $2"
 	exit 1
 fi
+
+# **for loops**
+
+
+
 
 Here the conditional checks if a filename does not exist (! -f ) with the name of our second argument ($2) Test the script with a misspelled file name
 
