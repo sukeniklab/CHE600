@@ -110,7 +110,7 @@ Often, our data will be tabulated - this means that the data is in fields sepera
 2.	Let's use the ```cut``` command to cut file by fields and extract the second column (-d specifies column separator, -fn indicates which column)
 
 ```bash
-cut –d "," -f 2 rests.csv
+cut -d "," -f 2 rests.csv
 ```
 Let's keep only the 3rd and 5th columns of the data
 ```bash
