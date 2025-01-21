@@ -352,8 +352,11 @@ awk '{FS=",";sum += $4; count += 1}END{print sum/count}' UP000464024.dc
 wc -l UP000002311.dc
 ```
 
-4. Create a table in google sheets or excel with the following information: Organism, number of proteins, average disorder. 
+4. Use nano to create a comma seperated values (csv) file named ```disorder.csv``` in your ```~/CHE600/class02``` directory. The file should have the following header: Proteome ID, Organism, number of proteins, average disorder. Each organism should be a single row, so for example Baker's yeast would be:
 
-5. Try to think of patterns in this dataset - Which organisms have more disorder? which have less? What would be a folow up analysis you could try?
+```
+UP000002311,Baker's yeast, 6060, 0.76
+```
+Note this is not the actual average disorder for yeast! There should be 11 rows total, 1 for each organism.
 
-6. Submit the table and the answer to item 5 to blackboard.
+5. Bonus: Try to think of patterns in this dataset - Which organisms have more disorder? which have less? What would be a folow up analysis you could try? Write this answer in a file called ```bonus.txt``` using ```nano```.

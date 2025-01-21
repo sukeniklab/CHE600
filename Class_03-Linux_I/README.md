@@ -4,7 +4,7 @@ What we’ll cover today:
 * [Linux native text editors](#linux-text-editors)
 * [Slicing and dicing text files](#slicing-and-dicing-text-files)
 * [System commands](#system-commands)
-
+* [On your own - disorder scores]
 
 # **Linux text editors**
 Often we will want to edit text in our shell. This lets us quickly make changes to files with the need to download or upload files to the server. Since there is no graphical user interface (GUI) for our shell, there are several text-based editors available be default.
@@ -204,3 +204,7 @@ Unless otherwise noted, the main storage is under the root directory (```/```). 
 3. Beyond disk storage, the system has other resources like memory and cache. To view the usage here, use the ```top``` command. The top command in Linux is a system monitoring tool that displays real-time information about system processes and resource usage. It provides a dynamic, real-time view of system activity, including CPU usage, memory usage, and process information. Press ctrl+c to exit the viewer.
 
 4. If you want to see who else is logged in and working on the server, you can do so with the ```who``` command. Redirect the output of this command to a file called ```"who.txt"```
+
+# **On your own - disorder scores**
+
+Please use [this link](../Class_02-Resources/README.md#bashing-on-your-own---class-assignment) to complete the exercise in class 02. **files must be placed in the ```~/CHE600/class02``` directory!!**
