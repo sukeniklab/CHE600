@@ -5,7 +5,7 @@ What we’ll cover today:
 * [logging in](#logging-in) to the remote server
 * [first example](#iii-task-1-example-of-real-world-scientific-workflow-using-bash-and-python) of the power of bash
 * [linux files and commands](#iii-the-bash-shell---a-bit-deeper)
-* [Working on your own](#iv-bashing-on-your-own)
+* [Working on your own](#bashing-on-your-own---class-assignment)
 
 
 # **Resources**

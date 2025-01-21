@@ -105,7 +105,7 @@ grep GLY 1UBQ.pdb | grep ATOM
 
 Often, our data will be tabulated - this means that the data is in fields seperated by tabs (tsv - tab seperated values), commas (csv - comma seperated values), or similar format. Linux contains a bunch of commands that can help split these tabulated data into individual columns.
 
-1. Copy the file "rests.csv" from the ```/usr/CHE600/class03``` directory to your own class03 directory. The ```rests.csv``` file contains comma seperated tabulated data from an experiment. 
+1. Copy the file ```rests.csv``` from the ```/usr/CHE600/class03``` directory to your own ```class03``` directory. The ```rests.csv``` file contains comma seperated tabulated data from an experiment. Have a look at its contents by using ```cat```
 
 2.	Let's use the ```cut``` command to cut file by fields and extract the second column (-d specifies column separator, -fn indicates which column)
 
