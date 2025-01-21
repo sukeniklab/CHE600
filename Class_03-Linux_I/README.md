@@ -4,7 +4,7 @@ What we’ll cover today:
 * [Linux native text editors](#linux-text-editors)
 * [Slicing and dicing text files](#slicing-and-dicing-text-files)
 * [System commands](#system-commands)
-* [On your own - disorder scores]
+* [On your own - disorder scores](#on-your-own---disorder-scores)
 
 # **Linux text editors**
 Often we will want to edit text in our shell. This lets us quickly make changes to files with the need to download or upload files to the server. Since there is no graphical user interface (GUI) for our shell, there are several text-based editors available be default.
