@@ -335,7 +335,7 @@ awk '{FS=",";sum += $4; count += 1}END{print sum/count}' UP000464024.dc
 | Proteome Id | Organism |
 | --- | --- |
 | UP000002311 | Baker's yeast |
-| UP001285702 | E.Coli |
+| UP000000625 | E.Coli |
 | UP000000803 | Drosophila (fruit fly) |
 | UP000006548 | Arabidopsis (plant) |
 | UP000005640 | Human |

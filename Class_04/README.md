@@ -3,6 +3,7 @@
 Today's class will introduce us to script writing in bash. What we’ll cover today: 
 * [Defining and working with variables](#variables-in-bash)
 * [Basics of script writing](#basics-of-script-writing)
+* [for loops]()
 * [Creating executables with input and output](#creating-executables-with-input-and-output)
 * [Conditionals](#conditionals)
 
@@ -34,17 +35,22 @@ myOtherVar=$(echo "the first var was " $myOtherVar)
 # **Basics of script writing**
 
 ## **I. What elements do we need to create powerful, flexible scripts?**
-Generally, a script will need one or more of the following:
+
+1. Generally, a script will need one or more of the following:
     a.	Ability to pass information to the script, such as names of files, options, etc.
     b.	Ability to loop over different values or files
     c.	Ability to make decisions to do different things based on the input or data
     d.	Ability to store values in variables
     e.	Ability to display results in clearly formatted outputs
 
-In this class we will write many scripts. Our first scripts will be with the syntax of the linux shell (aka bash). Our scripts will generally not include completely new functions. Instead, they will bundle a set of bash commands (which we've learned about in the past few classes) in a useful way. In addition, our scripts:
+2. In this class we will write many scripts. Our first scripts will be with the syntax of the linux shell (aka bash). Our scripts will generally not include completely new functions. Instead, they will bundle a set of bash commands (which we've learned about in the past few classes) in a useful way. In addition, our scripts:
     a. Can includes loops over sets of files or input values
     b. Can include conditionals (if statements) to do different things under different conditions
     c. Can contain variables – a value that can change, depending on conditions or on information passed to the program
+
+3. In bash, we can write scripts in two ways. The first one is through the command line. In general, commands there will be seperatd by a semi-column (```;```). For example:
+
+
 
 ## **II. Let’s write our first script:**
 
