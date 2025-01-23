@@ -338,7 +338,7 @@ fi
     1. Checks if the number of arguments ($#) does not equal (-ne) 2
     2. If true – echo error text, then exit with an exit code of 1. (The exit code can help debug a script)
     3. If false – the script just continues on without exiting. You don’t need an “else” statement here (though those are possible)
-    4. The fi command terminates the conditional.
+    4. The ```fi``` command terminates the conditional.
     5. The tabs are not neccessary for bash (which is not true for other languages such as python), but they don't hurt and they increase the readability of our script.
 
 5. Lets add another conditional, checking if a file has actually been downloaded from RCSB. We must place this after the ```wget``` command, otherwise it will certainly fail:
