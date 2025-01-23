@@ -265,9 +265,9 @@ Now you will work independently to create a script. The goal of this script is t
 1. First, get acquianted with a new command: ```wget```. This command retrieves a file from a web address. The protein data bank (PDB) allows you to download any crystal structure using the wget command. The format is:
 
 ```bash
-wget https://files.rcsb.org/download/1UBQ.pdb
+wget -q https://files.rcsb.org/download/1UBQ.pdb
 ```
-and this line will get the crystal structure file with the code "1UBQ" - which is the ubiquitin we've used in class03.
+and this line will get the crystal structure file with the code "1UBQ" - which is the ubiquitin we've used in class03. Not that the ```-q``` supresses the output from the command. You can remove it if you like!
 
 2. Your script will require 2 inputs, the 4-letter pdb code (like 1UBQ) and a 3-letter abbreviation of the amino acid. The script should be called countAA.sh and run it as follows:
 
@@ -285,7 +285,7 @@ countAA.sh <pdb code> <3-letter amino acid>
 # It first downloads the pdb file, the analyzes it to count a specific amino acid
 # Inputs are pdb code (4 character string) and amino acid (3-letter code, all caps)
 
-wget https://files.rcsb.org/download/$1.pdb
+wget -q https://files.rcsb.org/download/$1.pdb
 count=$(**code to count**)
 echo "PDB $1 has $count $2
 ```
