@@ -181,14 +181,15 @@ Notice that we now created a bunch of text files! How are their names defined? W
 for i in $(ls *.txt); do echo "backing up file $i"; cp $i $i.bak; done
 ```
 
-Notice in this list we ran two commands for every iteration loop: ```echo``` and ```cp```. We have now used this loop to back up every single file in our directory! Type ```ls``` to make sure it happened.
+Notice in this list we ran two commands for every iteration loop: ```echo``` and ```cp```. We have now used this loop to back up every single file in our directory! Type ```ls``` to make sure it happened. Remember that if you don't understand one of the commands within the loop, or the commands that generate the iteration list, you can always type that command directly into the shell prompt to figure out what it does!
 
 ## **III. Using a for loop in a script**
 
-1. Let's try to modify this simple script to run as an executable. Use ```nano``` to edit a file called ```first.sh```. The file should contain the following:
+1. Let's try to modify a simple script to run as an executable. Use ```nano``` to edit a file called ```first.sh```. The file should contain the following:
 
 ```bash
 #! /bin/bash
+# this is my script - it will add 15 to a bunch of number - so useful!
 for i in $(seq 1 10)
 do
     echo "now on iteration $i"
@@ -199,8 +200,8 @@ done
 
 2. Pay attention to the hasbang (```#!```), and the format of our for loop. This script is a bit more complicated, and has three different operations, and the semi-columns have now been replaced by enters. 
     i. First we echo a message
-    ii. Next, we create a variable called ```res``` by using the ```expr``` command which evaluates (very) basic math operations.
-    iii. Finally, we echo the result of the "calculation".
+    ii. Next, we create a variable called ```res``` by using the ```expr``` command which evaluates (very) basic math operations - in this case it takes the iteration variable ```i``` and adds 15.
+    iii. Finally, we echo the ```res``` variable.
 
 3. Let's see if our script works. Save the file (ctrl+s) and exit back to the prompt (ctrl+x). We next have to make this file executable using the ```chmod``` command:
 
@@ -215,16 +216,18 @@ then we run it by typing
 ```
 
 # **Creating executables with input and output**
-The script we created could be more useful if we could provide arguments when we run it. This is very easy to do in bash.
+The script we created could be more useful if we could provide arguments when we run it. This is very easy to do in bash. You can pass any number of arguments that is neccessary for your program to run.
 
 ## **I. Basic input in scripts**
 1. Use ```nano``` to edit a new file called ```adlib.sh```. Paste the following into this file:
 
 ```bash
 #!/bin/bash
+# this script will use user input
 echo "Let’s all go to the $1! We can buy some $2"
 ```
-$1 and $2 stand for two variables that will be supplied by the user following the command. They should be separated by a space. These are similar to other variables in bash that are called using the \$ sign, but \$1, \$2, and all numbers cannot be used for variables since they are used for argument passing.
+
+```$1``` and ```$2``` stand for the first and second variables that will be supplied by the user following the command. They should be separated by a space. These are similar to other variables in bash that are called using the ```$``` sign, but ```$1```, ```$2```, and all numbers cannot be0 used for variables since they are used for argument passing.
 
 2. Make the file executable using 
 
@@ -235,13 +238,21 @@ chmod +x adlib.sh
 3. Now try running it by typing the following variations
 ```bash
 ./adlib.sh store mangos
+```
+```bash
 ./adlib.sh store mangos, oranges, and bananas
+```
+```bash
 ./adlib.sh store “mangos, oranges, and bananas”
 ```
+```bash
+./adlib.sh
+```
+
 What are the differences between the different arguments?
 
 4. There are other values from the command line that are also available inside a shell script:
-    1. ```$1```, ```$2```, etc. – The individual command line parameters
+    1. ```$1```, ```$2```, etc. – The individual command line parameters, provided by the user and seperated by space.
     2. ```$*``` - List of all parameters passed to the script ($1, $2, etc.)
     3. ```$0``` - Name of the shell script being executed.
     4. ```$#``` - Number of arguments specified in the command line.
@@ -258,30 +269,44 @@ wget https://files.rcsb.org/download/1UBQ.pdb
 ```
 and this line will get the crystal structure file with the code "1UBQ" - which is the ubiquitin we've used in class03.
 
-2. Your script will require 2 inputs, the 4-letter pdb code (like 1UBQ) and a 3-letter abbreviation of the amino acid. The script should be called count_aa.sh and run it as follows:
+2. Your script will require 2 inputs, the 4-letter pdb code (like 1UBQ) and a 3-letter abbreviation of the amino acid. The script should be called countAA.sh and run it as follows:
 
 ```bash
-count_aa.sh <pdb code> <3-letter amino acid> 
+countAA.sh <pdb code> <3-letter amino acid> 
 ```
 
 3. The output should be ```<pdb code> has <number> <amino acid>```
 
-4. How do you do this? Your script will need to first download the file using the ```wget``` command. It will then need to search for lines containing the specific amino acid code (GLY for example). Remember that we've done this before when we learned about the ```grep``` command. The counted number will need to passed into a variable (see below), and that variable used as output.
+5. Here's a skeleton script I put together that's missing the counting part:
 
-    **Hint 1:** It is highly recommended to try out the commands from the command line first to see if it works – before writing it into your script.
+```bash
+#! /bin/bash
+# This script counts amino acids in a given PDB
+# It first downloads the pdb file, the analyzes it to count a specific amino acid
+# Inputs are pdb code (4 character string) and amino acid (3-letter code, all caps)
 
-    **Hint 2:** searching for “ALA” will return all atoms that belong to alanine residues – there are many. But each amino acid has only one atom named “CA”
+wget https://files.rcsb.org/download/$1.pdb
+count=$(**code to count**)
+echo "PDB $1 has $count $2
+```
 
-    **Hint 3:** tune your grep command such that you get a single line for every amino acid in the PDB file. Then all you need to do is count lines by piping your output through wc -l
+4. You'll need to replace the ```**code to count**``` segment with your own code will search the pdb file for lines containing the specific amino acid code (GLY for example). Remember that we've done this before when we learned about the ```grep``` command, and you can certainly "recycle" that code if you'd like! The counted number is passed into a variable, ```count```, and that variable used as output.
 
-    **Hint 4:** Once your one-liner throws out the correct number, you’re good to implement it into your script. To do that, you’ll need to place that number into a variable.
+    **Best practice** It is highly recommended to try out the commands from the command line first to see if it works – before writing it into your script.
+
+    **Hint 1:** searching for “ALA” will return all atoms that belong to alanine residues – there are many. But each amino acid has only one atom named “CA”
+
+    **Hint 2:** tune your grep command such that you get a single line for every amino acid in the PDB file. Then all you need to do is count lines by piping your output through wc -l
+
+    **Hint 3:** Once your one-liner throws out the correct number, you’re good to implement it into your script. To do that, you’ll need to place that number into the ```$()``` bit of the code.
+
 
 5. Run the script on the following pdbs, and use your script to get the number of ALA in each one. Redirect the output to a results file (use ```>>```) called ```countALA.txt```:
     1. 1UBQ
     2. 1PGK
     3. 9D61
     4. 8YDS
-    5. 9GPW
+    5. 2PKR
     6. 8QM6
 
 # **Conditionals**
@@ -295,7 +320,11 @@ Conditionals are statements that get evaluated by the interpreter, and performs 
 ./countAA.sh too many arguments
 ```
 
-2. This causes the script to crash, and the user gets no information about why it crashed. Let’s improve the script ```countAA.sh``` script by adding some conditionals to test for issues that might arise, such as bad user input. A list of all conditionals in bash is available [here](https://www.gnu.org/software/bash/manual/html_node/Bash-Conditional-Expressions.html)
+```bash
+./countAA.sh
+```
+
+2. This causes the script to return a bad count becuase no file was found on the PDB query. Let’s improve the script ```countAA.sh``` script by adding some conditionals to test for issues that might arise, such as bad user input. A list of all conditionals in bash is available [here](https://www.gnu.org/software/bash/manual/html_node/Bash-Conditional-Expressions.html)
 
 3. Edit the script and add the following right after the first line (right after the hashbang)
 
@@ -305,21 +334,34 @@ if [ $# -ne 2 ]; then
 	exit 1
 fi
 ```
-
-4. Here the conditional performs the following function: 
+4. Now test the script with the wrong number of arguments. What happens? Here the conditional performs the following function: 
     a. Checks if the number of arguments ($#) does not equal (-ne) 2
     b. If true – echo error text, then exit with an exit code of 1. (The exit code can help debug a script)
     c. If false – the script just continues on without exiting. You don’t need an “else” statement here (though those are possible)
     d. The fi command terminates the conditional.
     e. The tabs are not neccessary for bash (which is not true for other languages such as python), but they don't hurt and they increase the readability of our script.
 
-5. Now test the script with the wrong number of arguments. What happens?
+5. Lets add another conditional, checking if a file has actually been downloaded from RCSB. We must place this after the ```wget``` command, otherwise it will certainly fail:
+
+```bash
+if [ ! -f $1.pdb ]; then
+    echo "$1.pdb has not downloaded!"
+    exit 1
+fi
+```
+
+6. Now test the script with a non-existant pdb code (like "XXXXX"). Here the conditionals performs the following function:
+    a. It checks if a file does **not** exist: the ```!``` is a "not" operator, and the ```-f``` flag checks if a file exists - together it means if ```$1.pdb``` does not exist..
+    b. If true - echo error tet and exit
+    c. If false, continue executing the script.
+
+
 
 # **Bonus script: Count all amino acids:**
 
-The goal here is to adapt your count_aa.sh script to a new script that counts the number of each amino acid in a pdb file. 
+The goal here is to adapt your countAA.sh script to a new script that counts the number of each amino acid in a pdb file. 
 
-1. First copy the first script you wrote to a new one called ```count_all_aa.sh```. Note that When you copy a file – all permissions are copied as well, so this new file will also be executable (have the +x flag).
+1. First copy the first script you wrote to a new one called ```countallAA.sh```. Note that When you copy a file – all permissions are copied as well, so this new file will also be executable (have the +x flag).
 
 2. The script should iterate over a list of all amino acids (feel free to google the list of three-letter amino acid codes!), and count the number of each of them using the same approach we've seen before. 
 
@@ -330,7 +372,7 @@ The goal here is to adapt your count_aa.sh script to a new script that counts th
 ```
 Remember to adjust your conditionals if needed!
 
-4. The output should be a comma separated value (csv) file with the following format:
+4. The output should be a comma separated value (csv) file called ```<pdbcode>_AA.csv``` with the following format:
 
 ```
 Amino acid,count
