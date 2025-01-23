@@ -40,8 +40,14 @@ Variables are critical to any code. They allow you to store information and reca
 
 ```bash
 myVar="This is my variable"
+```
+```bash
 echo myVar
+```
+```bash
 echo $myVar
+```
+```bash
 wc -c $myVar
 ```
 
