@@ -324,36 +324,47 @@ Conditionals are statements that get evaluated by the interpreter, and performs 
 ./countAA.sh
 ```
 
-2. This causes the script to return a bad count becuase no file was found on the PDB query. Let’s improve the script ```countAA.sh``` script by adding some conditionals to test for issues that might arise, such as bad user input. A list of all conditionals in bash is available [here](https://www.gnu.org/software/bash/manual/html_node/Bash-Conditional-Expressions.html)
+2. This causes the script to return a bad count becuase no file was found on the PDB query. Let’s improve the script ```countAA.sh``` script by adding some conditionals to test for issues that might arise, such as bad user input. 
 
-3. Edit the script and add the following right after the first line (right after the hashbang)
+3. A list of all conditionals and their format in bash is available [here](https://www.gnu.org/software/bash/manual/html_node/Bash-Conditional-Expressions.html)
+
+4. Edit the script and add the following right after the first line (right after the hashbang and your the comments). 
 
 ```bash
-if [ $# -ne 2 ]; then
+if [ $# -ne 2 ]
+then
 	echo "Script takes 2 arguments, a pdb code and a 3-letter amino acid code"
 	exit 1
 fi
 ```
-4. Now test the script with the wrong number of arguments. What happens? Here the conditional performs the following function: 
+4. Note the format for the conditional - it is in square brackets, and there **must** be a space between the bracket and the expression we are evaluating. We are ok to put any variable there, in this case the variable is the number of arguments the user passed (```$#```). What happens? Here the conditional performs the following function: 
     1. Checks if the number of arguments ($#) does not equal (-ne) 2
     2. If true – echo error text, then exit with an exit code of 1. (The exit code can help debug a script)
     3. If false – the script just continues on without exiting. You don’t need an “else” statement here (though those are possible)
     4. The ```fi``` command terminates the conditional.
     5. The tabs are not neccessary for bash (which is not true for other languages such as python), but they don't hurt and they increase the readability of our script.
 
-5. Lets add another conditional, checking if a file has actually been downloaded from RCSB. We must place this after the ```wget``` command, otherwise it will certainly fail:
+5. Now test the script with the wrong number of arguments. What happens?
+
+6. With this addition the script will run so long as we provide it with two parameters. However, sometimes the PDB code we provide is wrong, causing ```wget``` to not download anything! Lets add another conditional, checking if a file has actually been downloaded from RCSB. 
+
+7. The code for this is below, but you can't just place it anywhere in your script: **placement is critical**! If we place this **before** the ```wget``` command, it will **always return false** because we haven't downloaded the file yet! We must place it **after** the ```wget``` has run.
+
 
 ```bash
-if [ ! -f $1.pdb ]; then
+if [ ! -f $1.pdb ]
+then
     echo "$1.pdb has not downloaded!"
     exit 1
 fi
 ```
 
-6. Now test the script with a non-existant pdb code (like "XXXXX"). Here the conditionals performs the following function:
-    1. It checks if a file does **not** exist: the ```!``` is a "not" operator, and the ```-f``` flag checks if a file exists - together it means if ```$1.pdb``` does not exist..
+6. Here the conditionals performs the following function:
+    1. It checks if a file does **not** exist: the ```!``` is a "not" operator, and the ```-f``` flag checks if a file exists - together it means if ```$1.pdb``` does not exist.
     2. If true - echo error tet and exit
     3. If false, continue executing the script.
+
+Now test the script with a non-existant pdb code (like "XXXXX"). 
 
 
 
