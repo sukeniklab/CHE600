@@ -36,7 +36,7 @@ Alternatively, we can write scripts (like the ```getProteomeDisorder.sh``` that 
 
 Variables are critical to any code. They allow you to store information and recall it within the memory of your application, without writing anything to the disk. 
 
-1. Defining a variable is easy, simply use the equal sign: ```variable_name="this is the value of the variable"```. Try this (notice you can't have any spaces next to the equal sign!):
+1. Defining a variable is easy, simply use the equal sign: ```variable_name="this is the value of the variable"```. Try this (**notice you can't have any spaces next to the equal sign!**):
 
 ```bash
 myVar="This is my variable"
@@ -48,8 +48,13 @@ echo myVar
 echo $myVar
 ```
 ```bash
-wc -c $myVar
+myVar
 ```
+```bash
+$myVar
+```
+
+What are the differences between the different commands? Notice that to actuall call your variable you need to preface it by a ```$``` sign.
 
 2. We can also direct output into a variable. This is a bit different from directing output to a file, and looks like this:
 
