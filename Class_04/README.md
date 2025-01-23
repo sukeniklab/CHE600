@@ -1,13 +1,38 @@
 # CHEM260 F23 Class 4
 
 Today's class will introduce us to script writing in bash. What we’ll cover today: 
-* [Defining and working with variables](#variables-in-bash)
 * [Basics of script writing](#basics-of-script-writing)
-* [for loops]()
+* [iterations and loops](#iteration-and-loops)
 * [Creating executables with input and output](#creating-executables-with-input-and-output)
 * [Conditionals](#conditionals)
 
-# **Variables in bash**
+# **Basics of script writing**
+
+## **I. What elements do we need to create powerful, flexible scripts?**
+
+1. Generally, a script will need one or more of the following:
+    a.	Ability to pass information to the script, such as names of files, options, etc.
+    b.	Ability to loop over different values or files
+    c.	Ability to make decisions to do different things based on the input or data
+    d.	Ability to store values in variables
+    e.	Ability to display results in clearly formatted outputs
+
+2. In this class we will write many scripts. Our first scripts will be with the syntax of the linux shell (aka bash). Our scripts will generally not include completely new functions. Instead, they will bundle a set of bash commands (which we've learned about in the past few classes) in a useful way. In addition, our scripts:
+    a. Can includes loops over sets of files or input values
+    b. Can include conditionals (if statements) to do different things under different conditions
+    c. Can contain variables – a value that can change, depending on conditions or on information passed to the program
+
+## **II. Script formats: command line or executable##
+
+In bash, we can write scripts in two ways. The first one is through the command line. In general, commands there will be seperatd by a semi-column (```;```). For example:
+
+```bash
+for i in $(seq 1 20); do echo "I just counted to $i"; done
+```
+
+Alternatively, we can write scripts (like the ```getProteomeDisorder.sh``` that we've used before). Which one to use depends on the complexity of the script, your need for reusability, and your convenience!
+
+## **III. Variables in bash**
 
 Variables are critical to any code. They allow you to store information and recall it within the memory of your application, without writing anything to the disk. 
 
@@ -31,32 +56,10 @@ echo $myOtherVar
 
 ```bash
 myOtherVar=$(echo "the first var was " $myOtherVar)
-```
-# **Basics of script writing**
-
-## **I. What elements do we need to create powerful, flexible scripts?**
-
-1. Generally, a script will need one or more of the following:
-    a.	Ability to pass information to the script, such as names of files, options, etc.
-    b.	Ability to loop over different values or files
-    c.	Ability to make decisions to do different things based on the input or data
-    d.	Ability to store values in variables
-    e.	Ability to display results in clearly formatted outputs
-
-2. In this class we will write many scripts. Our first scripts will be with the syntax of the linux shell (aka bash). Our scripts will generally not include completely new functions. Instead, they will bundle a set of bash commands (which we've learned about in the past few classes) in a useful way. In addition, our scripts:
-    a. Can includes loops over sets of files or input values
-    b. Can include conditionals (if statements) to do different things under different conditions
-    c. Can contain variables – a value that can change, depending on conditions or on information passed to the program
-
-3. In bash, we can write scripts in two ways. The first one is through the command line. In general, commands there will be seperatd by a semi-column (```;```). For example:
-
-```bash
-for i in $(seq 1 20); do echo "I just counted to $i"; done
+echo $myOtherVar
 ```
 
-Alternatively, we can write scripts (like the ```getProteomeDisorder.sh``` that we've used before). Which one to use depends on the complexity of the script and your convenience!
-
-## **II. Let’s write our first script:**
+## **IV. Let’s write our first script:**
 
 1. Create a new directory called ```class04``` in your ```~/CHE600``` directory, and move into that directory using ```cd```
 
@@ -69,13 +72,14 @@ Alternatively, we can write scripts (like the ```getProteomeDisorder.sh``` that 
 5. Add the following 3 lines to the script after the hashbang: 
 
 ```bash
-echo "Directory contains this many files and dirs:"
-pwd
-ls | wc -w
+thisDir=$(pwd)
+numFiles=$(ls | wc -w)
+echo "Directory $thisDir has $numFiles files and dirs"
 ```
+
 Before running this – what do you think the output might be? Experiment with typing these commands and using different combinations of piping.
 
-6. Before we actually execute this file, we need to tell the system it is in executable. We've done this before in class02. To do this, make sure the new script file is in your working directory. Then we'll make the script runnable by giving it “execute” permission. chmod changes the permissions for the file. +x makes the file executable:
+6. Before we actually execute this file, we need to tell the system it is in executable. We've done this before in [class 2](../Class_02-Resources/README.md/#bashing-on-your-own---class-assignment). To do this, make sure the new script file is in your working directory. Then we'll make the script runnable by giving it “execute” permission. ```chmod``` changes the permissions for the file. +x makes the file executable:
 
 ```bash
 chmod +x files.sh
@@ -133,7 +137,9 @@ for i in ALA CYS GLU LYS HIS; do echo "now on $i"; done
 
 ```bash
 seq 1 10
-seq 57
+```
+
+```bash
 seq 3 4 100
 ```
 
