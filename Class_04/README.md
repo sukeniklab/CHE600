@@ -11,18 +11,18 @@ Today's class will introduce us to script writing in bash. What we’ll cover to
 ## **I. What elements do we need to create powerful, flexible scripts?**
 
 1. Generally, a script will need one or more of the following:
-    a.	Ability to pass information to the script, such as names of files, options, etc.
-    b.	Ability to loop over different values or files
-    c.	Ability to make decisions to do different things based on the input or data
-    d.	Ability to store values in variables
-    e.	Ability to display results in clearly formatted outputs
+    1.	Ability to pass information to the script, such as names of files, options, etc.
+    2.	Ability to loop over different values or files
+    3.	Ability to make decisions to do different things based on the input or data
+    4.	Ability to store values in variables
+    5.	Ability to display results in clearly formatted outputs
 
 2. In this class we will write many scripts. Our first scripts will be with the syntax of the linux shell (aka bash). Our scripts will generally not include completely new functions. Instead, they will bundle a set of bash commands (which we've learned about in the past few classes) in a useful way. In addition, our scripts:
-    a. Can includes loops over sets of files or input values
-    b. Can include conditionals (if statements) to do different things under different conditions
-    c. Can contain variables – a value that can change, depending on conditions or on information passed to the program
+    1. Can includes loops over sets of files or input values
+    2. Can include conditionals (if statements) to do different things under different conditions
+    3. Can contain variables – a value that can change, depending on conditions or on information passed to the program
 
-## **II. Script formats: command line or executable##
+## **II. Script formats: command line or executable**
 
 In bash, we can write scripts in two ways. The first one is through the command line. In general, commands there will be seperatd by a semi-column (```;```). For example:
 
@@ -243,7 +243,7 @@ chmod +x adlib.sh
 ./adlib.sh store mangos, oranges, and bananas
 ```
 ```bash
-./adlib.sh store “mangos, oranges, and bananas”
+./adlib.sh store "mangos, oranges, and bananas"
 ```
 ```bash
 ./adlib.sh
@@ -287,7 +287,7 @@ countAA.sh <pdb code> <3-letter amino acid>
 
 wget -q https://files.rcsb.org/download/$1.pdb
 count=$(**code to count**)
-echo "PDB $1 has $count $2
+echo "PDB $1 has $count $2"
 ```
 
 4. You'll need to replace the ```**code to count**``` segment with your own code will search the pdb file for lines containing the specific amino acid code (GLY for example). Remember that we've done this before when we learned about the ```grep``` command, and you can certainly "recycle" that code if you'd like! The counted number is passed into a variable, ```count```, and that variable used as output.
@@ -364,9 +364,7 @@ fi
     2. If true - echo error tet and exit
     3. If false, continue executing the script.
 
-Now test the script with a non-existant pdb code (like "XXXXX"). 
-
-
+7. Now test the script with a non-existant pdb code (like "XXXXX"). Did it work?
 
 # **Bonus script: Count all amino acids:**
 
