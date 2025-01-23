@@ -335,11 +335,11 @@ if [ $# -ne 2 ]; then
 fi
 ```
 4. Now test the script with the wrong number of arguments. What happens? Here the conditional performs the following function: 
-    a. Checks if the number of arguments ($#) does not equal (-ne) 2
-    b. If true – echo error text, then exit with an exit code of 1. (The exit code can help debug a script)
-    c. If false – the script just continues on without exiting. You don’t need an “else” statement here (though those are possible)
-    d. The fi command terminates the conditional.
-    e. The tabs are not neccessary for bash (which is not true for other languages such as python), but they don't hurt and they increase the readability of our script.
+    1. Checks if the number of arguments ($#) does not equal (-ne) 2
+    2. If true – echo error text, then exit with an exit code of 1. (The exit code can help debug a script)
+    3. If false – the script just continues on without exiting. You don’t need an “else” statement here (though those are possible)
+    4. The fi command terminates the conditional.
+    5. The tabs are not neccessary for bash (which is not true for other languages such as python), but they don't hurt and they increase the readability of our script.
 
 5. Lets add another conditional, checking if a file has actually been downloaded from RCSB. We must place this after the ```wget``` command, otherwise it will certainly fail:
 
@@ -351,9 +351,9 @@ fi
 ```
 
 6. Now test the script with a non-existant pdb code (like "XXXXX"). Here the conditionals performs the following function:
-    a. It checks if a file does **not** exist: the ```!``` is a "not" operator, and the ```-f``` flag checks if a file exists - together it means if ```$1.pdb``` does not exist..
-    b. If true - echo error tet and exit
-    c. If false, continue executing the script.
+    1. It checks if a file does **not** exist: the ```!``` is a "not" operator, and the ```-f``` flag checks if a file exists - together it means if ```$1.pdb``` does not exist..
+    2. If true - echo error tet and exit
+    3. If false, continue executing the script.
 
 
 
