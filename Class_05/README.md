@@ -16,7 +16,9 @@ We have a series of experiments where the data files are text based (csv or tsv)
 
 3. use the ```tar``` command to untar the file. We use this with the ```-xzvf``` flag: x to extract, z to unzip (decompress), v for "verbose" - show the output of the command, and f to force overwriting if a file already exists in the current directory:
 
+```bash
 tar -xzvf FRETdata.tar.gz
+```
 
 4. Check out the content of your directory. There are now a bunch of files in this directory. These are results from simulations of a single polypeptide chain in the presence of spherical "crowders" that take up space, limit its movement, and hopefully compress its dimensions (this is what we want to see). The parameters used to generate the simulation are embedded in the filename (```XX_XX.dat```): The first number is the radius of the monomers in the box; the second number is the number of inert spheres in the simulation box. All boxes contain the same polypeptide (16 repeats of Gly-Ser).
 
