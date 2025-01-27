@@ -22,9 +22,13 @@ tar -xzvf FRETdata.tar.gz
 
 5. Use ```more``` to look at one of these output files. Each file contains a header with a ```@``` prefix. The header is followed by two columns: the frame number and the end-to-end distance of the peptide chain - which represent one metric of the dimensions of the chain. 
 
-6. Your task is to calculate the AVERAGE and STANDARD DEVIATION of the end-to-end distance of each repeat and prepare a plot of the average end-to-end distance vs. the concentration of the crowding spheres for all sphere radii. All told the plot will have 4 lines (one for each sphere radius) and each line will have 7 points (one for each concentration of spheres).
+6. Your task is to calculate the AVERAGE and STANDARD DEVIATION of the end-to-end distance of each repeat and make a csv file with the following header:
 
-7. How can we do this quickly and efficiently?
+```bash
+crowder_radius, crowder_conc, Re_avg, Re_std
+```
+
+7. Finally, you will import this csv to excel or google sheets, and prepare a plot of the average end-to-end distance vs. the concentration of the crowding spheres for all sphere radii. All told the plot will have 4 lines (one for each sphere radius) and each line will have 7 points (one for each concentration of spheres), and each point will have errorbars defined by the standard deviation of the average. How can we do this quickly and efficiently?
 
 ## **II. AWK to the rescue**
 As we've seen, linux contains some very powerful programs to manipulate text files. Awk is one of the most powerful. It is essentially a command-line based excel sheet, capable of parsing tabulated files and performing calculations on rows and/or columns, all using a single command. This of course lets us execute the same command on dozens or thousands of files quickly. Let's see how it works.
@@ -64,10 +68,34 @@ Here:
 5. As usual, the only output for this command it to our terminal - if you want to save it direct (```>``` or ```>>```)it to a file.
 
 ## **III. Using awk to get average and std**
-So now let's remember our main goal - we want to take the numbers in our extracted files, and calculate their average and standard deviation. We now have the power of awk to do this, but we may need to clean these up a bit. Remember that all the files have a header - how can we get rid of it?
+So now let's remember our main goal - we want to take the numbers in our extracted files, and calculate their average and standard deviation. We now have the power of awk to do this, but we may need to clean these up a bit. We will first work on the entire chain of commands to clean up a **single file**, then calculate its average + std. Then we'll put these commands in a loop that goes over all the files in one swoop! Pick one and only one file to perform these operations on. You can pipe commands through to other commands if you'd like.
 
+1. Cleanup: Remember that all the files have a header - write a code to remove the first few lines of the header so we stay with only two columns.
 
+<details>
+<summary>spoiler</summary>
 
+```bash
+tail -n +23 30_5.txt
+```
+</details>
+
+2. Averaging with awk: On the cleaned up file, run awk to calculate the average. You only need to print it out at the end. Remember that this command needs to operate, either on the file or on the output of another command through a pipe ```|``` 
+
+```bash
+awk 'BEGIN{FS=" ";sum+=$2};END{print sum/NR}'
+```
+
+3. Calculating standard deviation: Rememver that stdev is the square root of the variance, which is calculated by (sumsq / count) - (mean)^2. Let's add this functionality into our awk code. Notice that awk recognizes the function sqrt (square root):
+
+<details>
+<summary>spoiler</summary>
+```bash
+awk 'BEGIN{FS=" "};{sum+=$2;sumsq+=$2*$2};END{mean=sum/NR;var=sumsq/NR-(mean*mean);stdev=sqrt(var);print mean","var","stdev}'
+```
+</details>
+
+4. You should now have a one-liner ready to process any of the data files. The next part is to loop over each data
 
 
 # **Running executables with multiple parameters**
