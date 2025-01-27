@@ -69,9 +69,9 @@ awk 'BEGIN{FS=","; sum=0; print "index,random number,cumulative_sum";};
 END{print "average random number is "sum/NR}' sample.dat
 ```
 Here:
-    1. The BEGIN block defines the Field Seperator (```FS=","```), then defined a variable called sum with a value of 0, then prints out a header.
-    2. The main block increments the sum variable by the value of the second field (```$2```), then prints out the first field, the second field, and the value of the sum variable seperated by commas.
-    3. The END block prints out text and the average, taken by dividing the value of the sum variable by the Number of Rows (```NR```).
+    * The BEGIN block defines the Field Seperator (```FS=","```), then defined a variable called sum with a value of 0, then prints out a header.
+    * The main block increments the sum variable by the value of the second field (```$2```), then prints out the first field, the second field, and the value of the sum variable seperated by commas.
+    * The END block prints out text and the average, taken by dividing the value of the sum variable by the Number of Rows (```NR```).
 
 6. As usual, the only output for this command it to our terminal - if you want to save it direct (```>``` or ```>>```)it to a file.
 
