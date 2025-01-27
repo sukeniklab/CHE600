@@ -1,10 +1,10 @@
 # CHEM260 F23 Class 4
 
 Today's class will increase the complexity of tasks we're doing with bash. What we’ll cover today: 
-* [Multiple file processing] (Using the ```awk``` command)
-* [Parameter variation] (Using nested for loops with ```sed```)
+* [Multiple file processing](#processing-multiple-files) (Using the ```awk``` command)
+* [Parameter variation](#running-executables-with-multiple-parameters) (Using nested for loops with ```sed```)
 * [Calculations with ```awk```]
-* 
+
 # **Processing multiple files**
 
 ## **I. Explanation of the scenario**
