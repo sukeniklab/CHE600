@@ -12,25 +12,32 @@ We have a series of experiments where the data files are text based (csv or tsv)
 
 1. First, let's copy this dataset. Make a new directory using ```mkdir```, ```~/CHE600/class05```, and ```cd``` into it.
 
-2. The dataset is archived in a compressed "tarball" - these files generally have the suffix ```.tar.gz```, and include one or more files that are bundled together and compressed to take up less space. **note** Compression is very effective for text files, but not so effective for binary files. The dataset exists in ```/usr/CHE600/class05/FRETdata.tar.gz```. use ```cp``` to copy the dataset into your ```class05``` directory.
+2. The dataset is archived in a compressed "tarball" - these files generally have the suffix ```.tar.gz```, and include one or more files that are bundled together and compressed to take up less space. **note** Compression is very effective for text files, but not so effective for binary files. The dataset exists in ```/usr/CHE600/class05/ree.tar.gz```. use ```cp``` to copy the dataset into your ```class05``` directory.
 
 3. use the ```tar``` command to untar the file. We use this with the ```-xzvf``` flag: x to extract, z to unzip (decompress), v for "verbose" - show the output of the command, and f to force overwriting if a file already exists in the current directory:
 
 ```bash
-tar -xzvf FRETdata.tar.gz
+tar -xzvf ree.tar.gz
 ```
 
 4. Check out the content of your directory. There are now a bunch of files in this directory. These are results from simulations of a single polypeptide chain in the presence of spherical "crowders" that take up space, limit its movement, and hopefully compress its dimensions (this is what we want to see). The parameters used to generate the simulation are embedded in the filename (```XX_XX.dat```): The first number is the radius of the monomers in the box; the second number is the number of inert spheres in the simulation box. All boxes contain the same polypeptide (16 repeats of Gly-Ser).
 
 5. Use ```more``` to look at one of these output files. Each file contains a header with a ```@``` prefix. The header is followed by two columns: the frame number and the end-to-end distance of the peptide chain - which represent one metric of the dimensions of the chain. 
 
-6. Your task is to calculate the AVERAGE and STANDARD DEVIATION of the end-to-end distance of each repeat and make a csv file with the following header:
+6. Try a linux-native plotting program - xmgrace - to visualize the data. 
+    * First, download the [X410](https://apps.microsoft.com/detail/9PM8LP83G3L3?hl=en-us&gl=US&ocid=pdpshare) X-windows server from the microsoft app store 
+    * The X-windows server will display graphics from the linux server. 
+    * Next, type in the following command. Note that it will take some time to open up. Once it does, you will need to either ctrl+z or close the xmgrace window to return to the prompt.
+
+```bash
+xmgrace 30_2.dat
+```
+
+6. Your task is to calculate the AVERAGE and STANDARD DEVIATION of the end-to-end distance of each file, and make a csv file with the following header:
 
 ```bash
 crowder_radius, crowder_conc, Re_avg, Re_std
 ```
-
-7. Finally, you will import this csv to excel or google sheets, and prepare a plot of the average end-to-end distance vs. the concentration of the crowding spheres for all sphere radii. All told the plot will have 4 lines (one for each sphere radius) and each line will have 7 points (one for each concentration of spheres), and each point will have errorbars defined by the standard deviation of the average. How can we do this quickly and efficiently?
 
 ## **II. AWK to the rescue**
 As we've seen, linux contains some very powerful programs to manipulate text files. Awk is one of the most powerful. It is essentially a command-line based excel sheet, capable of parsing tabulated files and performing calculations on rows and/or columns, all using a single command. This of course lets us execute the same command on dozens or thousands of files quickly. Let's see how it works.
