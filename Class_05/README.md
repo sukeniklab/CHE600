@@ -50,9 +50,6 @@ paste -d "," col1 col2 > sample.dat
 ```bash
 awk 'BEGIN{PRE-RUN COMMANDS};{MAIN RUN COMMANDS};END{POST RUN COMMANDS}' filename
 ```
-
-
-
     1. The BEGIN block is processed once before the file is processed. You can use it to define variables, limits, etc.
     2. The main block processes every line, one line at a time.
     3. The END block is processed once after the last line has been processed. 
