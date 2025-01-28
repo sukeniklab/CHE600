@@ -20,6 +20,8 @@ $$ D = \frac{1}{6} \lim_{t \to \infty}\langle(\frac{d}{dt}\langle r^2 \rangle)\r
 
 2. Here, D is the self-diffusion coefficient, t is the time, and r(t) is the 3D position of the molecule at time t. The diffusion coefficient is obtained from the slope of the displacement (in area units) vs time. We will simulate a box of ~ 100 gas particles in a range of conditions, and the software will calculate the $$D$$ paramter by averaging over all displacements for all particles for the entire trajectory.
 
+![image](./images/MSD.png)
+
 3. The simulation program is called "MDSS", and it sits in the ```/bin``` folder. This means we can execute it from anywhere we'd like. Let's use ```nano``` to look at the code. Notice it is written in python, and contains many lines of code.
 
 ```bash
