@@ -1,9 +1,9 @@
-# CHEM260 F23 Class 4
+# CHEM260 F23 Class 5
 
 Today's class will increase the complexity of tasks we're doing with bash. What we’ll cover today: 
+
 * [Multiple file processing](#processing-multiple-files) (Using the ```awk``` command)
-* [Parameter variation](#running-executables-with-multiple-parameters) (Using nested for loops with ```sed```)
-* [Calculations with ```awk```]
+* [Parameter variation with nested loops](#running-executables-with-multiple-parameters)
 
 # **Processing multiple files**
 
@@ -24,6 +24,7 @@ tar -xzvf ree.tar.gz
 
 5. Use ```more``` to look at one of these output files. Each file contains a header with a ```@``` prefix. The header is followed by two columns: the frame number and the end-to-end distance of the peptide chain - which represent one metric of the dimensions of the chain. 
 
+<!--
 6. Try a linux-native plotting program - xmgrace - to visualize the data. 
     * First, download the [X410](https://apps.microsoft.com/detail/9PM8LP83G3L3?hl=en-us&gl=US&ocid=pdpshare) X-windows server from the microsoft app store 
     * The X-windows server will display graphics from the linux server. 
@@ -32,6 +33,7 @@ tar -xzvf ree.tar.gz
 ```bash
 xmgrace 30_2.dat
 ```
+-->
 
 6. Your task is to calculate the AVERAGE and STANDARD DEVIATION of the end-to-end distance of each file, and make a csv file with the following header:
 
@@ -139,8 +141,25 @@ done
 
 # **Running executables with multiple parameters**
 
+Researchers can run computational simulations. These are essentially experiments where the behavior of a complex system is paired down, parameters provided, and the result - which is normally too complex to calculate analytically - is calculated numerically by the computer. In this exercise we will do exactly this: we will run a simulation of an ideal gas, providing a range of experimental parameters (namely density and temperature). We'll validate the result of the simulation by looking at the pressure - the simulation should obey the gas law!
 
+1. The simulation program is called "MDSS", and it sits in the ```/bin``` folder. Let's use nano to look at the code. Notice it is written in python, and contains many lines of code.
 
+2. Try running ```MDSS```. Look at the message, and try changing your parameters until you get the simulation to run. Notice the output - and notice also the output only goes to the terminal window - no files are written (verify by typing ```ls```). You will need to extract information from this output. How would you do this?
 
-# **
+3. Your task is to write a bash script called ```runMDSS.sh``` in your ```~/CHE600/class05``` directory that will iteratively run MDSS providing **all combinations** of the following temperatures and densities. This task should be completed with nested ```for``` loops. One for loop for each temperature, and another for loop for each pressure. Try simple examples using the ```echo``` command to figure out how to do this.
 
+| **Temp (K)** | **Pressure (mg/mL)** |
+| --- | --- |
+| 10 | 0.1 |
+| 50 | 0.5 |
+| 100 | 1 |
+| 200 | 1.5 |
+| 300 | 2 |
+| 400 | 2.5 |
+
+4. The script will also need to extract the Pressure provided at the end of the output ("Average pressure=XX"). The average density (which you provided), temperature, pressure, and diffusion constant of each simulation (from the output) will need to be inserted into a csv file called ```simulations.csv```.
+
+5. Look at your results. Does the pressure make sense? Does the diffusion constant make sense? Why/Why not? Discuss the results in a file called ```ideal_gas.txt```
+
+**Reminding you that all output should be placed in ```~/CHE600/class05``` directory!
