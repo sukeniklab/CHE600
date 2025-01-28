@@ -221,3 +221,8 @@ Download page available [here](https://code.visualstudio.com/download). Pick the
 
 ## **II. Installing VSCode on classroom computer**
 
+VSCode can be installed through the "Microsoft store", which lets you installed it on the classroom computer. Link [here](https://apps.microsoft.com/detail/XP9KHM4BK9FZ7Q?hl=en-US&gl=US&ocid=pdpshare)
+
+## **III. Installing functionality**
+
+You'll need to install python and jupyter notebooks in VSCode. Those are both avaialble in the plugins tab (see me for details, or wait till next class)
