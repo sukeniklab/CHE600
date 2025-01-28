@@ -4,7 +4,7 @@ Today's class will increase the complexity of tasks we're doing with bash. What 
 
 * [Parameter variation with nested loops](#running-executables-with-multiple-parameters)
 * [Multiple file processing](#processing-multiple-files) (Using the ```awk``` command)
-* [Install VSCode]
+* [Install VSCode](#installing-vscode)
 
 
 
@@ -28,7 +28,7 @@ $$ D = \frac{1}{6} \lim_{t \to \infty}\langle(\frac{d}{dt}\langle r^2 \rangle)\r
 nano /bin/MDSS
 ```
 
-4. Try running ```MDSS```. Look at the message, and try changing your parameters until you get the simulation to run. Notice the output - and notice also the output only goes to the terminal window - no files are written (verify by typing ```ls```). You will need to extract information from this output. How would you do this?
+4. Make a new directory using ```mkdir```, ```~/CHE600/class05```, and ```cd``` into it. Try running ```MDSS```. Look at the message, and try changing your parameters until you get the simulation to run. Notice the output - and notice also the output only goes to the terminal window - no files are written (verify by typing ```ls```). You will need to extract information from this output. How would you do this?
 
 5. Your task is to write a bash script called ```runMDSS.sh``` in your ```~/CHE600/class05``` directory that will iteratively run MDSS providing **all combinations** of the following temperatures and densities. This task should be completed with nested ```for``` loops. One for loop for each temperature, and another for loop for each pressure. Try simple examples using the ```echo``` command to figure out how to do this.
 
@@ -45,7 +45,7 @@ nano /bin/MDSS
 
 </center>
 <details>
-<summary> <b>>Hint on creating your iteration lists</b> </summary> 
+<summary> <b>Hint on creating your iteration lists</b> </summary> 
 
 We've seen two ways of creating iteration lists. One uses a bash command:
 
@@ -70,9 +70,10 @@ Pay attention to the ```$()``` on the first option, and the lack of the in the s
 # **Processing multiple files**
 
 ## **I. Explanation of the scenario**
+
 We have a series of experiments where the data files are text based (csv or tsv) and all structured in the same way. We need to process each of these files in the same way, perform manipulations, and produce some kind of output from these files. 
 
-1. First, let's copy this dataset. Make a new directory using ```mkdir```, ```~/CHE600/class05```, and ```cd``` into it.
+1. For our dataset, we will use a collection of simulation results. These are results from simulations of a single polypeptide chain in the presence of spherical "crowders" that take up space, limit its movement, and hopefully compress its dimensions (this is what we want to see). First, let's copy this dataset to your ```class05``` directory. 
 
 2. The dataset is archived in a compressed "tarball" - these files generally have the suffix ```.tar.gz```, and include one or more files that are bundled together and compressed to take up less space. **note** Compression is very effective for text files, but not so effective for binary files. The dataset exists in ```/usr/CHE600/class05/ree.tar.gz```. use ```cp``` to copy the dataset into your ```class05``` directory.
 
@@ -82,7 +83,7 @@ We have a series of experiments where the data files are text based (csv or tsv)
 tar -xzvf ree.tar.gz
 ```
 
-4. Check out the content of your directory. There are now a bunch of files in this directory. These are results from simulations of a single polypeptide chain in the presence of spherical "crowders" that take up space, limit its movement, and hopefully compress its dimensions (this is what we want to see). The parameters used to generate the simulation are embedded in the filename (```XX_XX.dat```): The first number is the radius of the monomers in the box; the second number is the number of inert spheres in the simulation box. All boxes contain the same polypeptide (16 repeats of Gly-Ser).
+4. Check out the content of your directory. There are now a bunch of files in this directory. The parameters used to generate the simulation are embedded in the filename (```XX_XX.dat```): The first number is the radius of the monomers in the box; the second number is the number of inert spheres in the simulation box. All boxes contain the same polypeptide (16 repeats of Gly-Ser).
 
 5. Use ```more``` to look at one of these output files. Each file contains a header with a ```@``` prefix. The header is followed by two columns: the frame number and the end-to-end distance of the peptide chain - which represent one metric of the dimensions of the chain. 
 
