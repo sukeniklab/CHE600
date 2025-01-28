@@ -20,7 +20,7 @@ $$ D = \frac{1}{6} \lim_{t \to \infty}\langle(\frac{d}{dt}\langle r^2 \rangle)\r
 
 2. Here, D is the self-diffusion coefficient, t is the time, and r(t) is the 3D position of the molecule at time t. The diffusion coefficient is obtained from the slope of the displacement (in area units) vs time. We will simulate a box of ~ 100 gas particles in a range of conditions, and the software will calculate the $$D$$ paramter by averaging over all displacements for all particles for the entire trajectory.
 
-![image](./images/MSD.png)
+<img src="./images/MSD.png" width="300"/>
 
 3. The simulation program is called "MDSS", and it sits in the ```/bin``` folder. This means we can execute it from anywhere we'd like. Let's use ```nano``` to look at the code. Notice it is written in python, and contains many lines of code.
 
@@ -33,6 +33,7 @@ nano /bin/MDSS
 5. Your task is to write a bash script called ```runMDSS.sh``` in your ```~/CHE600/class05``` directory that will iteratively run MDSS providing **all combinations** of the following temperatures and densities. This task should be completed with nested ```for``` loops. One for loop for each temperature, and another for loop for each pressure. Try simple examples using the ```echo``` command to figure out how to do this.
 
 <center>
+
 | **Temp (K)** | **Density (mg/mL)** |
 | --- | --- |
 | 10 | 0.1 |
@@ -41,6 +42,7 @@ nano /bin/MDSS
 | 200 | 1.5 |
 | 300 | 2 |
 | 400 | 2.5 |
+
 </center>
 <details>
 <summary>**Hint on creating your iteration lists**</summary> 
