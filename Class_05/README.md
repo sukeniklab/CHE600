@@ -4,18 +4,31 @@ Today's class will increase the complexity of tasks we're doing with bash. What 
 
 * [Parameter variation with nested loops](#running-executables-with-multiple-parameters)
 * [Multiple file processing](#processing-multiple-files) (Using the ```awk``` command)
+* [Install VSCode]
 
 
 
 # **Running executables with multiple parameters**
 
-Researchers can run computational simulations. These are essentially experiments where the behavior of a complex system is paired down, parameters provided, and the result - which is normally too complex to calculate analytically - is calculated numerically by the computer. In this exercise we will do exactly this: we will run a simulation of an ideal gas, providing a range of experimental parameters (namely density and temperature). We'll validate the result of the simulation by looking at the pressure - the simulation should obey the gas law!
+Researchers often use servers to run computational simulations. These are essentially experiments where the behavior of a complex system is defined, parameters provided, and the result - which is normally too complex to calculate analytically - is calculated numerically by the computer. In this exercise we will do exactly this: we will run a simulation of an ideal gas, providing a range of experimental parameters (namely density and temperature), to **simulate** the diffusion constant of a single gas molecule. We'll validate the result of the simulation by looking at the pressure - the simulation should obey the gas law!
 
-1. The simulation program is called "MDSS", and it sits in the ```/bin``` folder. Let's use nano to look at the code. Notice it is written in python, and contains many lines of code.
+1. The diffusion coefficient is a measure of how quickly an object moves in an isotropic environment (one that is the same in all directions). Here we are simulating an ideal gas, so every particle should be the same and the isotropic environment holds. To calculate diffusion, we will use the Einstein relationship:
 
-2. Try running ```MDSS```. Look at the message, and try changing your parameters until you get the simulation to run. Notice the output - and notice also the output only goes to the terminal window - no files are written (verify by typing ```ls```). You will need to extract information from this output. How would you do this?
+$$\langle r^2 \rangle = \langle (r(t) - r(t_0))^2 \rangle$$
 
-3. Your task is to write a bash script called ```runMDSS.sh``` in your ```~/CHE600/class05``` directory that will iteratively run MDSS providing **all combinations** of the following temperatures and densities. This task should be completed with nested ```for``` loops. One for loop for each temperature, and another for loop for each pressure. Try simple examples using the ```echo``` command to figure out how to do this.
+$$ D = \frac{1}{6} \lim_{t \to \infty}\langle(\frac{d}{dt}\langle r^2 \rangle)\rangle $$
+
+2. Here, D is the self-diffusion coefficient, t is the time, and r(t) is the 3D position of the molecule at time t. The diffusion coefficient is obtained from the slope of the displacement (in area units) vs time. We will simulate a box of ~ 100 gas particles in a range of conditions, and the software will calculate the $$D$$ paramter by averaging over all displacements for all particles for the entire trajectory.
+
+3. The simulation program is called "MDSS", and it sits in the ```/bin``` folder. This means we can execute it from anywhere we'd like. Let's use ```nano``` to look at the code. Notice it is written in python, and contains many lines of code.
+
+```bash
+nano /bin/MDSS
+```
+
+4. Try running ```MDSS```. Look at the message, and try changing your parameters until you get the simulation to run. Notice the output - and notice also the output only goes to the terminal window - no files are written (verify by typing ```ls```). You will need to extract information from this output. How would you do this?
+
+5. Your task is to write a bash script called ```runMDSS.sh``` in your ```~/CHE600/class05``` directory that will iteratively run MDSS providing **all combinations** of the following temperatures and densities. This task should be completed with nested ```for``` loops. One for loop for each temperature, and another for loop for each pressure. Try simple examples using the ```echo``` command to figure out how to do this.
 
 | **Temp (K)** | **Pressure (mg/mL)** |
 | --- | --- |
@@ -26,9 +39,25 @@ Researchers can run computational simulations. These are essentially experiments
 | 300 | 2 |
 | 400 | 2.5 |
 
-4. The script will also need to extract the Pressure provided at the end of the output ("Average pressure=XX"). The average density (which you provided), temperature, pressure, and diffusion constant of each simulation (from the output) will need to be inserted into a csv file called ```simulations.csv```.
+<details>
+<summary>**Hint on creating your iteration lists**</summary> 
 
-5. Look at your results. Does the pressure make sense? Does the diffusion constant make sense? Why/Why not? Discuss the results in a file called ```ideal_gas.txt```
+We've seen two ways of creating iteration lists. One uses a bash command:
+
+```bash
+for i in $(ls); do echo $i; done
+```
+Another just uses a user provided list, seperated by spaces:
+```bash
+for i in WORD1 450 WORD3 ORANGES; do echo $i; done
+```
+
+Pay attention to the ```$()``` on the first option, and the lack of the in the second ```$()```. Which one should you use here?
+</details>
+
+6. The script will also need to extract the Pressure provided at the end of the output (e.g. "Average pressure=XX"). The average density (which you provided), temperature, pressure, and diffusion constant of each simulation (from the output) will need to be inserted into a csv file called ```simulations.csv```.
+
+7. Look at your results. Does the pressure make sense? Does the diffusion constant make sense? Why/Why not? Discuss the results in a file called ```ideal_gas.txt```
 
 # **Processing multiple files**
 
@@ -166,3 +195,14 @@ done
 
 
 **Reminding you that all output should be placed in ```~/CHE600/class05``` directory!
+
+# **Installing VSCode**
+
+For those that have completed today's tasks: we will be moving to python next class. Because IT couldn't help support us working on the server, we will be working locally. This can be done either on your own laptop, or on class computers - whichever you prefer. We will be working with VSCode - a powerful editor for python and other programming languages.
+
+## **I. Installing VSCode on your own laptop**
+
+
+
+
+## **II. Installing VSCode on classroom computer**
