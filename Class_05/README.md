@@ -73,9 +73,13 @@ Pay attention to the ```$()``` on the first option, and the lack of the in the s
 
 We have a series of experiments where the data files are text based (csv or tsv) and all structured in the same way. We need to process each of these files in the same way, perform manipulations, and produce some kind of output from these files. 
 
-1. For our dataset, we will use a collection of simulation results. These are results from simulations of a single polypeptide chain in the presence of spherical "crowders" that take up space, limit its movement, and hopefully compress its dimensions (this is what we want to see). First, let's copy this dataset to your ```class05``` directory. 
+1. For our dataset, we will use a collection of simulation results. These are results from simulations of a single polypeptide chain in the presence of spherical "crowders" that take up space, limit its movement, and hopefully compress its dimensions (this is what we want to see). First, let's copy this dataset using ```cp``` to your ```class05``` directory. The dataset is in:
 
-2. The dataset is archived in a compressed "tarball" - these files generally have the suffix ```.tar.gz```, and include one or more files that are bundled together and compressed to take up less space. **note** Compression is very effective for text files, but not so effective for binary files. The dataset exists in ```/usr/CHE600/class05/ree.tar.gz```. use ```cp``` to copy the dataset into your ```class05``` directory.
+```bash
+/usr/CHE600/class05/ree.tar.gz
+```
+
+2. The dataset is archived in a compressed "tarball" - these files generally have the suffix ```.tar.gz```, and include one or more files that are bundled together and compressed to take up less space. **note** Compression is very effective for text files, but not so effective for binary files. T
 
 3. use the ```tar``` command to untar the file. We use this with the ```-xzvf``` flag: x to extract, z to unzip (decompress), v for "verbose" - show the output of the command, and f to force overwriting if a file already exists in the current directory:
 
@@ -142,9 +146,9 @@ END{print "average random number is "sum/NR}' sample.dat
 ```
 
 Here:
-* The BEGIN block defines the Field Seperator (```FS=","```), then defined a variable called sum with a value of 0, then prints out a header.
+* The BEGIN block defines the Field Seperator (```FS=","```), then defined a variable called sum with a value of 0, (```sum=0```) then prints out a header (```print "index,random number,cumulative_sum"```). Notice that each command is separated by a semi-column (```;```)
 * The main block increments the sum variable by the value of the second field (```$2```), then prints out the first field, the second field, and the value of the sum variable seperated by commas.
-* The END block prints out text and the average, taken by dividing the value of the sum variable by the Number of Rows (```NR```).
+* The END block prints out text and the average, taken by dividing the value of the sum variable by the Number of Rows (```NR``` - a protected variable name in awk).
 
 6. As usual, the only output for this command it to our terminal - if you want to save it direct (```>``` or ```>>```)it to a file.
 
@@ -156,8 +160,9 @@ So now let's remember our main goal - we want to take the numbers in our extract
 <details>
 <summary>spoiler</summary>
 
+Remember you can use the ```tail``` command to look at all but the top N lines:
 ```bash
-tail -n +23 30_5.txt
+tail -n +5 30_5.txt
 ```
 </details>
 
@@ -211,7 +216,8 @@ For those that have completed today's tasks: we will be moving to python next cl
 
 ## **I. Installing VSCode on your own laptop**
 
-
+Download page available [here](https://code.visualstudio.com/download). Pick the download that works for you.
 
 
 ## **II. Installing VSCode on classroom computer**
+
