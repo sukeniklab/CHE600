@@ -32,6 +32,7 @@ nano /bin/MDSS
 
 5. Your task is to write a bash script called ```runMDSS.sh``` in your ```~/CHE600/class05``` directory that will iteratively run MDSS providing **all combinations** of the following temperatures and densities. This task should be completed with nested ```for``` loops. One for loop for each temperature, and another for loop for each pressure. Try simple examples using the ```echo``` command to figure out how to do this.
 
+<center>
 | **Temp (K)** | **Density (mg/mL)** |
 | --- | --- |
 | 10 | 0.1 |
@@ -40,7 +41,7 @@ nano /bin/MDSS
 | 200 | 1.5 |
 | 300 | 2 |
 | 400 | 2.5 |
-
+</center>
 <details>
 <summary>**Hint on creating your iteration lists**</summary> 
 
