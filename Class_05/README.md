@@ -45,7 +45,7 @@ nano /bin/MDSS
 
 </center>
 <details>
-<summary>**Hint on creating your iteration lists**</summary> 
+<summary> <b>>Hint on creating your iteration lists</b> </summary> 
 
 We've seen two ways of creating iteration lists. One uses a bash command:
 
@@ -60,9 +60,12 @@ for i in WORD1 450 WORD3 ORANGES; do echo $i; done
 Pay attention to the ```$()``` on the first option, and the lack of the in the second ```$()```. Which one should you use here?
 </details>
 
-6. The script will also need to extract the Pressure provided at the end of the output (e.g. "Average pressure=XX"). The average density (which you provided), temperature, pressure, and diffusion constant of each simulation (from the output) will need to be inserted into a csv file called ```simulations.csv```.
+6. Beyond the provided density and temperature, the script will also need to extract the pressure and diffusion constant provided at the end of the run in the output (e.g. "Average pressure=XX"). The average density (which you provided), temperature, pressure, and diffusion constant of each simulation (from the output) will need to be inserted into a csv file called ```simulations.csv```.
 
-7. Look at your results. Does the pressure make sense? Does the diffusion constant make sense? Why/Why not? Discuss the results in a file called ```ideal_gas.txt```
+7. Look at your results and answer the following: 
+    * Does the pressure make sense with the ideal gas law? 
+    * How does the diffusion constant change with pressure and temperature? 
+    * Write your answers in a file called ```~/CHE600/class05/ideal_gas.txt```
 
 # **Processing multiple files**
 
