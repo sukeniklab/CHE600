@@ -11,10 +11,10 @@ Today's class will focus on finishing the tasks from Tuesday, and then setting u
 
 We have a series of experiments where the data files are text based (csv or tsv) and all structured in the same way. We need to process each of these files in the same way, perform manipulations, and produce some kind of output from these files. 
 
-1. For our dataset, we will use a collection of simulation results. These are results from simulations of a single polypeptide chain in the presence of spherical "crowders" that take up space, limit its movement, and hopefully compress its dimensions (this is what we want to see). First, let's copy this dataset using ```cp``` to your ```class05``` directory. The dataset is in:
+1. For our dataset, we will use a collection of simulation results. These are results from simulations of a single polypeptide chain in the presence of spherical "crowders" that take up space, limit its movement, and hopefully compress its dimensions (this is what we want to see). First, make a ~/CHE600/class06 directory, and copy this dataset using ```cp``` to your ```class06``` directory. The dataset is in:
 
 ```bash
-/usr/CHE600/class05/ree.tar.gz
+/usr/CHE600/class06/ree.tar.gz
 ```
 
 2. The dataset is archived in a compressed "tarball" - these files generally have the suffix ```.tar.gz```, and include one or more files that are bundled together and compressed to take up less space. **note** Compression is very effective for text files, but not so effective for binary files. T
