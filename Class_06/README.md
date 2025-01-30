@@ -69,7 +69,7 @@ command_to_generate_text | awk 'BEGIN{PRE-RUN COMMANDS};{MAIN RUN COMMANDS};END{
 ```bash
 awk 'BEGIN{FS=","; sum=0; print "index,random number,cumulative_sum";};
 {sum+=$2; print $1","$2","sum};
-END{print "average random number is "sum/NR}' sample.dat
+END{print "proccessed " NR " rows. Average random number is "sum/NR}' sample.dat
 ```
 
 Here:
