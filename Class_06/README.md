@@ -1,6 +1,9 @@
-# CHEM260 F23 Class 4
+# CHEM260 F23 Class 6
 
 Today's class will focus on finishing the tasks from Tuesday, and then setting up a python environment for us to work in for the remainder of class!
+
+* [Multiple file processing](#processing-multiple-files) (Using the ```awk``` command)
+* [Install VSCode](#installing-vscode)
 
 # **Processing multiple files**
 
