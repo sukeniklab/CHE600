@@ -82,21 +82,21 @@ Here:
 ## **III. Using awk to get average and std**
 So now let's remember our main goal - we want to take the numbers in our extracted files, and calculate their average and standard deviation. We now have the power of awk to do this, but we may need to clean these up a bit. We will first work on the entire chain of commands to clean up a **single file**, then calculate its average + std. Then we'll put these commands in a loop that goes over all the files in one swoop! Pick one and only one file to perform these operations on. You can pipe commands through to other commands if you'd like.
 
-1. Cleanup: Remember that all the files have a header - write a code to remove the first few lines of the header so we stay with only two columns.
+1. Cleanup: Remember that all the files have a header (have a look using ```head```!). If ```awk``` would run on that it would parse it in the same way it would parse the actual data. You'll need to write a code to remove the header lines (those starting with ```@```) so we stay with only two columns.
 
 <details>
 <summary>spoiler</summary>
 
 Remember you can use the ```tail``` command to look at all but the top N lines:
 ```bash
-tail -n +5 30_5.txt
+tail -n +20
 ```
 </details>
 
 2. Averaging with awk: On the cleaned up file, run awk to calculate the average. You only need to print it out at the end. Remember that this command needs to operate, either on the file or on the output of another command through a pipe ```|``` 
 
 ```bash
-awk 'BEGIN{FS=" ";sum+=$2};END{print sum/NR}'
+awk 'BEGIN{FS=" ";sum=0};{sum+=$2};END{print sum/NR}'
 ```
 
 3. Calculating standard deviation: Rememver that stdev is the square root of the variance, which is calculated by (sumsq / count) - (mean)^2. Let's add this functionality into our awk code. Notice that awk recognizes the function sqrt (square root):
@@ -132,10 +132,10 @@ done
 ```
 </details>
 
-5. Save the results (preferably by redirecting) to a filename called ```summary.csv``` - please make sure this is in your ```~/CHE600/class05``` directory for checking!
+5. Save the results (preferably by redirecting) to a filename called ```summary.csv``` - please make sure this is in your ```~/CHE600/class06``` directory for checking!
 
 
-**Reminding you that all output should be placed in ```~/CHE600/class05``` directory!**
+**Reminding you that all output should be placed in ```~/CHE600/class06``` directory!**
 
 # **Installing VSCode**
 
