@@ -1,4 +1,4 @@
-# CHEM260 F23 Class 6
+# CHEM260 Class 6
 
 Today's class will focus on finishing the tasks from Tuesday, and then setting up a python environment for us to work in for the remainder of class!
 
