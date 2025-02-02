@@ -7,9 +7,10 @@ Topics include:
     * [The python shell](#i-the-python-terminal)
     * [the VSCode integrated working environment](#ii-vscode)
     * [Jupyter notebooks](#iii-jupyter-notebooks)
-5. [Variables]
+5. [Variables](#python-variables)
 6. [Loops and conditionals]
-7. [First coding exercise: random walk]
+7. [Libraries]
+8. [First coding exercise: random walk]
 
 # Python Overview
 
@@ -161,54 +162,90 @@ myVar=myVar/4.2
 type(myVar)
 ```
 
-4. Strings - any combination of characters, symbols, and numbers. Notice that if we want to assign characters to a variable, we will need to use either single or double quotation marks - otherwise python will intepret our string as a variable name. Try the following in a new block:
+## II. String variables
+
+Strings - any combination of characters, symbols, and numbers. Notice that if we want to assign characters to a variable, we will need to use either single or double quotation marks - otherwise python will intepret our string as a variable name. Try the following in a new block:
 
 ```python
 myString='this is a string with 2 numbers: 4 and 6'
 type(myString)
 ```
 
-5. Lists (open a new window in spyder and put all of the commands in this section into lists.py)
-a.	Lists can hold any mix of data types (including other lists)
-b.	Several ways to create a new list:
-1.	Create with values
-alist=[1, 9, 3, 7, "a"]  (Note square brackets)
-type(alist)
-print(alist)
-len(alist)
+## III. List variables
 
-2.	There are many ways to create empty list:
+Lists can hold any mix of data types (including other lists) in an indexed way - in other words it is a variable that can contain multiple, indexed values. 
+
+1. We can create lists in several ways. Start a new block and try the following:
+
+```python
+# We first define a list by assigning variables seperated by commas and contained within square brackers ([]):
+myList=[1, 9, 3, 7, "a"]
+type(myList)
+print(myList)
+# The len() function works only on list variables returns the length of the list.
+len(myList)
+```
+
+2. We can create empty lists using an empty square bracket or with the list() function:
+
+```python
 blist=list()
+type(blist)
 blist=[]
+type(blist)
+```
 
-3.	There are ways to fill lists with values:
+3. List variables contains some functions themselves. For example, the ```append``` function is _called_ through the ```blist``` variable. Try it out in the same block:
+
+```python
 blist.append(10)
 blist.append("b")
+print(blist)
+```
 
-4.	You can initialize a list with all the same values using “*”:
+4. You can create a list variable with all the same values using ```*```:
+
+```python
 clist=[0]*20
+print(clist)
+# we can combine two lists together with append. For example, to add your clist to blist, use:
+blist.append(clist)
+print(blist)
+```
 
-c.	You access values in arrays lists with [], note that first entry is element zero [0]
+5. We can pull specific indices from a list using ```[]```. Note that first entry in the list has an index of [0]
 
-alist[0]
-alist[1]
-alist[1:2]
-alist[1:]
-alist[:2]
-alist[-1]
-
-Setting a value in alist:
+```python
+# pulling the first entry in the list
+blist[0]
+# pulling the second entry in the list
+blist[1]
+# pulling the 2nd and 3rd entires in the list
+blist[1:3]
+# pulling all entries byt the first
+blist[1:]
+#pulling all entries up to the 4th
+blist[:5]
+# pulling the last entry in the list
+blist[-1]
+# We can also set the value of an index in a list using this indexer:
+alist[4]
 alist[4]=5
+alist[4]
+```
 
-d.	Lists are objects. Objects often contain internal functions that can be invoked directly from the variable:
-1.	Count the  number of times an element appears in a list
-alist.count(3)
-2.	Take off the last element:
-alist.pop()
-3.	Sort the list:
-alist.sort()
-4.	Reverse the list:
-alist.reverse()
-5.	To see the complete set of function for list in spyder, pause after typing the “.” And hit tab.
+6. We saw the ```append``` function can be called from a list - this is because a list is a python objects. Objects in python often contain internal functions that can be invoked directly from the variable. To see the complete set of ```list``` functions, hit the tab after type ```blist.```
+
+```python
+# Count the  number of times an element appears in a list
+blist.count(3)
+# Take off the last element:
+blist.pop()
+# Sort the list:
+blist.sort()
+# Reverse the list:
+blist.reverse()
+```
+
 
 
