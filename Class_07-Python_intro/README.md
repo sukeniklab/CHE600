@@ -8,8 +8,8 @@ Topics include:
     * [the VSCode integrated working environment](#ii-vscode)
     * [Jupyter notebooks](#iii-jupyter-notebooks)
 5. [Variables](#python-variables)
-6. [Loops and conditionals]
-7. [Libraries]
+6. [Loops and conditionals](#script-flow-control)
+7. [Libraries](#python-libraries)
 8. [First coding exercise: random walk]
 
 # Python Overview
@@ -247,5 +247,65 @@ blist.sort()
 blist.reverse()
 ```
 
+# Script flow control
+
+## I. "for" loops
+
+1. for loops are similar to bash, but use indentation instead of do/done to denote the commands to be included in the loop. 
+
+2. Note that indentation matters! – python doesn’t care if you indent with tab or with spaces (or how many spaces) but you must be consistent! You can’t use tab once then spaces, or different number of spaces.
+
+3. To set the value of the iterable variable we will use the range command. range is a python command that creates a “range” object that contains sequential integers separated by a step. The format is ```range(start,stop,[step])```, where start is the first integer, stop is the first integer that will **NOT** be included), and step is the step size. (step is optional so it is written in []– if non is provided the default is 1). Start a new block in your notebook and enter the following:
+
+```python
+for i in range(0,100): 
+    j=i*i # this line is indented
+    print(i,j) #so is this one!
+```
+
+## II. "If" conditionals
+
+If statements are similar to bash but use indentation instead of then/fi to denote the commands to be included in the loop and do not require parentheses around condition. In a new block, insert the following. Pay attention to indentation!
+
+```python
+q=[1,2,2,3,3,4,7]
+if q.count(3)==1:
+	print("q has one 3")
+elif q.count(3)==0:
+	print("q has no 3s")
+else:
+	print("q has two 3s or more!")
+```
+
+# Python Libraries
+
+Libraries of useful functions are organized into modules that are imported into Python programs using the import or from commands. This is one of the best features of python. Most libraries, especially the most popular and extensive ones, are easy to install and work right out of the box.
+
+1. Some libraries come built in with vanilla python. However, they still must be imported. This is because storing a library's functions takes up memory while running your script. Using only required libraries (or even only specific functions of required libraries) will reduce memory usage, making your script faster and more efficient.
+
+2. The ```import``` command loads in an entire library. To use a function from that library you will need to call the library after this import. In a new block write:
+
+```python
+import math
+math.sqrt(10)
+```
+
+2. The ```from``` command loads just the specified functions. If you call functions in this way, you can use them directly from the main variable space. In a new block, write:
+
+```python
+from math import sqrt
+sqrt(10)
+```
+
+3. A useful function is ```choice()``` from the ```random``` library. ```choice()``` returns one value from a list selected randomly. In a new block, write:
+
+```python
+from random import choice
+ndice=5
+for i in range(ndice):
+    dice.append(choice(range(1,7)))
+dice.sort()
+print(dice)
+```
 
 
