@@ -370,8 +370,8 @@ for i in range(ndice):
 4. Now we can easily count our rolls using another for loop. Place it in a new cell:
 
 ```python
-for i in range (1,7):
-    print("%is: %i"%(i,dice.count(i)))
+for d in range (1,7):
+    print("%is: %i"%(d,dice.count(d)))
 ```
 
 5. Lets extend this now to TWO dice throws. How would you do it? Put the code in a new cell.
