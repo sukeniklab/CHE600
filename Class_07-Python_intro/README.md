@@ -238,60 +238,71 @@ print(dlist)
 
 ```python
 # pulling the first entry in the list
+print(blist)
 print(blist[0])
 ```
 ```python
 # pulling the second entry in the list
+print(blist)
 print(blist[1])
 ```
 
 ```python
 # pulling the 2nd and 3rd entires in the list
+print(blist)
 print(blist[1:3])
 ```
 
 ```python
 # pulling all entries byt the first
+print(blist)
 print(blist[1:])
 ```
 
 ```python
 #pulling all entries up to the 4th
-print(blist[:5])
+print(blist)
+print(blist[:3])
 ```
 
 ```python
 # pulling the last entry in the list
+print(blist)
 print(blist[-1])
 ```
 
 ```python
 # We can also set the value of an index in a list using this indexer:
-print(blist[4])
-blist[4]=5
-print(blist[4])
+print(blist)
+blist[3]=5
+print(blist)
 ```
 
 6. We saw the ```append``` function can be called from a list - this is because a list is a python objects. Objects in python often contain internal functions that can be invoked directly from the variable. To see the complete set of ```list``` functions, hit the tab after type ```blist.```
 
 ```python
 # Count the  number of times an element appears in a list
-blist.count(3)
+blist.count(10)
 ```
 
 ```python
 # Take off the last element:
+print(blist)
 blist.pop()
+print(blist)
 ```
 
 ```python
 # Sort the list:
-blist.sort()
+clist=[23,1,56,778,43,21,5,7,99]
+clist.sort()
+print(clist)
 ```
 
 ```python
 # Reverse the list:
-blist.reverse()
+clist.reverse()
+print(clist)
 ```
 
 # Script flow control
@@ -309,6 +320,8 @@ for i in range(0,100):
     j=i*i # this line is indented
     print(i,j) #so is this one!
 ```
+
+Notice that here our output has been cropped and replaced by ```...```. This is to increase readability of our notebook. You can click the links in the notebook to open the output in a different window, or turn the output into a scrollable block!
 
 ## II. "If" conditionals
 
@@ -348,11 +361,19 @@ sqrt(10)
 
 ```python
 from random import choice
-ndice=5
+ndice=50
+dice=[]
 for i in range(ndice):
     dice.append(choice(range(1,7)))
-dice.sort()
-print(dice)
 ```
+
+4. Now we can easily count our rolls using another for loop. Place it in a new cell:
+
+```python
+for i in range (1,7):
+    print("%is: %i"%(i,dice.count(i)))
+```
+
+5. Lets extend this now to TWO dice throws. How would you do it? Put the code in a new cell.
 
 
