@@ -104,7 +104,7 @@ print(a/b)
 
 ## III. Jupyter notebooks
 
-1. Another option to write python is using Jupyter notebooks. This is similar to a text file, but lines of code can be written in block, executed, and the result displayed in line before the next block. See some examples [here](https://jupyter.org/try-jupyter/notebooks/?path=notebooks/Intro.ipynb).
+1. Another option to write python is using Jupyter notebooks. This is similar to a text file, but lines of code can be written in cells, executed, and the result displayed in line before the next cell. See some examples [here](https://jupyter.org/try-jupyter/notebooks/?path=notebooks/Intro.ipynb).
 
 2. Let's start a new jupyter notebook.  Go to _file_ and select _New File..._, then choose the _Jupyter Notebook_ option. Select python 3.13 when prompted.
 
@@ -116,7 +116,7 @@ print(a/b)
 
 <img src="./images/jupyter_03.png" width=450>
 
-4. Your window should contain a single cell. Place the same code from the last two exercises in the cell. Run the code using the "play" button on the upper left side of the block. You should see output! Notice that you can also have a look at your variables by hitting the _Jupyter Variables_ button on the top.
+4. Your window should contain a single cell. Place the same code from the last two exercises in the cell. Run the code using the "play" button on the upper left side of the cell. You should see output! Notice that you can also have a look at your variables by hitting the _Jupyter Variables_ button on the top.
 
 ```python
 print("Hello world!")
@@ -128,7 +128,7 @@ print(a/b)
 
 <img src="./images/jupyter_04.png" width=450>
 
-5. We can now add another block by pressing the _+ Code_ button on the left of the top toolbar, and then write more code in the next block!
+5. We can now add another cell by pressing the _+ Code_ button on the left of the top toolbar, and then write more code in the next cell!
 
 6. Jupyter notebooks are saved automatically, and can hold any number of cells and variables. Anything defined in previous cells will be carried over to the next cell within the same notebook.
 
@@ -157,7 +157,7 @@ variable = value
 
 ## I. Number variables
 
-1. Floating point (anything with a decimal). Also called _float_. Try putting the following in your notebook block and running it. We define a variable called _myVar_ and assign a non-integer number to that variable. We then _pass_ the variable into the function ```type```, which should tell us what its variable type is. **Note that comments in python start with ```#```, and can be placed anywhere in the block**
+1. Floating point (anything with a decimal). Also called _float_. Try putting the following in your notebook cell and running it. We define a variable called _myVar_ and assign a non-integer number to that variable. We then _pass_ the variable into the function ```type```, which should tell us what its variable type is. **Note that comments in python start with ```#```, and can be placed anywhere in the cell**
 
 ```python
 myVar=3.14  # defines var "myVar" as a float
@@ -165,14 +165,14 @@ myVar=3.14  # defines var "myVar" as a float
 type(myVar) 
 ```
 
-2. Integer (exact, non-decimal number). These numbers cannot have decimals. As a result they take up much less space in the computer's memory. Place this code in a new block. Notice that the old value of the variable _myVar_ will be overwritten.
+2. Integer (exact, non-decimal number). These numbers cannot have decimals. As a result they take up much less space in the computer's memory. Place this code in a new cell. Notice that the old value of the variable _myVar_ will be overwritten.
 
 ```python
 myVar=3*10+4
 type(myVar)
 ```
 
-3. In many programming languages, if we try to perform an operation on a integer that will return a float, an error will occur. Python automatically "upgrades" integers to floats when needed. Try the following in a new block:
+3. In many programming languages, if we try to perform an operation on a integer that will return a float, an error will occur. Python automatically "upgrades" integers to floats when needed. Try the following in a new cell:
 
 ```python
 myVar=4
@@ -183,7 +183,7 @@ print(type(myVar))
 
 ## II. String variables
 
-Strings - any combination of characters, symbols, and numbers. Notice that if we want to assign characters to a variable, we will need to use either single or double quotation marks - otherwise python will intepret our string as a variable name. Try the following in a new block:
+Strings - any combination of characters, symbols, and numbers. Notice that if we want to assign characters to a variable, we will need to use either single or double quotation marks - otherwise python will intepret our string as a variable name. Try the following in a new cell:
 
 ```python
 myString='this is a string with 2 numbers: 4 and 6'
@@ -194,7 +194,7 @@ print(type(myString))
 
 Lists can hold any mix of data types (including other lists) in an indexed way - in other words it is a variable that can contain multiple, indexed values. 
 
-1. We can create lists in several ways. Start a new block and try the following:
+1. We can create lists in several ways. Start a new cell and try the following:
 
 ```python
 # We first define a list by assigning variables seperated by commas and contained within square brackers ([]):
@@ -214,7 +214,7 @@ print(blist)
 print(clist)
 ```
 
-3. List variables contains some functions themselves. For example, the ```append``` function is _called_ through the ```blist``` variable. Try it in a new block:
+3. List variables contains some functions themselves. For example, the ```append``` function is _called_ through the ```blist``` variable. Try it in a new cell:
 
 ```python
 blist.append(10)
@@ -222,7 +222,7 @@ blist.append("b")
 print(blist)
 ```
 
-Notice that ```list.append()``` function changes the value of the list permanently! See what happens when you run the block several more times!
+Notice that ```list.append()``` function changes the value of the list permanently! See what happens when you run the cell several more times!
 
 4. You can create a list variable with all the same values using ```*```:
 
@@ -302,7 +302,7 @@ blist.reverse()
 
 2. Note that indentation matters! – python doesn’t care if you indent with tab or with spaces (or how many spaces) but you must be consistent! You can’t use tab once then spaces, or different number of spaces.
 
-3. To set the value of the iterable variable we will use the range command. range is a python command that creates a “range” object that contains sequential integers separated by a step. The format is ```range(start,stop,[step])```, where start is the first integer, stop is the first integer that will **NOT** be included), and step is the step size. (step is optional so it is written in []– if non is provided the default is 1). Start a new block in your notebook and enter the following:
+3. To set the value of the iterable variable we will use the range command. range is a python command that creates a “range” object that contains sequential integers separated by a step. The format is ```range(start,stop,[step])```, where start is the first integer, stop is the first integer that will **NOT** be included), and step is the step size. (step is optional so it is written in []– if non is provided the default is 1). Start a new cell in your notebook and enter the following:
 
 ```python
 for i in range(0,100): 
@@ -312,7 +312,7 @@ for i in range(0,100):
 
 ## II. "If" conditionals
 
-If statements are similar to bash but use indentation instead of then/fi to denote the commands to be included in the loop and do not require parentheses around condition. In a new block, insert the following. Pay attention to indentation!
+If statements are similar to bash but use indentation instead of then/fi to denote the commands to be included in the loop and do not require parentheses around condition. In a new cell, insert the following. Pay attention to indentation!
 
 ```python
 q=[1,2,2,3,3,4,7]
@@ -330,21 +330,21 @@ Libraries of useful functions are organized into modules that are imported into 
 
 1. Some libraries come built in with vanilla python. However, they still must be imported. This is because storing a library's functions takes up memory while running your script. Using only required libraries (or even only specific functions of required libraries) will reduce memory usage, making your script faster and more efficient.
 
-2. The ```import``` command loads in an entire library. To use a function from that library you will need to call the library after this import. In a new block write:
+2. The ```import``` command loads in an entire library. To use a function from that library you will need to call the library after this import. In a new cell write:
 
 ```python
 import math
 math.sqrt(10)
 ```
 
-2. The ```from``` command loads just the specified functions. If you call functions in this way, you can use them directly from the main variable space. In a new block, write:
+2. The ```from``` command loads just the specified functions. If you call functions in this way, you can use them directly from the main variable space. In a new cell, write:
 
 ```python
 from math import sqrt
 sqrt(10)
 ```
 
-3. A useful function is ```choice()``` from the ```random``` library. ```choice()``` returns one value from a list selected randomly. In a new block, write:
+3. A useful function is ```choice()``` from the ```random``` library. ```choice()``` returns one value from a list selected randomly. In a new cell, write:
 
 ```python
 from random import choice
