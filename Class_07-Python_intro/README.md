@@ -1,4 +1,4 @@
-# Chem 260 Class 7 – Python intro!
+# CHE600 Class 7 – Python intro!
 
 Today we start working with Python - which will be the language of choice for the rest of the semester. 
 Topics include:	
