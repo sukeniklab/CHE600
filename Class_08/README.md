@@ -323,9 +323,9 @@ np.savetxt('data.csv', data, delimiter=',', header='x,y,z',comments = '\"# rando
 
 <details>
 <summary><b>Different options to solve this problem</b></summary>
-<li> use a for loop to assign 1's (simplest but most expensive computationally) 
-<li> use np.random.choice() to pick M matrix indices and set their value to 1
-<li> create a vector of zeros of size N^2, set the first M positions as 1, then shuffle and reshape into an NxN matrix
+<li> use a for loop to assign 1's (simplest but most expensive computationally, also might pick the same position twice)
+<li> use [np.random.choice()](https://numpy.org/doc/2.1/reference/random/generated/numpy.random.choice.html#numpy.random.choice) function to pick M matrix indices and set their value to 1
+<li> create a vector of zeros of size N^2, set the first M positions as 1, then [shuffle](https://numpy.org/doc/2.1/reference/random/generated/numpy.random.shuffle.html) and [reshape](https://numpy.org/doc/2.1/reference/generated/numpy.reshape.html#numpy-reshape) into an NxN matrix
 </details>
 
 4. With the script to prepare the ```board``` array completed, use the sum function of the array (```board.sum()```) to verify you have exactly M ones. Print out the array itself and the number of ones.
