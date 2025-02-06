@@ -299,7 +299,7 @@ Numpy has very powerful commands to import and export numeric data. The main com
 data_load = np.loadtxt('CONTACTMAP.dat', skiprows=1)
 print(data_load.shape)
 print(data_load.dtype)
-print(data_load[1,:])
+print(data_load[35,:])
 ```
 
 3. ```loadtxt()``` is a numpy function with lots of options. It requires one parameter: the name of the file (a string or a string variable). We pass it another, optional parameter, skiprows, which tells it how many rows from the top it should skip for the import (for example if they contain a text header - remember that arrays can only contain one type of variable!). The help for [np.loadtxt](https://numpy.org/doc/2.1/reference/generated/numpy.loadtxt.html) contains all the parameters, their meaning, and their default values.
