@@ -291,9 +291,9 @@ print(aarray * 2) # should give same result
 
 Numpy has very powerful commands to import and export numeric data. The main commands are loadtext and savetxt. Let’s try it out. 
 
-1. Download CONTACTMAP.dat from this week's module on blackboard. Save it to your ```class_08``` working directory. What is your working directory? It will appear in the explorer tab on the left hand side of the VSCode window.
+1. Download [CONTACTMAP.dat](./files/CONTACTMAP.dat) from the link or from this week's module on blackboard. Save it to your ```class_08``` working directory. **What is your working directory?** It will appear in the explorer tab on the left hand side of the VSCode window.
 
-2. Start a new script called "import.ipynb". Make sure it's in the same directory as the CONTACTMAP.dat file. In the first cell place the import code ```import numpy as np``` and in the next cell write the following:
+2.  In a new cell place the import code write the following:
 
 ```python
 data_load = np.loadtxt('CONTACTMAP.dat', skiprows=1)
