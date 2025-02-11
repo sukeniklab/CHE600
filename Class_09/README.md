@@ -114,7 +114,7 @@ print(data_load[35,:])
 
 3. ```loadtxt()``` is a numpy function with lots of options. It requires one parameter: the name of the file (a string or a string variable). We pass it another, optional parameter, skiprows, which tells it how many rows from the top it should skip for the import (for example if they contain a text header - remember that arrays can only contain one type of variable!). The help for [np.loadtxt](https://numpy.org/doc/2.1/reference/generated/numpy.loadtxt.html) contains all the parameters, their meaning, and their default values.
 
- 3. The ```np.savetxt``` command saves a text file. also has lots of optional [parameters](https://numpy.org/doc/2.1/reference/generated/numpy.savetxt.html) to help you format the output you want. Let’s try it out:
+ 3. The ```np.savetxt()``` command saves a text file. also has lots of optional [parameters](https://numpy.org/doc/2.1/reference/generated/numpy.savetxt.html) to help you format the output you want. Let’s try it out:
 
 ```python
 data = np.random.randn(100,3)
