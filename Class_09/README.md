@@ -3,9 +3,10 @@
 Today we will continue our exploration of numpy arrays, and then use them to write a script which we will use later in class. 
 
 Topics include:	
-1. [Numpy array slicing and dicing](#adding-functionality-to-python-numpy)
+1. [Numpy array slicing and dicing](#iv-slicing-and-dicing-numpy-arrays-cont)
 2. [Independent work: generating a board](#independent-work)
-3. [Visualizing with matplotlib]
+3. [Visualizing with matplotlib](#visualizing-data-with-matplotlib)
+
 ## IV. Slicing and dicing numpy arrays (Cont.)
 
 (we are picking up from [here](../Class_08/README.md#iv-slicing-and-dicing-numpy-arrays)). Start a new jupyter notebook in a class09 directory. In the first cell make sure you have ```import numpy as np```.
@@ -13,13 +14,14 @@ Topics include:
 3. We can search arrays for specific conditions using the ```np.where()``` function. This function accepts conditionals, and returns a list arrays - each array is the indices where the condition is met in a single dimension. In this case, the where command will return two lists of indices where our random 2D matrix has values higher than 0.8:
 
 ```python
-# 
-# notice that the result is three arrays:
+# Generate a 10X10 matrix of random numbers
 random2D = np.random.rand(10,10)
-[x,y]=np.where(random2D>0.8)
-# print the indexes
-for i in len(x):
-    print(x[i],y[i] value is random2D[x,y])
+# feed the result of the np.where() function into two variables: x and y
+# The conditional is that the value of random2D must be larger than 0.8
+[x_idx,y_idx]=np.where(random2D>0.8)
+# Loop over each index in x, then look up the value of that index in the matrix
+for i in range(len(x_idx)):
+    print('(%i, %i) value is %f' % (x_idx[i],y_idx[i],random2D[x_idx[i],y_idx[i]]))
 ```
 
 4. Numpy has many functions that can reshape arrays. For example, we can turn our 3D cube into a 2D matrix:
@@ -42,23 +44,32 @@ print(vec)
 5. We can get the sum, mean, median, standard deviation, or other calculatable constants from our arrays quickly:
 
 ```python
-# the sum function
+# the sum function be default summs all elements
 print(np.sum(randomCube))
+# we can also provide the axis to work on as a parameter. Here we're summing over columns
+# but since this is a 3D matrix it will return a 2D matrix
+print(np.sum(randomCube,axis=1))
+# We can carry another sum operation to return a vector
+print(np.sum(np.sum(randomCube,axis=1),axis=0))
 ```
 ```python
 # the sum function on a slice
 print(np.sum(randomCube[:,:,2]))
 ```
 ```python
-# mean, median, and standard deviation
-print('random cube mean: %f, median: %f, std: %f'%(np.mean(randomCube), np.median(randomCube), np.std(randomCube)))
+# mean, median, and standard deviation all have specific functions
+# notive that we can run them on a full array, but also on sliced (same as the np.sum() function)
+mean = np.mean(randomCube)
+median = np.median(randomCube)
+std = np.std(randomCube)
+print('random cube mean: %f, median: %f, std: %f'%(mean,median,std))
 ```
 
 ## V. Numerical calculations with arrays 
 
 The main power of arrays is that we can perform mathematical operations on each element of the array in one quick line. 
 
-1. To understand the power of arrays, let's try performing mathematical operations on a list (We've already seen this, but just so we're keeping track!)
+1. To remind us of the power of arrays, let's try performing mathematical operations on a list (We've already seen this, but just so we're keeping track!)
 
 ```python
 alist = list(range(10))
@@ -68,11 +79,11 @@ print(alist * 2)
 print(alist + alist)
 ```
 
-If we want to do operations, we actually need a for loop. This is annoying, reduces readability of our code, and increases the computational cost of our script:
+Mathematical operations on a list require for loop. This is annoying, reduces readability of our code, and most importantly increases the computational cost of our script:
 
 ```python
 newlist=[]
-for i in range(len(list)):
+for i in range(len(alist)):
     newlist.append(alist[i]*2)
 print(newlist)
 ```
@@ -90,7 +101,7 @@ print(aarray * 2) # should give same result
 
 Numpy has very powerful commands to import and export numeric data. The main commands are loadtext and savetxt. Let’s try it out. 
 
-1. Download [CONTACTMAP.dat](./files/CONTACTMAP.dat) from the link or from this week's module on blackboard. Save it to your ```class_08``` working directory. **What is your working directory?** It will appear in the explorer tab on the left hand side of the VSCode window.
+1. Download [CONTACTMAP.dat](./files/CONTACTMAP.dat) from the link or from this week's module on blackboard. Save it to your ```class_09``` working directory. **What is your working directory?** It will appear in the explorer tab on the left hand side of the VSCode window, or you can type ```pwd``` in a cell to find out!
 
 2.  In a new cell place the import code write the following:
 
@@ -107,14 +118,16 @@ print(data_load[35,:])
 
 ```python
 data = np.random.randn(100,3)
-np.savetxt('data.csv', data, delimiter=',', header='x,y,z',comments = '\"# random x, y, z coordinates\"\n')
+np.savetxt('data.csv', data, delimiter=',', header='x,y,z',comments = '# random x, y, z coordinates\n')
 ```
 
 4. Remember that if the filename does not contain a directory path it will be written in your current working directory, which is highlighted in orange in the VSCode explorer. You can now use excel or VSCode directly to open the file and look at its contents.
 
 # Independent work
 
-1. Start a new python notebook called board.ipynb. The script should generate a numpy array called ```board``` which will be a 2D (square) matrix of size NxN, where M positions on the matrix, randomly selected, will have the value 1 and the rest will have the value 0. N and M should be variables that are defined in the beginning of the script. 
+1. Start a new jupyter notebook called board.ipynb. 
+
+2. Your tasp is to generate a numpy array called ```board``` which will be a 2D (square) matrix of size NxN, where M positions on the matrix, randomly selected, will have the value 1 and the rest will have the value 0. N and M should be variables that are defined in the beginning of the script. 
 
 2. **Note:** There are many ways to do this simple task. I suggest you try tackling it yourself, and not assigning it to an LLM - remember right now you are trying to learn how to think like a programmer! You should always start with small N's and M's, and print out your output to help debug your script.
 
@@ -123,13 +136,13 @@ np.savetxt('data.csv', data, delimiter=',', header='x,y,z',comments = '\"# rando
 <details>
 <summary><b>Different options to solve this problem</b></summary>
 <li> use a for loop to assign 1's (simplest but most expensive computationally, also might pick the same position twice)
-<li> use <a target="_blank" href="https://numpy.org/doc/2.1/reference/random/generated/numpy.random.choice.html#numpy.random.choice">np.random.choice()</a> function to pick M matrix indices and set their value to 1
+<li> use <a target="_blank" href="https://numpy.org/doc/2.1/reference/random/generated/numpy.random.choice.html#numpy.random.choice">np.random.choice()</a> function with the ```replace=False``` parameter to pick M unique matrix indices and set their value to 1
 <li> create a vector of zeros of size N^2, set the first M positions as 1, then <a target="_blank" href="https://numpy.org/doc/2.1/reference/random/generated/numpy.random.shuffle.html">shuffle</a> and <a target="_blank" href="https://numpy.org/doc/2.1/reference/generated/numpy.reshape.html#numpy-reshape">reshape</a> into an NxN matrix
 </details>
 
 4. With the script to prepare the ```board``` array completed, use the sum function of the array (```board.sum()```) to verify you have exactly M ones. Print out the array itself and the number of ones.
 
-5. Upload board.ipynb to the blackboard "class 8 - board" submission link, as well as screenshots of 5 5x5 arrays with 8 1’s in each. 
+5. Upload ```board.ipynb``` to the blackboard "class 9 - board" submission link, as well as screenshots of 5 5x5 arrays with 8 1’s in each. 
 
 # Visualizing data with matplotlib
 
@@ -178,13 +191,14 @@ plt.scatter(x,y)
 5. Notice that this appears "in-line" in your notebook. This is very useful to display the result of a calculation and/or visualization. However, sometimes we'd want our images to open up in a separate window. We can change this behavior to show up in its own window by typing the magic command %matplotlib. 
 
 ```python
-%matplotlib qt # figure pops up in new window
+# set figure to pop up in a new window
+%matplotlib qt 
 plt.plot(x,y)
 plt.scatter(x,y)
 ```
 ```python
-# back to normal behavior.
-%matplotlib inline # figure in plots panel
+# back to normal ("in-line") behavior.
+%matplotlib inline
 plt.plot(x,y)
 plt.scatter(x,y)
 ```
@@ -192,14 +206,23 @@ plt.scatter(x,y)
 6. Let’s play around with some more options. We’ll plot several plots on the same axes. In a new cell, add the following lines: 
 
 ```python
+# Generate first and second derivatives of y
 y2 = 3*x**2 + 4*x
 y3 = 6*x + 4
 
-fig,ax = plt.subplots()
-ax.plot(x,y,color = “red”, label=”y”)
-ax.plot(x,y2,color = “blue”, label=”y’”)
-ax.plot(x,y3,color = “green”, label=”y’’”)
-ax.legend()
+# Generate a plt figure object called fig and a plt axis object called ax
+# using the plt.subplots() function. This allows you to modify the plotting area.
+# Here we pass the figure size we want into this function
+fig,ax = plt.subplots(figsize=[5,5])
+print(type(ax))
+print(type(fig))
+
+# Now call the plot() function through the ax object. 
+# Note this has to be done in the same cell!
+ax.plot(x,y,color = 'red', label='y')
+ax.plot(x,y2,color = 'blue', label='y\'')
+ax.plot(x,y3,color = 'green', label='y\'\'')
+ax.legend(title='lines')
 ```
 
 7. Let’s try to plot a few figures side by side. In a new cell:
@@ -210,9 +233,9 @@ ax[0].plot(x,y,color = "red", label="y")
 ax[1].plot(x,y2,color = "blue", label="y'")
 ax[2].plot(x,y3,color = "green", label="y''")
 for i in range(3):
-ax[i].set_xlabel("x")
-ax[i].legend()
-ax[0].set_ylabel("y")
+    ax[i].set_xlabel("x")
+    ax[i].legend()
+    ax[0].set_ylabel("y")
 ```
 
 ## II. Visualizing boards
@@ -224,22 +247,25 @@ Our next goal is to generate a board using the code we've written [before](#inde
 2. We want to visualize this board. A good way to do that would be to use scatter, which draws markers (as opposed to lines) on a 2D axis. To do that, we would need the (x,y) coordinates (i.e. the row and column number) of all the ones in the matrix. We can do this easily with Numpy’s np.where command:
 
 ```python
+fig,ax = plt.subplots(figsize=[5,5])
 [x,y] = np.where(board==1)
-plt.scatter(x,y,marker="s")
+ax.scatter(x,y,marker="s",c='red',s=500)
+[x,y] = np.where(board==0)
+ax.scatter(x,y,marker="s",c='grey',s=500)
 ```
 
-3. There are other ways to visualize this type of map – for example plt.imshow and plt.pcolor are two other options that can visualize the board directly (ie, will not need the np.where() function). Try them both - there is no one correct answer!
+3. There are other ways to visualize this type of map – for example ```plt.imshow()``` and ```plt.pcolor()``` are two other options that can visualize the board directly (ie, will not need the np.where() function). Try them both - there is no one correct answer!
 
 ## III. Saving visualizations
 
 
 1. Once a figure is generated, there's no need to keep it only in the notebook! We can copy it from VSCode and paste it directly any where we'd like. 
 
-2. More importantly, we can also export our figures in different formats. To do this we use plt.savefig() function. Note that like every other function we learned today, there are many options to savefig, and you can export in different formats/resolutions/etc. Put the following code in the same cell as the one that generates the image:
+2. More importantly, we can also export our figures in different formats. To do this we call the savefig() function through the ```fig``` object we created with the ```plt.subplots()``` command. Note that like every other function we learned today, there are many options to savefig, and you can export in different formats/resolutions/etc. 
 
 ```python
-plt.savefig('board.png')
-plt.savefig('board.svg')
+fig.savefig('board.png')
+fig.savefig('board.svg')
 ```
 
-3. Note that matplotlib automatically detects the format of the figure based on the suffix. A file name ending with ```.png``` will generate a raster image (composed of pixels) that is good for emailing or displaying on a webpage. A ```.svg``` creates a scaleable vector graphics that has unlimited resolution (i.e. you can size it as small or large as you want without suffering pixelation). This is the prefered format for scientific publications, and can be opened with Adobe Illustrator or (free and recommended!) [Inkscape](https://inkscape.org/).
+3. Note that matplotlib automatically detects the format of the figure based on the suffix. A file name ending with ```.png``` will generate a raster image (composed of pixels) that is good for emailing or displaying on a webpage. A ```.svg``` creates a scaleable vector graphics that has unlimited resolution (i.e. you can size it as small or large as you want without suffering pixelation). This is the prefered format for scientific publications, and can be opened with Adobe Illustrator or [Inkscape](https://inkscape.org/) (free and recommended!).

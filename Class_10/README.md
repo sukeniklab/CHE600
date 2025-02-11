@@ -3,18 +3,43 @@
 Today we'll learn how to define functions in scripts. We've mentioned in the beginning that python can be run "sequentially" (i.e. line-by-line) which is what we've done so far. Today we'll learn how to create our own functions that will accept parameters and return specific results.
 
 
+# defining functions
+
+## I. The def keyword
 
 Python allows you to define functions in scripts. In this way, you can call the function from anywhere in your script, any number of times. The function, like others we’ve used can accept any inputs you define, and return anything that has been created during its executation as output.
 
-b.	Let’s start by writing a function called genBoard that accepts two variables, N and M, and generates an NxN 2D matrix with zeros and M ones. Start a new file called make_board.py. Import numpy and pyplot into it. Start the function by typing:
+1. Let’s start by writing a function called genBoard that accepts two variables, N and M, and generates an NxN 2D matrix with zeros and M ones. Start a new jupyter notebook in class10 directory called make_board.ipynb. 
+
+2. Import numpy and matplotlib.pyplot into it in the first cell. 
+
+3. In a new cell, define a new function using the ```def``` keyword. Note that when you run this cell nothing will happen. This is because we only DEFINE the function, but do not actuall call it!
 
 ```python
 def genBoard(N,M):
+	# print a line every time the function runs
+	print('genBoard is now running!')
+	# return two variables: N-2 and M+2
+	return(N-2,M+2)
 ```
 
-c.	This function is called through the keyword genBoard(), and accepts two arguments – M is the number of neighbors (1’s on the board) and N is the size of the board. Notice the format here is like a for loop or conditional – everything following def with an indent will be a part of this function! 
+4. This function is called by calling genBoard(), and accepts two arguments – M and N. Notice the format here is like a for loop or conditional – everything following def with an indent will be a part of this function! Let's now call the function and observe the output. In a new cell, type:
 
-d.	Adapt your board.py function to accept these two variables and generate a board. The function should terminate with the return keyword:
+```python
+[out1,out2]=genBoard(30,56)
+print(out1)
+print(out2)
+```
+
+5. We have placed the values RETURNED by ```genBoard()``` into two variables, ```out1``` and ```out2```. Notice that even though these variables are named ```M``` and ```N``` in genBoard, they are not included in our namespace (see the jupyter variables list to be convinced!). We can call this function as many times as we want:
+
+```python
+for i in range(10):
+	genBoard(i,i+45)
+```
+
+
+3. Adapt the ```board.py``` function to accept these two variables and generate a board. The function should terminate with the return keyword:
 
 ```python
 return(<variable name(s)>)
