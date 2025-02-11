@@ -268,4 +268,6 @@ fig.savefig('board.png')
 fig.savefig('board.svg')
 ```
 
+3. Upload ```board.png``` and ```visuals.ipynb``` to the class 9 "Board" submission link on blackboard
+
 3. Note that matplotlib automatically detects the format of the figure based on the suffix. A file name ending with ```.png``` will generate a raster image (composed of pixels) that is good for emailing or displaying on a webpage. A ```.svg``` creates a scaleable vector graphics that has unlimited resolution (i.e. you can size it as small or large as you want without suffering pixelation). This is the prefered format for scientific publications, and can be opened with Adobe Illustrator or [Inkscape](https://inkscape.org/) (free and recommended!).
