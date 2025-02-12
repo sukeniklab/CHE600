@@ -44,15 +44,13 @@ for i in range(10):
 
 1. Adapt the ```board.py``` function we wrote last class to accept these two variables and generate a board. The function should be called genBoard(M,N), where M and N are the number of 1's and the length of the board, respectively. The function should return the board: a NxN numpy array with M ones and NxN - M zeros.
 
-2. This should essentially require you to copy and paste your board.ipynb code into the funciton, and maybe arrange some variable names. End the function with the ```return``` function
-
-This will exit the function and pass the returning variable either into your standard out, or into a variable. For example, the following function should create a 8x8 numpy array called ```aBoard``` filled with 0’s and 10 1’s in random positions. If your board.ipynb contained conditionals or breaks - no worries! Like for loops, you can also break out of functions, or have several return instances based on conditionals:
+2. This should essentially require you to copy and paste your board.ipynb code into the funciton, and maybe arrange some variable names. End the function with the ```return()``` command. This will exit the function and pass the returning variable either into your standard out, or into a variable. For example, the following function should create a 8x8 numpy array as a variable called ```aBoard``` filled with 0’s and 10 1’s in random positions. 
 
 ```python
 aBoard = genBoard(10,8)
 ```
 
-3. We can now call this function from our script – but because python is an interpreted language, the function definition must come before the script calling it! Put the following lines in a new cell (#%%) after the function definition (def) into board.py:
+3. We can now call this function from our script – but because python is an interpreted language, the function definition must come before the script calling it! Put the following lines in a new cell after the function definition (def) into ```board.ipynb```:
 
 ```python
 N=20
@@ -62,11 +60,11 @@ board=genBoard(N,M)
 
 # Independent work
 
-We will write some additional functions in a new cell to start building up an actual python program:
+We will next write some additional functions. Each function will go in a new cell, and together they will form  an actual python program:
 
-1. The first function should be called ```drawBoard()``` This function accepts an NxN matrix of 0’s and 1’s (we refer to this as a board) and then plots it using matplotlib. See [last week's class](../Class_09/README.md#ii-visualizing-boards) for details on how to do that.
+1. The first function should be called ```drawBoard()``` This function accepts an NxN matrix of 0’s and 1’s (we refer to this as a board) and then plots it using matplotlib. See [last week's class](../Class_09/README.md#ii-visualizing-boards) for details on how to do that. Notice that nothing should actuall be returned - so you can just end with an empty ```return()``` statement
 
-2. The second function should be called ```countNeighbors()``` This function accepts a board as input and returns a new board (NxN matrix) where each element contains the number of neighboring 1’s in the original board. This is a jumpy up in difficulty and requires some careful thinking on how to best implement this task.
+2. The second function should be called ```countNear()``` This function accepts a board as input and returns a new board (NxN matrix) where each element contains the number of neighboring 1’s in the original board. This is a jump up in difficulty and requires some careful thinking on how to best implement this task.
 
 	1. A neighbor is defined by a square with a 1 that is immediately adjacent to another square with a 1. Do not count diagonals. 
 
@@ -74,6 +72,7 @@ We will write some additional functions in a new cell to start building up an ac
 
 	3. See examples below:
 
+<img src=".images/board.png" width=450>
 
 3. You can write these functions in any way you want – there is no wrong way. I strongly recommend you try this yourself before just handing this task off to an LLM. Bonus points if there are no for loops! Hint: you can shift your matrix up/down/left/right by one cell using the np.roll function (see the help file)
 
