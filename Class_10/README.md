@@ -71,20 +71,20 @@ We will next write some additional functions. Each function will go in a new cel
 	2. We assume the board is “infinite” – which means the top row is in contact with the bottom row and the left-most column is in contact with the right-most column. This is sometimes called “periodic boundary conditions” and lets us simulate an infinite system.
 
 	3. See examples below:
-
-<img src=".images/board.png" width=450>
+<center>
+<img src="./images/boards.png" width=450>
+</center>
 
 3. You can write these functions in any way you want – there is no wrong way. I strongly recommend you try this yourself before just handing this task off to an LLM. Bonus points if there are no for loops! Hint: you can shift your matrix up/down/left/right by one cell using the np.roll function (see the help file)
 
-4. Once done, your jupyter notebook should start with the three functions, ```genBoard()```, ```drawBoard()```, and ```countNeighbors()```. Then in a new cell write a script that will create a board, visualize it, and return a neighbor matrix by calling the three functions. This is a step up in difficulty – please feel free to discuss with me/each other/ChatGPT/Google on how to approach this challenge! Hints:
+4. Once done, your jupyter notebook should start with the three functions, ```genBoard()```, ```drawBoard()```, and ```countNear()```. Then in a new cell write a script that will create a board, visualize it, and return a neighbor matrix by calling the three functions. This is a step up in difficulty – please feel free to discuss with me/each other on how to approach this challenge! Again, I recommend trying these yourself before outsourcing to LLM's. If you do end up using LLMs, please make sure you understand what the code does and that it actually works! Some tips below.
 
-<details>
-<summary><b>Hints!</b></summary>
-<li> Start with SMALL boards where you can easily visualize and count neighbors yourself. 
+<li> Start with SMALL boards (like the ones shown in the example above) where you can easily visualize and count neighbors yourself. 
+<li> You can create a 3x3 zeros matrix and place 1's in exact position to test your script!
 <li> Implement periodic boundaries only AFTER your code is working without them.
 <li> Remember what the input and output should be as you write your code.
-<li> 1x1 = 1; 1x0 = 0
-</details>
+<li> Only put the code in a function when it's ready - don't debug within a function!
+
 
 Upload your full script (should include the three functions: genBoard(), drawBoard(),  and countNeighbors(), and the calls to these functions), as well as a screenshot of the visualized board and the neighbor matrix (either visualized or in text form from the iPython console is fine) of a 20x20 matrix with 70 ones.
 
