@@ -98,7 +98,7 @@ At time t+δt:
     * N - number of cars (1's) on the road
     * L - the length of the road vector 
     * density $$\rho = N/L$$
-    * average velocty $$\langle v \rangle = \frac{1}{N} \sum_{i=1}^N v_i$$
+    * average velocty $$\langle v \rangle = \frac{1}{N} \sum\limits_{i=1}^N v_i$$
     * flow of cars $$F = \rho \times \langle v \rangle$$
 
 5. Complete the following assignments:
