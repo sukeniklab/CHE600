@@ -95,11 +95,12 @@ At time t+δt:
 
 
 4. The road will be a vector with 0's (empty road) and 1's (car-occupied road). The conditions on the road are defined by several “observables”:
-    * N - number of cars (1's) on the road
-    * L - the length of the road vector 
-    * density $$\rho = N/L$$
-    * average velocty $$\langle v \rangle = \frac{1}{N} \sum\limits_{i=1}^N v_i$$
-    * flow of cars $$F = \rho \times \langle v \rangle$$
+    * $$N$$ - number of cars (1's) on the road
+    * $$L$$ - the length of the road vector
+    * $$v$$ - the current "velocity" of a car  
+    * $$\rho = N/L$$ - density 
+    * $$\langle v \rangle = \frac{1}{N} \sum\limits_{i=1}^N v_i$$ - average road velocity
+    * $$F = \rho \times \langle v \rangle$$ - traffic flow
 
 5. Complete the following assignments:
 	1. Write a program that simulates a road that can hold 1000 cars. To do this: 
