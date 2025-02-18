@@ -44,25 +44,9 @@ def countNear(board):
 	3. A cell on the board where board=1 AND neighs<2 turns to 0.
 	4. All other cells remain as-is.
 
-4. 
+4. All four functions should be placed together in a file called GoL.ipynb in your class 11 directory whole thing together. The file should have 4 defined functions: genBoard(M,N) to generate the board, countNear() to count the nearest neighbors, golStep() to progress the board one step according to the “rules of life.” 
 
-```python
-def drawBoard(board,i):
-    plt.cla() # clears the current plot
-    plt.imshow(board)
-    plt.title("iteration %i" % i)
-    plt.pause(0.1) #waits for 0.1 seconds before returning
-```
-
-4. All four functions should be placed together in a file called GoL.ipynb in your class 11 directory whole thing together. The file should have 4 defined functions: genBoard(M,N) to generate the board, countNear() to count the nearest neighbors, golStep() to progress the board one step according to the “rules of life,” and drawBoard(board,i) to visualize the board. 
-
-5. In the same directory, start a new jupyter notebook called ```playGoL.ipynb```. Now we're going to import all the functions you wrote. In the first cell, write:
-
-```python
-import GoL
-```
-
-6. Now we just need to iteratively call these functions in the right order to progress the board according to the rules, and visualize the board after every update!
+5. Now we just need to iteratively call these functions in the right order to progress the board according to the rules, and visualize the board after every update! The full, commented script is available [here](GoL.ipynb) - please get it to work in your own notebook!
 
 7. Congrats! You just coded Conway’s “Game of Life”. This little deterministic simulation is determined ONLY by its initial configuration, but fascinating dynamics evolve all the same. Please upload five of your favorite screenshots from your simulation to this week’s classword assignment.
 
