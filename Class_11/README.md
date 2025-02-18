@@ -44,7 +44,7 @@ def countNear(board):
 	3. A cell on the board where board=1 AND neighs<2 turns to 0.
 	4. All other cells remain as-is.
 
-4. Finally, let’s write a function that plots the board. In order to ensure that our plot updates regularly, have the iPython console on qt mode by typing %matplotlib qt in the console itself!
+4. 
 
 ```python
 def drawBoard(board,i):
