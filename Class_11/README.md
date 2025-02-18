@@ -1,11 +1,11 @@
 CHE600 - Class 11 - Cellular automata
 
 Topics today:
-1. [Cellular automata](#cellular-automata)
+1. [Cellular automaton](#cellular-automaton)
 2. ["game of life”](#game-of-life)
 3. [Homework: Traffic simulation](#homework-traffic-cellular-automata-simulation-due-tue-1022)
 
-# Cellular Automata
+# Cellular Automaton
 
 Today we will bring together everything we’ve learned with python to create an agent-based simulation (aka [cellular automaton](https://en.wikipedia.org/wiki/Cellular_automaton) or CA). 
 
@@ -17,7 +17,7 @@ Today we will bring together everything we’ve learned with python to create an
 
 # Game of life
 
-We’ll start by adding a couple of new routines to your “board” functions, adapting them to create and visualize a CA called “Game of Life” developed by British mathematician [John Conway](https://en.wikipedia.org/wiki/John_Horton_Conway). This is essentially a simulation of population evolution, but unlike evolution, which is stochastic, the simulation is deterministic, and is a result only of the initial state of the board and the rules that propagate it. 
+We’ll start by adding a couple of new routines to your “board” functions, adapting them to create and visualize a CA called “Game of Life” developed by British mathematician [John Conway](https://en.wikipedia.org/wiki/John_Horton_Conway). This is essentially a simulation of population evolution, but unlike evolution, which is stochastic, the simulation is deterministic, and is a result only of the initial state of the board and the rules that propagate it. There is a [game of life wiki](https://conwaylife.com/wiki/) that is full of different boards and information and web-based simulations.
 
 1. The rules are simple: We have a board of ones and zeros – with ones being occupied sites and 0 unoccupied sites. From an initial random state, the board then develops according to the following rules:
 	1. Any occupied cell with less than two occupied neighboring cells dies (becomes 0)
