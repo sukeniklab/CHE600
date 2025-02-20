@@ -140,28 +140,50 @@ Another way to create a DataFrame is to import a file. Pandas has even more powe
 1. Download [fret_data.csv](./files/fret_data.csv) and place it in the same folder as your current notebook. This dataset contains the results of ~4700 experiments done in the lab. Put it in a dedicated directory where you will write today’s script, and import the data:
 
 ```python
+# read in the contents of a comma seperate values file
+# by default, the function creates a range of numbers for the index and assigns the first row as the column headers
 df = pd.read_csv("fret_data.csv")
+print(df)
+```
+```python
+df.describe() # display stat summary on each column
+```
+```python
 df.index # display the row indices
+```
+```python
 df.columns # displays the column headers
+```
+```python
 df.values # displays the values as a numpy array
+```
+```python
 df.shape # shape of dataframe
+```
+```python
 df.head(5) # displays first 5 lines of DataFrame
+```
+```python
 df.info() # displays the type of each column 
-type(df)
 ```
 
-2. pd.read_csv() is only one import function. Importantly, pandas can easily import a wide range of spreadsheets, including tab separated (pd.read_table()) and excel files (pd.read_excel()) 
-Notice that now we have both indices and columns names! (both are properties, not functions!). 
+2. pd.read_csv() is only one import function. Importantly, pandas can easily import a wide range of spreadsheets, including tab separated (```pd.read_table()```) and excel files (```pd.read_excel()```). Notice that now we have both indices and columns names! (both are properties, not functions!). 
 
 ## IV. Slicing and dicing DataFrames
 
 Like lists and arrays, we need to be able to select a subset of a dataframe.
 
-1. We can select only a single column in a dataframe. If we do this, we will get a Series object back:
+1. We can select only a single column in a dataframe. If we do this, we will get a Series object back. If we select more than two columns, we'll get a DataFrame back:
 
 ```python
 s2 = df["protein_name"]
-type(s2)
+print(s2)
+print(type(s2))
+```
+```python
+df2 = df[['protein_name','E_f']]
+print(df2)
+print(type(df2))
 ```
 
 2. We can use conditionals to slice the DataFrame in any way we want. A conditional on a dataframe or a slice will return a pandas Series of Booleans (true/false values) according to where the condition is met. 
@@ -174,21 +196,29 @@ print(idx)
 3. Note that a the resulting list (```idx```) can then be used as an index:
 
 ```python
-print(df[idx])
+print('before slicing:')
+print(df.shape)
+print(df['protein_name'].unique())
+print('after slicing:')
+# applying the boolean series as an index removes all rows where "protein_name" is not "GS"
+print(df[idx].shape)
+print(df[idx]['protein_name'].unique())
 ```
 
 4. In general we can just put the conditionals directly into the indexing. In the example below, we use this approach to make even more complex conditionals. What will this line do?
 
 ```python
-sliced2 = df[(df["protein_name"]=="GS0")&(df["repeat"]>1)].
+sliced2 = df[(df["protein_name"]=="GS0")&(df["repeat"]>1)]
+print(sliced2[['protein_name','repeat']])
 ```
 
 ## V. Operations with Series and DataFrames
 
-1. We can perform operations between different columns of a DataFrame (so long as they are numerical!):
+1. We can perform operations between different columns of a DataFrame (so long as they are numerical!). This will return a series:
 
 ```python
 ratio = df['E_f']/df['E_f_GS']
+print(ratio)
 ```
 
 2. We can assign new columns to the DataFrame:
@@ -197,9 +227,10 @@ ratio = df['E_f']/df['E_f_GS']
 df["ratio"]=ratio
 df["constant"]=3
 df["calc"]=df["E_f"]-df["E_f_GS"]
+print(df.iloc[:,-4:])
 ```
 
-3. We can combine between two dataframes based on the values in a specific column. Download the excel sheet “prot_data.xlsx” from this week’s module to your working directory. Import it into pandas with:
+3. We can combine between two dataframes based on the values in a specific column. Download the excel sheet [prot_data.xlsx](./files/prot_data.xlsx) from this week’s module to your working directory. Import it into pandas with:
 
 ```python
 prots_df = pd.read_excel('prot_data.xlsx',index_col=0)
