@@ -9,7 +9,7 @@ Topics today:
 
 Today’s class will introduce you to [Pandas](https://pandas.org) – a very popular python library that allows you to work with data like you would with excel: unlike numpy, pandas doesn’t care if your data is numerical, textual, or even more complicated data types like lists, dictionaries or arrays. 
 
-1. Pandas is very powerful and extremely useful – it is how my lab imports and processes experimental (and simulation) data to process, analyze, and visualize. Let's start by using ```pip``` to install it. In the first cell, type the followin (you will only need to do this once!)
+1. Pandas is very powerful and extremely useful – it is how my lab imports and processes experimental (and simulation) data to process, analyze, and visualize. Let's start by using ```pip``` to install it. Start a new jupyter notebook called ```class12.ipynb```. In the first cell, type the followin (**you will only need to do this once!**)
 
 ```python
 !pip install pandas
@@ -19,15 +19,16 @@ Today’s class will introduce you to [Pandas](https://pandas.org) – a very po
 
 ## I. the pandas Series
 
-1. Let’s create a pandas series in your iPython console:
+1. Let’s create a pandas series in your notebook:
 
 ```python
 import pandas as pd
 s = pd.Series([100,200,300,400,500,500,200])
+print(s)
 type(s) 
 ```
 
-2. Call the series by simply typing s in the console. Notice the printout contains the values, but also a numerical index for these values (like row number in excel). The Series object, like other data objects we’ve seen, contains a bunch of functions and properties. Try some examples:
+2. Notice the printout contains the values, but also a numerical index for these values (like row number in excel). The Series object, like other data objects we’ve seen, contains a bunch of functions and properties. Try some examples:
 
 ```python
 s.index # displays only the indices of the Series
@@ -59,13 +60,15 @@ s.median() # median of the Series
 s.std() # standard deviation of the Series
 ```
 ```python
-s.describe() # an overview of the series
+s.describe() # an overview of the series, including mean, standard deviation, and quantiles
 ```
 
 5. We can change our Series name and indices:
 
 ```python
+# set the index using a list. Note that this needs to of the same length as the Series!
 s.index = ["S","M","T","W","R","F","sat"]
+# set the name of the series
 s.name = "payment"
 print(s)
 ```
@@ -73,26 +76,38 @@ print(s)
 6. We can slice our Series, meaning keep only a subset of the list. Note that you must assign the slice to a variable (or a function) – otherwise it will only be sent to standard output and not saved:
 
 ```python
-s["S"]
+s["S"] # index "S" of the series
 ```
 ```python
+# indices "S" and "R" of the series
 s[["S","R"]]
 ```
 ```python
+# iloc (index location) selects the first through third row
 s.iloc[0:3]
 ```
 ```python
+# iloc selects the 3 through the row before last
 s.iloc[2:-1]
 ```
 ```python
+# The average of the above selection 
 s.iloc[2:-1].mean()
 ```
 
 7. Notice that because a slice from a Series is also a Series it retains all Series functions and properties! If we want to generate a different type of variable we can use one of the follow:
 
 ```python
-s.to_list() # generates a list variable
-s.to_numpy() # generates a numpy array from s
+# generates a list variable
+s_list = s.to_list() 
+print(s_list)
+print(type(s_list))
+```
+```python
+# generates a numpy array from s
+s_np = s.to_numpy() 
+print(s_np)
+print(type(s_np))
 ```
 
 ## II. The pandas DataFrame
@@ -102,12 +117,18 @@ Now let’s create a DataFrame - a dataframe is composed of multiple Series, all
 1. One way to creat a DataFrame is by combining two series. Let's create another series, and concatenate it with the first series using the ```pd.concat()``` function to create a dataframe.
 
 ```python
+# generate a new Series called m from Series s
 m = s*0.1
+# give it the same index but a different name
 m.index = s.index
 m.name = 'tax'
 print(m)
-df = pd.concat([s,m]) 
+```
+```python
+# use pd.concat() to join the two series. The axis=1 column means they are joined on columns (as opposed to rows)
+df = pd.concat([s,m],axis=1) 
 print(df)
+print(type(df))
 ```
 
 2. Notice that we now created a DataFrame. The indices are the same as the indices of the individual Series (they are the same by design since we set ```m.index = s.index```), but the column headers are now set by the name of each Series.
@@ -116,7 +137,7 @@ print(df)
 
 Another way to create a DataFrame is to import a file. Pandas has even more powerful import options than numpy: you can import csv’s and text-based data of course, but you can also import excel workbooks (including ones with multiple sheets!) and other complex data structures like HDF, XML, and JSON. We will only use the csv import option today.
 
-1. Download ```fret_data.csv``` from Canvas. This dataset contains the results of ~4700 experiments done in the lab. Put it in a dedicated directory where you will write today’s script, and import the data:
+1. Download [fret_data.csv](./files/fret_data.csv) and place it in the same folder as your current notebook. This dataset contains the results of ~4700 experiments done in the lab. Put it in a dedicated directory where you will write today’s script, and import the data:
 
 ```python
 df = pd.read_csv("fret_data.csv")
