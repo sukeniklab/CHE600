@@ -230,49 +230,56 @@ df["calc"]=df["E_f"]-df["E_f_GS"]
 print(df.iloc[:,-4:])
 ```
 
-3. We can combine between two dataframes based on the values in a specific column. Download the excel sheet [prot_data.xlsx](./files/prot_data.xlsx) from this week’s module to your working directory. Import it into pandas with:
+3. We can combine between two dataframes based on the values in a specific column. Download the excel sheet [prot_data.csv](./files/prot_data.csv) from this week’s module to your working directory. Import it into pandas with:
 
 ```python
-prots_df = pd.read_excel('prot_data.xlsx',index_col=0)
+# here we set the index column to be the first column
+prots_df = pd.read_csv('prot_data.csv',index_col=0)
 prots_df.head(10)
 ```
 
-4. notice that the protein names are the same as df, but other columns are different. We will want to merge prots_df with df such that all values in prots_df will be mapped onto prots. To do this, we will use the merge command.
+4. notice that the protein names are the same as ```df```, but other columns are different. We will want to merge ```prots_df``` with ```df```. To do this, we will use the ```pd.merge()``` function. The left dataframe is the main one, and the merge will be based on data existing there.
 
 ```python
+# provide the left and right dataframe, and the column names on which to merge
 merged_df = pd.merge(df,prots_df,left_on='protein_name',right_on='prot')
-merged_df.shape
+print(merged_df.shape)
+print('columns in df:')
+print(df.columns)
+print('columns in prots_df:')
+print(prots_df.columns)
+print('columns in merged_df:')
+print(merged_df.columns)
+print(merged_df['protein_name'].unique())
 ```
 
-5. DataFrames have many more options. As one example, you can have multiple levels of column or index names which allows you to have multi-dimensional DataFrames. When you type out the index or column of these DataFrames instead of a list of values you will get back an object called MultiIndex – we will not cover this in this class. I encourage you to look through the pandas documentation online and play around with more options.
+5. DataFrames have many more [attributes and functions](https://pandas.pydata.org/docs/reference/frame.html). For example, you can have multiple levels of column or index names (aka [MultiIndex](https://pandas.pydata.org/docs/user_guide/advanced.html) which allows you to have multi-dimensional DataFrames. When you type out the index or column of these DataFrames instead of a list of values you will get back an object called MultiIndex – we will not cover this in this class. I encourage you to look through the pandas documentation online and play around with more options.
 
-6. A word of warning on imports – the csv file you’ve imported is already optimized for pandas. Often, this will not be the case. The read_csv function contains many options that allow you to ignore rows/columns, use specific rows/columns as indices or column names, etc. Often though, the best idea is to think carefully about how you arrange your data – when my students collect data we spend some time thinking about how to arrange it and what properties of the experiment to record (eg time, temp, repeat, etc.) so that in the end we can import, manipulate, and plot it easily and efficiently.
+6. **A word of warning on imports** – the csv file you’ve imported is already optimized for pandas. Often, this will not be the case. The read_csv function contains many options that allow you to ignore rows/columns, use specific rows/columns as indices or column names, etc. Often though, the best idea is to think carefully about how you arrange your data – when my students collect data we spend some time thinking about how to arrange it and what properties of the experiment to record (eg time, temp, repeat, etc.) so that in the end we can import, manipulate, and plot it easily and efficiently.
 
 # Class exercise: Plotting large datasets
 
-1. Last week we’ve seen some very basic plotting functions. We’re now going to try and make some fancier plots to give you some idea of the power you have with matplotlib and pandas. Start a new script called plotChi.py. Make sure it is in the same directory as fret_data.csv. 
+1. Last week we’ve seen some very basic plotting functions. We’re now going to try and make some fancier plots to give you some idea of the power you have with matplotlib and pandas. Start a new notebook called ```plotChi.ipynb```. Make sure it is in the same directory as ```fret_data.csv```. 
 
-2. fret_data.csv contains the structural data of different proteins in different solution conditions obtained from FRET experiments. Each row has (among other things) the protein name (‘protein_name’), the solute name (‘solute’), the concentration of that solute (‘conc’), and the dimensions of the protein in those conditions (‘chi’, where chi > 0 is expanded, chi < 0 is compacted). We are going to want to plot chi vs solute concentration for each protein and each solute type.
+2. fret_data.csv contains the structural data of different proteins in different solution conditions obtained from FRET experiments. Each row has (among other things) the protein name (_protein_name_), the solute name (_solute_), the concentration of that solute (_conc_), and the dimensions of the protein in those conditions _chi_, where chi > 0 is expanded, chi < 0 is compacted). We are going to want to plot chi vs solute concentration for each protein and each solute type.
 
 3. The script should do the following:
     1. Import pyplot and pandas
-    2. import fret_data.csv into a pandas DataFrame
-    3. Loop over all protein names
+    2. import ```fret_data.csv``` into a pandas DataFrame
+    3. Loop over all protein names (use the unique() function to create your iteration list!)
     4. Loop over all ‘solute’ types
     5. Within each iteration of these two loops, slice the DataFrame such that the resulting dataset will contain only a single protein and solute type. 
     6. Still within each iteration, using matplotlib, generate a fig and ax object using ```plt.subplots()```. Use the ```ax.scatter()``` function to create a scatter plot where the x value is the concentration of the solute (the ```conc``` column) and the y value is the structural dimensions of the protein (the ```chi``` column)
 
 4. The end result will be a large number of scatter plots. Make sure you include the solute type and the protein type as text on your plot (you can use ```ax.set_xlabel()``` or ```ax.text()``` functions to display text from the iterable variable (google how these commands work if needed).
 
-5. Upload 5 of these plots as png files to the class 10 assignment on catcourses, as well as the script.
+5. Upload 5 of these plots as png files to the class 12 assignment on blackboard, as well as the script.
 
 # Seaborn – a package for statistical data visualization
 
 Often we will need to work with large datasets that have many dimensions or representations. Turning these into a single bar graph not only loses much of your data, it also hides away information that could be crucial to understanding or interpreting the data. For example:
 
-<center>
-<img src="./images/superPlots.png" width = 450>
-</center>
+<img src="./images/superPlots.png" width = 450 align="center">
 
 1. The Seaborn python library offers many options to visualize data in an inclusive way, with lots of bells and whistles. This is a great library for publication-level graph preparation. 
 
@@ -328,30 +335,38 @@ data=cells,alpha=0.2,hue='prot')
 12. The plotreg command lets us look at correlations. Coupled to database slicing this becomes very powerful. Start a new script, and write in the following:
 
 ```python
-axIdx=0 # set a counter
-fig,ax=plt.subplots(1,4,figsize=[12,4],sharex=True,sharey=True) # create axis subplots
 
-color=sns.color_palette() #pick colors
+axIdx = 0 # set a counter
+fig,ax = plt.subplots(1,4,figsize=[12,4],sharex=True,sharey=True) # create axis subplots
+color = sns.color_palette() # generate colormap
 
-for prot in cells.prot.unique():
-sliced = cells[cells['prot']==prot]
-sns.regplot(x='directA_before',y='D/A_before',
-color=color[axIdx],scatter_kws={'alpha':0.2,'s':1},data=sliced,ax=ax[axIdx],order=1)
+# loop over all protein names
+for prot in cells['prot'].unique():
+    # slice the dataFrame
+    sliced = cells[cells['prot']==prot]
+    # plot
+    sns.regplot(x='directA_before',y='D/A_before', color=color[axIdx], scatter_kws={'alpha':0.2,'s':1}, data=sliced, ax=ax[axIdx], order=1)
     axIdx+=1
 ```
 
 13. You can notice that the scattered points often overlap. We may want to display this as a density map instead, such that regions on the plot where there are many points show up as a high density. This lets us better observe the features on the plot. Add the following lines to in a new cell:
 
 ```python
-axIdx=0
-for prot in cells.prot.unique():
+axIdx = 0 # set a counter
+color = sns.color_palette()  # generate colormap
+
+# loop over all protein names
+for prot in cells['prot'].unique():
+    # slice the dataFrame
     sliced = cells[cells['prot']==prot]
-    sns.jointplot(x='directA_before',y='D/A_before',
-                  color=color[axIdx],data=sliced,kind='hex')
+    # plot
+    sns.jointplot(x='directA_before',y='D/A_before', color=color[axIdx],data=sliced,kind='hex')
+    # set graph limits
     plt.xlim(0,20000)
     plt.ylim(0.1,0.7)
     plt.text(300,0.68,prot,fontsize=20)
     axIdx+=1
+
 ```
 
 14. You can view many more (working!) examples in the [seaborn gallery](https://seaborn.pydata.org/examples/index.html)
