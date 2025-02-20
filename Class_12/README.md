@@ -303,9 +303,3 @@ for prot in cells.prot.unique():
 ```
 
 14. You can view many more (working!) examples in the [seaborn gallery](https://seaborn.pydata.org/examples/index.html)
-
-
-
-
-
-
