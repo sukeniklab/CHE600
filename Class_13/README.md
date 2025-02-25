@@ -20,7 +20,7 @@ $$y_{fit} = Ae^{\frac{-x}{k}}$$
 
 $$f(x,y_{exp},A,k) = (y_{exp}-y_{fit})^2=(y_{exp}-Ae^{\frac{-x}{k}})^2$$
 
-3. Now, $f(x,y_{exp},A,k) is our _objective function_, $y_{exp}$ is a vector containing our experimental data, $y_{fit}$ is a vector of the same shape as $y_{exp} but which contains the result of the fitting function, $x$ is a vector of the same shape as $y_{exp}$ that contains the independent variable (our x-axis), and $A$ and $k$ are the free or _fitting_ paramteres. These are the values we will vary to find the minimum value of our objective function $f$. 
+3. Now, $f(x,y_{exp},A,k)$ is our _objective function_, $y_{exp}$ is a vector containing our experimental data, $y_{fit}$ is a vector of the same shape as $y_{exp} but which contains the result of the fitting function, $x$ is a vector of the same shape as $y_{exp}$ that contains the independent variable (our x-axis), and $A$ and $k$ are the free or _fitting_ paramteres. These are the values we will vary to find the minimum value of our objective function $f$. 
 
 3. Look closely: with this transformation, we have turned our problem to an optimization problem. That's because when this function is at its minimum, we have managed to "fit" our experimental data! This is sometimes called a "least square" optimization, because we’re looking for the smallest square difference. 
 
@@ -150,7 +150,7 @@ popt, pcov = optimize.curve_fit(func,x,y,bounds=bounds)
 
 # Independent work – fitting experimental data
 
-1. Download the dataset data.csv and place it in your class_13 directory. 
+1. Download the dataset [data.csv](./files/data.csv) and place it in your class_13 directory. 
 
 2. Start a new notebook called fitData.ipynb. In this notebook, import the dataset into a variable using ```pd.read_csv()``` function (don't forget your imports!). Notice this array contains both the x and y for the experimental data.
 
