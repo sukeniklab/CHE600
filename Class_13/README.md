@@ -18,7 +18,7 @@ $$y_{fit} = Ae^{\frac{-x}{k}}$$
 
 2. Our task is to find the values of $A$ and $k$ that would be the best fit for our experimental data. Now let's turn this into a function with a clear minimum - also called the _objective function_ or the function it is our objective to solve (minimize!). We can do this with the following equation:
 
-    $$ f(x,y_{exp},A,k) = (y_{exp}-y_{fit})^2=(y_{exp}-Ae^{\frac{-x}{k}})^2$$
+    $$f(x,y_{exp},A,k) = (y_{exp}-y_{fit})^2=(y_{exp}-Ae^{\frac{-x}{k}})^2$$
 
 3. Now, $f(x,y_{exp},A,k) is our _objective function_, $y_{exp}$ is a vector containing our experimental data, $y_{fit}$ is a vector of the same shape as $y_{exp} but which contains the result of the fitting function, $x$ is a vector of the same shape as $y_{exp}$ that contains the independent variable (our x-axis), and $A$ and $k$ are the free or _fitting_ paramteres. These are the values we will vary to find the minimum value of our objective function $f$. 
 
