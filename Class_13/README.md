@@ -20,23 +20,25 @@ $$y_{fit} = Ae^{\frac{-x}{k}}$$
 
 $$f(x,y_{exp},A,k) = (y_{exp}-y_{fit})^2=(y_{exp}-Ae^{\frac{-x}{k}})^2$$
 
-3. Now, $f(x,y_{exp},A,k)$ is our _objective function_, $y_{exp}$ is a vector containing our experimental data, $y_{fit}$ is a vector of the same shape as $y_{exp} but which contains the result of the fitting function, $x$ is a vector of the same shape as $y_{exp}$ that contains the independent variable (our x-axis), and $A$ and $k$ are the free or _fitting_ paramteres. These are the values we will vary to find the minimum value of our objective function $f$. 
+3. Now, $f(x,y_{exp},A,k)$ is our _objective function_, $y_{exp}$ is a vector containing our experimental data, $y_{fit}$ is a vector of the same shape as $y_{exp}$ but which contains the result of the fitting function, $x$ is a vector of the same shape as $y_{exp}$ that contains the independent variable (our x-axis), and $A$ and $k$ are the free or _fitting_ paramteres. These are the values we will vary to find the minimum value of our objective function $f$.
 
-3. Look closely: with this transformation, we have turned our problem to an optimization problem. That's because when this function is at its minimum, we have managed to "fit" our experimental data! This is sometimes called a "least square" optimization, because we’re looking for the smallest square difference. 
+3. Look closely: with this transformation, we have turned our problem to an optimization problem. That's because when this function is at its minimum, we have managed to "fit" our experimental data! This is sometimes called a ["least square" optimization](https://en.wikipedia.org/wiki/Least_squares), because we’re looking for the smallest square difference. 
 
-4. How does this minimization function look? You can see that in this case it is a two-dimensional function (a function of $A$ and $k$). The shape of this two dimensional surface is very difficult to visualize, but in this case it will have one minimum. But if we use _N_ fitting parameters, this space becomes N-dimensional and extremely complicated. Luckily, we usually don’t have to concern ourselves with this! SciPy’s optimization toolkit will do the dirty job for us. 
+4. How does this minimization function look? In this case it is a two-dimensional function (a function of $A$ and $k$). The shape of this two dimensional surface is very difficult to guess or visualize, but it will have one minimum. Notice that if we use _N_ fitting parameters, this space becomes N-dimensional and extremely complicated. Luckily, we usually don’t have to concern ourselves with this! We'll use the [SciPy](https://scipy.org/) library's optimization toolkit will do the job for us. 
 
 ## II. Solving optimization problems
 
 1. How does it work? Usually, optimization algorithms for non-linear functions rely on the gradients of our function. Let’s consider the following surface:
 
-    <img src="./images/surface01.png" width=250>
+    <img src="./images/surface01.png" width=350>
  
-2. The minimum of our optimization function is at the red x. We will need to vary A and k to reach this position, but our initial guess can start at any of (infinite) values, and we have no knowledge of what the surface actually looks like. How can we get to the X? If we start from an initial guess of k=2, A=-1, we want to walk in the direction where the function drop is the steepest. It may be easier to understand with a 3D representation of the function:
+2. The minimum of our optimization function is at the red x. We will need to vary A and k to reach this position, but our initial guess can start at any (of infinite) values, and when we start optimizing we have no knowledge of what the surface actually looks like. How can we get to the X? This is analogous to a blind person walking on a landscape, trying to find a valley. 
 
-<img src="./images/surface02.png" width=350>
+3. One solution is to follow the _steepest descent_. If we start from an initial guess of k=2, A=-1, we want to walk in the direction where the function drop is the steepest. It may be easier to understand with a 3D representation of the function:
+
+<img src="./images/surface02.png" width=450>
  
-3. We want to change our variables $A$ and $k$ so that we move towards the minimum. There are many algorithms to do this. One famous algorithm named after its developers [Nelder-Mead](https://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method) introduces an “amoeba” with N vertices starting at a random position and traverses the surface by moving one vertice at a time:
+3. We want to change our variables $A$ and $k$ so that we move towards the minimum. There are many algorithms to do this. One famous algorithm named after its developers [Nelder-Mead](https://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method) introduces an “amoeba” with N+1 vertices (N being the number of fitting parameters). The amoeba starts at a random position and traverses the surface by moving one vertice at a time according to a set of rules. In this way, it traverses and explores the objective function's landscape, and the area of the amoba gets smaller as it gets closer to the minimum. The fitting is considered complete if the area of the amoeba drops below a certain threshold.
 
 <img src="./images/surface03.gif" width = 450>
 
@@ -44,13 +46,15 @@ $$f(x,y_{exp},A,k) = (y_{exp}-y_{fit})^2=(y_{exp}-Ae^{\frac{-x}{k}})^2$$
 
 Often, our optimization does not reach the required minimum. This can happen from several reasons:
 
-1. Some optimization algorithms "walk down the path" in what is hopefully the steepest descent possible (that’s the most efficient walk assuming only one global minima!). You can see, however, that as we reach the valley, the gradient becomes almost flat, and these steepest descent algorithms can converge slowly, or never converge at all. To overcome this, we usually put a _tolerance_ on our solution - if the difference in the value of the objective function $f$ between this and the last step is smaller than that tolerance, we call our problem solved.
+1. The simplest case is when our fitting function simply cannot fit the shape of the experimental data. If you try fitting a guassian to the logarithm of a 4th degree polynomial, it will simply never work. Make sure you are picking a fitting function that can (roughly) fit the shape of your data!
 
-2. We might be starting from a direction that is so far off from our solution that it will take a huge number of steps for our optimization to reach a minimum. To solve this, we can provide an initial guess that already brings our solver to a region close to the solution. Our physical intuition (e.g. understanding what the variables in our function mean) can be very helpful here.
+2. Some optimization algorithms "walk down the path" in what is hopefully the steepest descent possible (that’s the most efficient walk assuming only one global minima!). You can see, however, that as we reach the valley, the gradient becomes almost flat, and these steepest descent algorithms can converge slowly, or never converge at all. To overcome this, we usually put a _tolerance_ on our solution - if the difference in the value of the objective function $f$ between this and the last step is smaller than that tolerance, we call our problem solved.
 
-3. Similar to the previous issue, the space we're searching is effectively infinite. If the landscape is complex, our solver might quickly walk in the wrong way and get very far away from our solution. To help with this issue, we can provide _bounds_ to the solver - basically limiting the range of values our fitting variables can have.
+3. We might be starting from a direction that is so far off from our solution that it will take a huge number of steps for our optimization to reach a minimum. To solve this, we can provide an initial guess that already brings our solver to a region close to the solution. Our physical intuition (e.g. understanding what the variables in our function mean) can be very helpful here.
 
-4. A more fundamental problem we can have with optimization algorithms occurs when we have many local minima. The steepest descent approach fails to find the global minima on a landscape. In fact, there is no algorithm that can always find the global minimum of an arbitrary function! (but we have ways of guessing if we have found it or not)
+4. Similar to the previous issue, the space we're searching is effectively infinite. If the landscape is complex, our solver might quickly walk in the wrong way and get very far away from our solution. To help with this issue, we can provide _bounds_ to the solver - basically limiting the range of values our fitting variables can have.
+
+5. A more fundamental problem we can have with optimization algorithms occurs when we have many local minima. The steepest descent approach fails to find the global minima on a landscape. In fact, there is no algorithm that can always find the global minimum of an arbitrary function! (but we have ways of guessing if we have found it or not)
 
 <img src="./images/surface04.png" width=450>
  
@@ -67,7 +71,7 @@ Let's start by creating a test dataset. This is a dataset that is generated by r
 2. Let's install scipy. While numpy adds functionality to python and lets us work with matrices, scipy is more of a collection of tools. It contains algorithms for optimizing (fitting), linear algebra, integration, interpolation, and statistical analysis. Let's first make sure we have scipy installed. Put the following in your first cell, run it, and then delete the cell.
 
 ```python
-pip install scipy
+!pip install scipy
 ```
 
 3. In the first cell, import the optimize function from the SciPy library. Also import numpy and matplotlib.pyplot
@@ -86,33 +90,34 @@ def func(x,a,b,c,d):
    return y
 ```
 
-5. Use this function to generate y values from x values generated with np.linspace 
-
-```python
-x=np.linspace(0,100,1000) # 1000 numbers between 0 and 100
-y=func(x,0.2,2,0.8,20) #asterisk feeds the list step-wise as individual values.
-```
-
-6. Now let’s add noise to generate "experimental data". You can do this as its own function, or just a line:
+5. Let's define another function that will add normally distributed "noise" to our vector:
 
 ```python
 def noisify(y,s=0.1):
-noise = np.random.normal(0,s,y.shape) # 0 is mean, s is stdev
-y += noise
-return(y)
+    noise = np.random.normal(0,s,y.shape) # 0 is mean, s is stdev
+    y_n = y+noise
+    return(y_n)
 ```
 
-7. Use ```plt.scatter()``` to plot x,y and  see what your "noisy" function looks like. You can adjust the level of noise by changing s.
+5. Use these functions to generate y values from x values generated with ```np.linspace()```, then use your new ```noisify()``` function to add "experimental noise" to your y values:
 
-8. Now it’s time to fit. We’ll use scipy’s optimize function to fit our experimental data “x,y” to the function “func”. In this case, we used the same function to generate our experimental data, but don’t be confused: We normally get our experimental data by importing it from our actual instrument/experiment!
+```python
+x=np.linspace(0,100,1000) # 1000 numbers between 0 and 100
+y=func(x,0.2,2,1,20) #asterisk feeds the list step-wise as individual values.
+y_exp = noisify(y,0.1)
+```
+
+6. Use ```plt.scatter()``` to plot x,y_noise and ```plt.plot()``` to plot x,y. See what your "noisy" function looks like. You can adjust the level of noise by changing the value of second parameters passed to the noisify() funciton.
+
+7. Now it’s time to fit. We’ll use scipy’s optimize function to fit our experimental data “x,y” to the function “func”. In this case, we used the same function to generate our experimental data, but don’t be confused: We normally get our experimental data by importing it from our actual instrument/experiment!
 
 ```python
 popt, pcov = optimize.curve_fit(func,x,y_exp)
 ```
 
-9. The resulting variables are:
+8. The resulting variables are:
 
-* ```popt```: (1d array) Optimal values for the parameters so that the sum of ```(func(x, *popt) - y)^2```  is minimized
+* ```popt```: (1d array) Optimal values for the parameters so that the sum of ```(func(x, *popt) - y)^2```  is minimized. The positions are in the same position they are provided in ```func()``` (in this case, the fitted values for parameters a,b,c,d)
 
 * ```pcov```: (2d array) The estimated covariance of popt. The diagonals provide the variance of the parameter estimate. To compute standard deviation errors on the parameters (this is what you use to get the error bars on your fit) you would need the square root of the variance. The resulting vector contains the error for each one of the parameters in ```popt```
 
@@ -120,10 +125,12 @@ popt, pcov = optimize.curve_fit(func,x,y_exp)
 popt_err = np.sqrt(np.diag(pcov))
 ```
 
-11. To plot the fitted function, simply feed the ```popt``` variable into ```func```. Note that the asterisk (```*```) tells python to pass a list as individual values, so effectively ```func(x,*popt)``` is the same as writing ```func(x,popt[0],popt[1],popt[2],popt[3],...,popt[n])``` for an n-dimensional vector of fitting parameters.
+9. To plot the fitted function, simply feed the ```popt``` variable into ```func```. Note that the asterisk (```*```) tells python to pass a list as individual values, so effectively ```func(x,*popt)``` is the same as writing ```func(x,popt[0],popt[1],popt[2],popt[3],...,popt[n])``` for an n-dimensional vector of fitting parameters.
 
 ```python
-plt.plot(x,func(x,*popt)
+plt.scatter(x,y_exp,label='exp')
+plt.plot(x,func(x,*popt),'r',label='fit')
+plt.legend()
 ```
 
 ## II. Dealing with hard-to-fit functions
