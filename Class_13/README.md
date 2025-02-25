@@ -13,7 +13,7 @@ One of the most common things we use a computer for in data science is to "fit o
 ## I. Defining the optimization problem
 
 1.  Let’s consider we have some experimental data that we want to fit with an experimental curve. Looking at the data (below), seems like an exponential decay would be a good fit:
-    $$ y_{fit} = Ae^{\frac{-x}{k}} $$
+$$ y_{fit} = Ae^{\frac{-x}{k}} $$
 
 2. Our task is to find the values of $A$ and $k$ that would be the best fit for our experimental data. Now let's turn this into a function with a clear minimum - also called the _objective function_ or the function it is our objective to solve (minimize!). We can do this with the following equation:
 
