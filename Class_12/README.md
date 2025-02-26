@@ -291,13 +291,13 @@ cells = pd.read_csv('cells.csv',index_col=0)
 
 3. Have a look at the data. Each row contains information about a single cell measured under the microscope. Each cell has a specific labeled protein expressed inside it, denoted in the ‘prot’ column.
 
-4. We want to understand how the identity of the protein affects different parameters for this dataset. To do this with matplotlib requires some extensive slicing. Seaborn lets us do this very easily. First, let's install seaborn. Remember that you need to run this line ONLY ONCE.
+4. We want to understand how the identity of the protein affects different parameters for this dataset. To do this with matplotlib requires some extensive slicing. Seaborn lets us do this very easily. First, let's install seaborn. Remember that you need to run this line ONLY ONCE, so you can erase the cell after it has run.
 
 ```python
 !pip install seaborn
 ```
 
-5. Next, add an import for seaborn in your script (the library should come built-in with anaconda. If not you can conda or pip install it!):
+5. In the first cell, now add an import for seaborn in your script:
 
 ```python
 import seaborn as sns
@@ -311,7 +311,7 @@ sns.boxplot(x='prot', y='area', data=cells, showfliers=False)
 
 7. here we use the categorical protein name as the x axis and the cell area in μm2 as the y-axis. Is there a correlation?
 
-8. Now let’s move sequentially over each column in our dataset and see where the protein identity determines the parameter. Write a simple code to do this.
+8. Now let’s move sequentially over each column in our dataset and see where the protein identity determines the parameter. Write a simple code to do this - you can use ```cells.columns``` do get a list of all parameters.
 
 9. Box charts are nice, but they do not show if the data is uniformly distributed or has multiple modalities. A violin plot shows the full distribution of the curve. Let’s try doing that! 
 
