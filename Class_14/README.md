@@ -1,30 +1,3 @@
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    TeX: {
-      equationNumbers: { autoNumber: "AMS" },
-      tagSide: "right"
-    },
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-      processEscapes: true
-    }
-  });
-  MathJax.Hub.Register.StartupHook("TeX AMSmath Ready", function () {
-    MathJax.InputJax.TeX.Stack.Item.AMSarray.Augment({
-      clearTag() {
-        if (!this.global.notags) {
-          this.super(arguments).clearTag.call(this);
-        }
-      }
-    });
-  });
-</script>
-<script type="text/javascript" charset="utf-8"
-  src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS_CHTML">
-</script>
-
-
 # CHE600 - Class 14
 
 Topics today:
@@ -76,7 +49,7 @@ Equations are what let us turn an idea into a quantitative prediction. In any mo
 
 1. The first thing we need to think about is how we turn the composition of our system into our observable – in this case a D/A fluorescence ratio. For that, we will assume that the entire protein population is divided into two states, and that each state has an average D/A value that is associated with it. The final equation would be:
 
-$$\begin{equation}D/A=\frac{[monomer]}{[total]}D/A_{monomer} + \frac{[dimer]}{[total]}D/A_{dimer}\end{equation}$$
+$$\begin{equation}\tag{1}D/A=\frac{[monomer]}{[total]}D/A_{monomer} + \frac{[dimer]}{[total]}D/A_{dimer}\end{equation}$$
 
 * Note that this assumption need not be true – it’s possible there are higher order oligomers, or that the initial state is a dimer, or that there are stable oligomeric states.. but all these can be tested down the line. 
 
