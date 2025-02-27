@@ -1,9 +1,9 @@
 # CHE600 - Class 14
 
 Topics today:
-1. [Fitting a physical model – overview](#fitting-a-physical-model)
-2. [Designing a model](#designing-a-model)
-3. [Homework #2 submission instructions](#fitting-our-model-to-our-data--homework-2)
+* [Fitting a physical model – overview](#fitting-a-physical-model)
+* [Designing a model](#designing-a-model)
+* [Homework #2 submission instructions](#fitting-our-model-to-our-data--homework-2)
 
 # Fitting a physical model
 
