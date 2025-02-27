@@ -30,7 +30,7 @@ We write models based on our physical/chemical/biological knowledge. Models are 
 
 1. In today’s class, we will take experimental data from my lab, and try to fit it to a physical model. The data is the FRET signal from cells expressing a specific FRET-labeled protein. The donor-to-acceptor ratio (D/A) is the ratio of the donor and acceptor fluorophore emissions, and is measured using live cell microscopy. The concentration on the x-axis is measured by the intensity of the acceptor flurophore. Each point on the scatter plot below is a single cell.
 
-<img src="./images/DA_exp.png" width=450>
+    <img src="./images/DA_exp.png" width=450>
 
 2. Here’s where our expertise as scientists come into play. We need to integrate what we know about the system we’re studying, about the method used to obtain the data, and our intuition about what is going on to propose a model. 
 
@@ -49,7 +49,9 @@ Equations are what let us turn an idea into a quantitative prediction. In any mo
 
 1. The first thing we need to think about is how we turn the composition of our system into our observable – in this case a D/A fluorescence ratio. For that, we will assume that the entire protein population is divided into two states, and that each state has an average D/A value that is associated with it. The final equation would be:
 
-$$\begin{equation}D/A=\frac{[monomer]}{[total]}D/A_{monomer} + \frac{[dimer]}{[total]}D/A_{dimer}\end{equation}$$
+$$\begin{equation}
+D/A=\frac{[monomer]}{[total]}D/A_{monomer} + \frac{[dimer]}{[total]}D/A_{dimer}
+\end{equation}$$
 
 * Note that this assumption need not be true – it’s possible there are higher order oligomers, or that the initial state is a dimer, or that there are stable oligomeric states.. but all these can be tested down the line. 
 
