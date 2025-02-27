@@ -55,11 +55,11 @@ $$\begin{equation}\tag{1}{D/A=\frac{[monomer]}{[total]}D/A_{monomer} + \frac{[di
 
 2. What parameters here can we obtain from our experimental data (assuming the model is correct?) Clearly there is some relationship between [monomer], [dimer], and [total]. Let’s build a model to account for this. The model will assume that the FRET reporter population in each cell is at equilibrium (another assumption!) according to the equilibrium equation:
 
-$$\begin{equation}[dimer] \rightleftharpoons 2[monomer]\end{equation}$$
+$$\begin{equation}\tag{2}{[dimer] \rightleftharpoons 2[monomer]}\end{equation}$$
 
 3. This chemical equilibrium obeys the following equilibrium constant:
 
-$$\begin{equation}K_d=\frac{[monomer]^2}{[dimer]}\end{equation}$$
+$$\begin{equation}\tag{3}{K_d=\frac{[monomer]^2}{[dimer]}}\end{equation}$$
 
 4. We do NOT know the dimer and monomer concentrations. HOWEVER – we know the TOTAL concentration of protein in each cell (that’s out x-axis!). We can back out individual concentrations if we know the Kd by using a simply quadratic:
 
