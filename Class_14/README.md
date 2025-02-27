@@ -50,6 +50,7 @@ Equations are what let us turn an idea into a quantitative prediction. In any mo
 1. The first thing we need to think about is how we turn the composition of our system into our observable – in this case a D/A fluorescence ratio. For that, we will assume that the entire protein population is divided into two states, and that each state has an average D/A value that is associated with it. The final equation would be:
 
 $$\begin{equation}
+\label{1}
 D/A=\frac{[monomer]}{[total]}D/A_{monomer} + \frac{[dimer]}{[total]}D/A_{dimer}
 \end{equation}$$
 
