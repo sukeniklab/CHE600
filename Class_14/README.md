@@ -91,7 +91,7 @@ $$\begin{equation} \tag{8}{x_{1,2}=\frac{-b±\sqrt{(b^2-4ac)}}{2a}} \end{equatio
 ## III. Turning the equations into code:
 
 1. Code this entire segment according to the following instructions:
-    1. Generate $[total]$ values (in the same $\mu$M range you see in the experimental data) using ```np.linspace()```
+    1. Generate $[total]$ values (in the same $\mu$ M range you see in the experimental data) using ```np.linspace()```
     2. Assign values to scalar variables $K_d$, $D/A_{monomer}$, and $D/A_{dimer}$
     3. Code the quadratic equation shown in eq (7) to obtain $[monomer]$ 
     4. Use $[monomer]$ and $[total]$ to calculate $[dimer]$ according to eq. (5)
