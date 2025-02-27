@@ -59,13 +59,13 @@ $$\begin{equation}\tag{1}{D/A=\frac{[monomer]}{[total]} \times D/A_{monomer} + \
 
 $$\begin{equation} \tag{2}{[dimer] \rightleftharpoons 2[monomer]} \end{equation}$$
 
-4. This chemical equilibrium obeys the following equilibrium constant:
+4. This chemical equilibrium obeys the following equilibrium constant (which is independent of $[total]$!):
 
 $$\begin{equation}\tag{3}{K_d=\frac{[monomer]^2}{[dimer]}}\end{equation}$$
 
 5. We do NOT know the dimer and monomer concentrations. HOWEVER – we know the TOTAL concentration of protein in each cell (that’s out x-axis!). We can back out individual concentrations if we know the Kd by using a simply quadratic:
 
-$$\begin{equation} \tag{4}{[total]=2×[dimer]+[monomer]} \end{equation}$$
+$$\begin{equation} \tag{4}{[total]=2[dimer]+[monomer]} \end{equation}$$
 
 6. From here follows that:
 
@@ -75,26 +75,25 @@ $$\begin{equation} \tag{5}{[dimer]=([total]-[monomer])/2} \end{equation}$$
 
 $$\begin{equation} \tag{6}{K_d=\frac{[monomer]^2}{([total]-[monomer])/2}} \end{equation}$$
 
-* This rearranges to a second degree polynomial:
+* This is a second degree polynomial that can be solved! Rearranging it slightly gives:
 
 $$\begin{equation} \tag{7}{-2[monomer]^2-K_d [monomer]+K_d [total]=0} \end{equation}$$
 
-* Which is solvable using a quadratic formula, where $a=-2$, $b=-K_d$, $c=K_d[total]$, and $x=[monomer]$. Reminder that the quadratic formula is 
+* Which is solvable using a quadratic formula, where $a=-2$, $b=-K_d$, $c=K_d[total]$, and $x=[monomer]$. Reminder that the quadratic formula is shown below. Also remember that only one solution is feasible, make sure you pick the right one! Like any concentration, $[monomer]$ cannot be negative!
 
 $$\begin{equation} \tag{8}{x_{1,2}=\frac{-b±\sqrt{(b^2-4ac)}}{2a}} \end{equation}$$
 
-7. In other words, we can now supply our function with $K_d$ and $[total]$ (our x axis – the vector containing the total concentration of protein in uM), and we will get the monomer and dimer concentration from:
+7. In other words, we can now supply our function with $K_d$ and $[total]$ (our x axis – the vector containing the total concentration of protein in $\mu M$), and we will get the monomer and dimer concentration from:
 
-    1. solving the quadratic in Eq. (7) to obtain $[monomer]$
-    2. plugging in $[monomer]$ into Eq. (5) to get $[dimer]$
-    3. plugging in $[monomer]$ and $[dimer]$ to Eq. (1) to get the observable D/A.
-
+    1. solving the quadratic in Eq. 7 to obtain $[monomer]$
+    2. plugging in $[monomer]$ into Eq. 5 to get $[dimer]$
+    3. plugging in $[monomer]$ and $[dimer]$ to Eq. 1 to get the observable D/A.
 
 ## III. Turning the equations into code:
 
 1. Code this entire segment according to the following instructions:
     1. Generate $[total]$ values (in the same $\mu M$ range you see in the experimental data) using ```np.linspace()```
-    2. Assign values to scalar variables $K_d$, $D/A_{monomer}$, and $D/A_{dimer}$
+    2. Assign values to scalar variables $K_d$, ${D/A}_{monomer}$, and $D/A_{dimer}$
     3. Code the quadratic equation shown in Eq. 7 to obtain $[monomer]$ 
     4. Use $[monomer]$ and $[total]$ to calculate $[dimer]$ according to Eq. 5
     5. Use Eq. 1 to calculate the observed D/A.
@@ -102,8 +101,6 @@ $$\begin{equation} \tag{8}{x_{1,2}=\frac{-b±\sqrt{(b^2-4ac)}}{2a}} \end{equatio
 2. You can now plot the D/A signal vs $[total]$, which is the experimental observable. However, you can now also plot the **monomer and dimer concentrations** as function of total concentration. Plot all of these - do they make sense?
 
 3. Think also about how you would do some sanity checks: For example, we know that $K_d$ should remain constant throughout. You can calculate it explicitly using Eq. 3 above, and see if it remains constant for every $[total]$ concentration. 
-
-4. We also want [total] to stay constant – you can check that by summing the monomer and dimer concentrations (Eq. 4) to see if they are not changing.
 
 ## IV. Turning the code to a function
 
@@ -114,14 +111,13 @@ Now that the model works – we need to turn it into a function so that we can u
     * $D/A_{monomer}$ and $D/A_{dimer}$ – the FRET value of the monomer and dimer conformations. 
     * $K_d$ – the equilibrium constant for the dissociation reaction
 
-2. The output we'll want to receive:
-    * the total, observable D/A - as described by eq. (1)
+2. The output we'll want to receive is the total, observable D/A - as described by Eq. 1
 
-3. Code it up and try running it and plotting the results. It’s a good idea to not have this function plot anything, because that would be problematic when you call it iteratively through curve_fit. 
+3. Code it up and try running it and plotting the results with a few different values of $K_d$, $D/A_{monomer}$ and $D/A_{dimer}$. It’s a good idea to not have this function plot anything directly, because that would be problematic when you call it iteratively through ```curve_fit()```. 
 
 # Using our model to fit experimental data
 
-1. Import the experimental data [here](./files/DA_vs_conc.csv) and import it into your python using pandas or numpy.
+1. Download the experimental data [here](./files/DA_vs_conc.csv) and import it into your notebook using pandas or numpy.
 
 2. Plot the experimental data, see if it makes sense.
 
@@ -141,4 +137,3 @@ popt,pcov = scipy.optimize.curve_fit(func, x, y_exp, **args)
     1. The final notebook (call it dimerModel.ipynb), including the model function and the fitting script.
     2. A plot of the experimental data overlayed with your model fit
     3. A plot of the monomer and dimer concentrations vs. total concentration.
-
