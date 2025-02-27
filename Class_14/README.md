@@ -3,7 +3,7 @@
 Topics today:
 * [Fitting a physical model – overview](#fitting-a-physical-model)
 * [Designing a model](#designing-a-model)
-* [Using the model as a fitting function](#fitting-our-model-to-our-data--homework-2)
+* [Using the model as a fitting function](#using-our-model-to-fit-experimental-data)
 
 # Fitting a physical model
 
@@ -34,7 +34,7 @@ We write models based on our physical/chemical/biological knowledge. Models are 
 
 2. Here’s where our expertise as scientists come into play. We need to integrate what we know about the system we’re studying, about the method used to obtain the data, and our intuition about what is going on to propose a model. 
 
-3. In this case, my student was surprised to see a concentration dependence of the D/A signal – because naively we would assume the signal is coming from an individual molecule. My student suggested that this may be due to interaction between proteins – meaning labeled proteins would interact with each other in the cell to form DIMERS with a different D/A signal than monomers. 
+3. In this case, the student was surprised to see a concentration dependence of the D/A signal – because naively we would assume the signal is coming from an individual molecule. The student suggested that this may be due to interaction between proteins – meaning labeled proteins would interact with each other in the cell to form DIMERS with a different D/A signal than monomers. 
 
 4. We now have a hypothesis based on a physical intuition: As concentration increases in the cell, more of the labeled protein population would exist as a dimer with a lower D/A. We want to fit this model to our experimental data above. If it doesn’t work – meaning the fit is poor – the hypothesis is ruled out. If it works, it indicates the hypothesis might be correct – it does not prove it outright!
 
@@ -91,18 +91,17 @@ $$\begin{equation} \tag{8}{x_{1,2}=\frac{-b±\sqrt{(b^2-4ac)}}{2a}} \end{equatio
 ## III. Turning the equations into code:
 
 1. Code this entire segment according to the following instructions:
-    1. Generate $[total]$ values (in the same $\mu$ M range you see in the experimental data) using ```np.linspace()```
+    1. Generate $[total]$ values (in the same $\mu M$ range you see in the experimental data) using ```np.linspace()```
     2. Assign values to scalar variables $K_d$, $D/A_{monomer}$, and $D/A_{dimer}$
-    3. Code the quadratic equation shown in eq (7) to obtain $[monomer]$ 
-    4. Use $[monomer]$ and $[total]$ to calculate $[dimer]$ according to eq. (5)
-    5. Use eq (1) to calculate the observed D/A.
+    3. Code the quadratic equation shown in Eq. 7 to obtain $[monomer]$ 
+    4. Use $[monomer]$ and $[total]$ to calculate $[dimer]$ according to Eq. 5
+    5. Use Eq. 1 to calculate the observed D/A.
     
 2. You can now plot the D/A signal vs $[total]$, which is the experimental observable. However, you can now also plot the **monomer and dimer concentrations** as function of total concentration. Plot all of these - do they make sense?
 
 3. Think also about how you would do some sanity checks: For example, we know that $K_d$ should remain constant throughout. You can calculate it explicitly using Eq. 3 above, and see if it remains constant for every $[total]$ concentration. 
 
 4. We also want [total] to stay constant – you can check that by summing the monomer and dimer concentrations (Eq. 4) to see if they are not changing.
-
 
 ## IV. Turning the code to a function
 
