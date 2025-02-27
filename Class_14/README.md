@@ -1,11 +1,9 @@
-CHE 600 - Class 14
+# CHE600 - Class 14
 
 Topics today:
-Fitting a physical model – overview
-Designing a model
-Turning the model to a function
-Fitting experimental data with the function
-Homework #2 submission instructions
+[Fitting a physical model – overview](#fitting-a-physical-model)
+[Designing a model](#designing-a-model)
+[Homework #2 submission instructions](#fitting-our-model-to-our-data--homework-2)
 
 # Fitting a physical model
 
@@ -122,27 +120,26 @@ Now that the model works – we need to turn it into a function so that we can u
 
 # Fitting our model to our data – Homework #2
 
-Import the experimental data (download DA_vs_conc.csv from Canvas) and import it into your python using pandas or numpy.
+1. Import the experimental data [here](./files/DA_vs_conc.csv) and import it into your python using pandas or numpy.
 
-Plot the experimental data, see if it makes sense.
+2. Plot the experimental data, see if it makes sense.
 
-Call your dimer model function through curve_fit (remember your imports!):
+3. Call your dimer model function through curve_fit (remember your imports!):
 
-popt,pcov = scipy.optimize.curve_fit(func, x, y, **args)
+```python
+popt,pcov = scipy.optimize.curve_fit(func, x, y_exp, **args)
+```
 
-x and y are the experimental concentration and D/A signal, respectively.
+4. Try fitting it without any arguments. If this doesn’t work, pass some initial starting point using p0, or add some bounds. We can use our knowledge of chemistry to help set these: For example, we know for a fact Kd and D/A can’t be negative.
 
-Try fitting it without any arguments. If this doesn’t work, pass some initial starting point using p0, or add some bounds. For example, we know for a fact Kd and D/A can’t be negative.
+5. Plot your fit on top of the experimental data to see how it looks!
 
-Plot your fit on top of the experimental data to see how it looks!
+6. If you managed to fit your data: congrats! Not only have you shown that the concentration dependence we see could be explained by our FRET construct dimerizing, you also managed to quantify the Kd for this reaction. 
 
-If you managed to fit your data: congrats! Not only have you shown that the concentration dependence we see could be explained by our FRET construct dimerizing, you also managed to quantify the Kd for this reaction. 
+7. This analytical dimerization model is a major upgrade for this paper, and gives strong mechanistic insight to an otherwise purely phenomenological observation
 
-This analytical dimerization model is a major upgrade for this paper, and gives strong mechanistic insight to an otherwise purely phenomenological observation
-
-To canvas, please upload:
-
-The final script (call it dimerModel.py), including the model function and the fitting script.
-A plot of the experimental data overlayed with your model fit
-A plot of the monomer and dimer concentrations vs. total concentration.
+8. To the blackboard submission link, please upload:
+    1. The final notebook (call it dimerModel.ipynb), including the model function and the fitting script.
+    2. A plot of the experimental data overlayed with your model fit
+    3. A plot of the monomer and dimer concentrations vs. total concentration.
 
