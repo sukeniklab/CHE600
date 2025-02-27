@@ -63,23 +63,23 @@ $$\begin{equation}\tag{3}{K_d=\frac{[monomer]^2}{[dimer]}}\end{equation}$$
 
 4. We do NOT know the dimer and monomer concentrations. HOWEVER – we know the TOTAL concentration of protein in each cell (that’s out x-axis!). We can back out individual concentrations if we know the Kd by using a simply quadratic:
 
-$$\begin{equation}[total]=2×[dimer]+[monomer]\end{equation}$$
+$$\begin{equation} \tag{4}{[total]=2×[dimer]+[monomer]} \end{equation}$$
 
 5. From here follows that:
 
-$$\begin{equation}[dimer]=([total]-[monomer])/2\end{equation}$$
+$$\begin{equation} \tag{5}{[dimer]=([total]-[monomer])/2} \end{equation}$$
 
 * And:
 
-$$\begin{equation}K_d=\frac{[monomer]^2}{([total]-[monomer])/2}\end{equation}$$
+$$\begin{equation} \tag{6}{K_d=\frac{[monomer]^2}{([total]-[monomer])/2}} \end{equation}$$
 
 * This rearranges to a second degree polynomial:
 
-$$\begin{equation}-2[monomer]^2-K_d [monomer]+K_d [total]=0\end{equation}$$
+$$\begin{equation} \tag{7}{-2[monomer]^2-K_d [monomer]+K_d [total]=0} \end{equation}$$
 
 * Which is solvable using a quadratic formula, where $a=-2$, $b=-K_d$, $c=K_d[total]$, and $x=[monomer]$. Reminder that the quadratic formula is 
 
-$$\begin{equation}x_{1,2}=\frac{-b±\sqrt{(b^2-4ac)}}{2a}\end{equation}$$
+$$\begin{equation} \tag{8}{x_{1,2}=\frac{-b±\sqrt{(b^2-4ac)}}{2a}} \end{equation}$$
 
 6. In other words, we can now supply our function with $K_d$ and $[total]$ (our x axis – the vector containing the total concentration of protein in uM), and we will get the monomer and dimer concentration from:
 
