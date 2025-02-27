@@ -7,15 +7,15 @@ Topics today:
 
 # Fitting a physical model
 
-Last class we've seen how to an arbitrary function and fit it to experimental data. While the function can be informative (e.g. provide a decay constant, find the peak or the midpoint of a curve, etc.), it reveals very little about the underlying behavior of the system that ultimately generates the data. 
+Last class we've seen how to take an arbitrary function and fit it to experimental data. While the results of the fit can be informative (e.g. provide a decay constant, find the peak or the midpoint of a curve, etc.), it reveals very little about the underlying behavior of the system. 
 
-1. To gain true mechanistic insight about our system requires us to think of a mathematical model that determines the behavior of the system given some initial conditions. Inmportantly in our case, we want the model to produce the same observable our experiment measures. This could be the concentration of a specific chromophore, the pH of the system, the change in temperature, or any other expeirmentally accessible variable. 
+1. To gain true mechanistic insight about our system requires us to think of a mathematical model that describes the behavior of the system given some initial conditions. Importantly in our case, we want the model to produce the same observable as our experiment. This could be the concentration of a specific chromophore, the pH of the system, the change in temperature, or any other expeirmentally accessible variable. When our model produces our observable, we can use curve fitting to find the right variables that match our experimental data using ```curve_fit()```, as we've seen for arbitrary functions.
 
 2. Our approach is as follows: 
-    1. Create a model (in practice: define a function) that accepts initial conditions as input and the experimental observable as output
+    1. Create a set of equations that accept initial conditions as input and provide the experimental observable as output
     2. The model will include constants that define the behavior of the system
     3. Test your model with the initial conditions of your experiment and a reasonable range of values for the constant to see if it works as expected
-    4. Finally, use the initial conditions of your experiment and FIT the constants to reproduce your experimental data
+    4. Finally, use the initial conditions of your experiment and FIT the other constants to reproduce your experimental data
     5. The fitting results now reveal the value of the real physical constants underlying your system (as opposed to details about the shape of your data)
 
 3. Modelling a system in this way is the ultimate way to leverage experimental results: If your fit doesn't work, or produces unrealistic constants, it means your experiment behaves by a different set of rules than what you expect. 
@@ -28,15 +28,15 @@ We write models based on our physical/chemical/biological knowledge. Models are 
 
 ## I. Setting the ground for the model
 
-1. In today’s class, we will take experimental data from my lab, and try to fit it to a physical model. The data is the FRET signal from cells expressing a specific FRET-labeled protein. The donor-to-acceptor ratio (D/A) is the ratio of the donor and acceptor fluorophore emissions, and is measured using live cell microscopy. The concentration on the x-axis is measured by the intensity of the acceptor flurophore. Each point on the scatter plot below is a single cell.
+1. In today’s class, we will take experimental data from my lab, and try to fit it to a physical model. The data is the FRET signal from cells expressing a specific FRET-labeled protein. The donor-to-acceptor ratio (D/A) is the ratio of the donor and acceptor fluorophore emissions, and is measured using live cell microscopy. The D/A is reports on the distnce between the donor and acceptor fluorophores: a high D/A implies they are far apart; a low D/A implies they are closer together. The concentration on the x-axis is measured by the intensity of the acceptor flurophore. Each point on the scatter plot below is taken from a single cell.
 
     <img src="./images/DA_exp.png" width=450>
 
 2. Here’s where our expertise as scientists come into play. We need to integrate what we know about the system we’re studying, about the method used to obtain the data, and our intuition about what is going on to propose a model. 
 
-3. In this case, the student was surprised to see a concentration dependence of the D/A signal – because naively we would assume the signal is coming from an individual molecule. The student suggested that this may be due to interaction between proteins – meaning labeled proteins would interact with each other in the cell to form DIMERS with a different D/A signal than monomers. 
+3. In this case, the student was surprised to see a concentration dependence of the D/A signal – because naively we would assume the signal is coming from an individual molecule. The student suggested that this may be due to interaction between proteins – meaning labeled proteins would interact with each other in the cell to form DIMERS with a lower D/A signal than monomers. 
 
-4. We now have a hypothesis based on a physical intuition: As concentration increases in the cell, more of the labeled protein population would exist as a dimer with a lower D/A. We want to fit this model to our experimental data above. If it doesn’t work – meaning the fit is poor – the hypothesis is ruled out. If it works, it indicates the hypothesis might be correct – it does not prove it outright!
+4. We now have a hypothesis based on a physical intuition: As concentration increases in the cell, more of the labeled protein population would exist as a dimer with a lower D/A. We want to fit this model to our experimental data above. If it doesn’t work – meaning the fit is poor – the hypothesis is ruled out. If it works, it indicates the hypothesis _might_ be correct – it does not prove it outright!
 
 5. We would need to:
     1. Write the model as a function
@@ -45,27 +45,29 @@ We write models based on our physical/chemical/biological knowledge. Models are 
 
 ## II. Turning our model into equations
 
-Equations are what let us turn an idea into a quantitative prediction. In any model you must turn your intuition/thoughts/concepts that you believe are key to explaining your system into a set of equations. In this case, the ideas revolve around a monomer dimer equilibrium in our system. Remember also that ultimately you will need to model the observable - in this case the D/A ratio.
+Equations are what let us turn an intuition or idea into a quantitative prediction. In any model you must turn the intuition/thoughts/concepts that you believe are key to explaining your system into a set of equations. In this case, the ideas revolve around a monomer dimer equilibrium in our system. Remember also that ultimately you will need to model the observable - in this case the D/A ratio.
 
 1. The first thing we need to think about is how we turn the composition of our system into our observable – in this case a D/A fluorescence ratio. For that, we will assume that the entire protein population is divided into two states, and that each state has an average D/A value that is associated with it. The final equation would be:
 
 $$\begin{equation}\tag{1}{D/A=\frac{[monomer]}{[total]} \times D/A_{monomer} + \frac{[dimer]}{[total]} \times D/A_{dimer}}\end{equation}$$
 
-* Note that this assumption need not be true – it’s possible there are higher order oligomers, or that the initial state is a dimer, or that there are stable oligomeric states.. but all these can be tested down the line. 
+* Note that this assumption need not be true – it’s possible there are higher order oligomers, or that the initial state is already dimer, or that there are stable oligomeric states, or that something altogether different is going on.. but all these can be tested down the line. 
 
-2. What parameters here can we obtain from our experimental data (assuming the model is correct?) Clearly there is some relationship between [monomer], [dimer], and [total]. Let’s build a model to account for this. The model will assume that the FRET reporter population in each cell is at equilibrium (another assumption!) according to the equilibrium equation:
+2. We _know_ $[total]$. We can also guess $D/A_{monomer}$ and $D/A_{dimer}$ from the limiting values of D/A at low and high concentrations. We do _not know_ $[monomer]$ and $[dimer]$.
 
-$$\begin{equation}\tag{2}{[dimer] \rightleftharpoons 2[monomer]}\end{equation}$$
+3. Clearly there is some relationship between [monomer], [dimer], and [total]. Let’s build a model to account for this. The model will assume that the FRET reporter population in each cell is at equilibrium (another assumption!) according to the equilibrium equation:
 
-3. This chemical equilibrium obeys the following equilibrium constant:
+$$\begin{equation} \tag{2}{[dimer] \rightleftharpoons 2[monomer]} \end{equation}$$
+
+4. This chemical equilibrium obeys the following equilibrium constant:
 
 $$\begin{equation}\tag{3}{K_d=\frac{[monomer]^2}{[dimer]}}\end{equation}$$
 
-4. We do NOT know the dimer and monomer concentrations. HOWEVER – we know the TOTAL concentration of protein in each cell (that’s out x-axis!). We can back out individual concentrations if we know the Kd by using a simply quadratic:
+5. We do NOT know the dimer and monomer concentrations. HOWEVER – we know the TOTAL concentration of protein in each cell (that’s out x-axis!). We can back out individual concentrations if we know the Kd by using a simply quadratic:
 
 $$\begin{equation} \tag{4}{[total]=2×[dimer]+[monomer]} \end{equation}$$
 
-5. From here follows that:
+6. From here follows that:
 
 $$\begin{equation} \tag{5}{[dimer]=([total]-[monomer])/2} \end{equation}$$
 
@@ -81,7 +83,7 @@ $$\begin{equation} \tag{7}{-2[monomer]^2-K_d [monomer]+K_d [total]=0} \end{equat
 
 $$\begin{equation} \tag{8}{x_{1,2}=\frac{-b±\sqrt{(b^2-4ac)}}{2a}} \end{equation}$$
 
-6. In other words, we can now supply our function with $K_d$ and $[total]$ (our x axis – the vector containing the total concentration of protein in uM), and we will get the monomer and dimer concentration from:
+7. In other words, we can now supply our function with $K_d$ and $[total]$ (our x axis – the vector containing the total concentration of protein in uM), and we will get the monomer and dimer concentration from:
 
     1. solving the quadratic in Eq. (7) to obtain $[monomer]$
     2. plugging in $[monomer]$ into Eq. (5) to get $[dimer]$
