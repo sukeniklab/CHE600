@@ -51,79 +51,76 @@ Equations are what let us turn an idea into a quantitative prediction. In any mo
 
 1. The first thing we need to think about is how we turn the composition of our system into our observable – in this case a D/A fluorescence ratio. For that, we will assume that the entire protein population is divided into two states, and that each state has an average D/A value that is associated with it. The final equation would be:
 
-$$D/A=\frac{[monomer]}{[total]}D/A_{monomer} + \frac{[dimer]}{[total]}D/A_{dimer}$$
+$$\begin{equation}D/A=\frac{[monomer]}{[total]}D/A_{monomer} + \frac{[dimer]}{[total]}D/A_{dimer}\end{equation}$$
 
 * Note that this assumption need not be true – it’s possible there are higher order oligomers, or that the initial state is a dimer, or that there are stable oligomeric states.. but all these can be tested down the line. 
 
-7. What parameters here can we obtain from our experimental data (assuming the model is correct?)
+2. What parameters here can we obtain from our experimental data (assuming the model is correct?) Clearly there is some relationship between [monomer], [dimer], and [total]. Let’s build a model to account for this. The model will assume that the FRET reporter population in each cell is at equilibrium (another assumption!) according to the equilibrium equation:
 
-Clearly there is some relationship between [monomer], [dimer], and [total]. Let’s build a model to account for this. The model will assume that the FRET reporter population in each cell is at equilibrium (another assumption!) according to the equilibrium equation:
+$$\begin{equation}[dimer] \rightleftharpoons 2[monomer]\end{equation}$$
 
-[dimer]⇌2[monomer],   (2)
+3. This chemical equilibrium obeys the following equilibrium constant:
 
-which obeys the following equilibrium constant:
+$$\begin{equation}K_d=\frac{[monomer]^2}{[dimer]}\end{equation}$$
 
-K_d=[monomer]^2/[dimer]    (3)
+4. We do NOT know the dimer and monomer concentrations. HOWEVER – we know the TOTAL concentration of protein in each cell (that’s out x-axis!). We can back out individual concentrations if we know the Kd by using a simply quadratic:
 
-We do NOT know the dimer and monomer concentrations. HOWEVER – we know the TOTAL concentration of protein in each cell (that’s out x-axis!). We can back out individual concentrations if we know the Kd by using a simply quadratic:
+$$\begin{equation}[total]=2×[dimer]+[monomer]\end{equation}$$
 
-[total]=2×[dimer]+[monomer]   (4)
+5. From here follows that:
 
-From here follows that:
+$$\begin{equation}[dimer]=([total]-[monomer])/2\end{equation}$$
 
-[dimer]=([total]-[monomer])/2  (5)
-And:
+* And:
 
-K_d=[monomer]^2/(([total]-[monomer])/2)  (6)
+$$\begin{equation}K_d=\frac{[monomer]^2}{([total]-[monomer])/2}\end{equation}$$
 
-This rearranges to a second degree polynomial:
+* This rearranges to a second degree polynomial:
 
--2[monomer]^2-K_d [monomer]+K_d [total]=0   (7)
+$$\begin{equation}-2[monomer]^2-K_d [monomer]+K_d [total]=0\end{equation}$$
 
-Which is solvable using a quadratic formula, where a=-2, b=-K_d, c=K_d [total], and x=[monomer]. Reminder that the quadratic formula is x_1,2=(-b±√(b^2-4ac))/2a
+* Which is solvable using a quadratic formula, where $a=-2$, $b=-K_d$, $c=K_d[total]$, and $x=[monomer]$. Reminder that the quadratic formula is 
 
-In other words, we can now supply our function with Kd and [total] (our x axis – the vector containing the total concentration of protein in uM), and we will get the monomer and dimer concentration from:
-solving the quadratic in Eq. 7 to obtain [monomer]
-plugging in [monomer] into Eq. 4 to get [dimer]
-plugging in [monomer] and [dimer] to Eq. 1 to get the observable.
+$$\begin{equation}x_{1,2}=\frac{-b±\sqrt{(b^2-4ac)}}{2a}\end{equation}$$
 
+6. In other words, we can now supply our function with $K_d$ and $[total]$ (our x axis – the vector containing the total concentration of protein in uM), and we will get the monomer and dimer concentration from:
 
-Putting it all together:
-
-Looking back, the parameters we need to plug into our model are:
-[total] – this is the x axis
-D/A_monomer and D/A_dimer – these are free parameters in Eq. 1
-K_d – another free parameter in Eq. 4
-
-Code this entire segment according to the following instructions:
-Generate [total] values (x-axis) using np.linspace()
-Assign values to scalar variables Kd, D/Amonomer, and D/Adimer
-¬Code the quadratic equation shown above, and use the monomer and dimer concentrations to calculate D/A.
-Plot D/A vs [total] and examine the shape. Change the variables to see what makes sense. Does this seem like a model that can explain the experimental results?
-
-Notice that now you can not only plot the total D/A signal, you can also plot the monomer and dimer concentrations as function of total concentration. See if that makes sense.
-
-Think also about how you would do some sanity checks: 
-
-For example, we know that Kd should remain constant throughout. You can calculate it explicitly using Eq. 3 above, and see if it remains constant for every [total] concentration. 
-We also want [total] to stay constant – you can check that by summing the monomer and dimer concentrations (Eq. 4) to see if they are not changing.
+    1. solving the quadratic in Eq. (7) to obtain $[monomer]$
+    2. plugging in $[monomer]$ into Eq. (5) to get $[dimer]$
+    3. plugging in $[monomer]$ and $[dimer]$ to Eq. (1) to get the observable D/A.
 
 
-Turning the model to a function
+## III. Turning the equations into code:
 
-Now that the model works – we need to turn it into a function so that we can use it with scipy.optimize.curve_fit to fit our experimental data. How do you do this? 
+1. Code this entire segment according to the following instructions:
+    1. Generate $[total]$ values (in the same $\mu$M range you see in the experimental data) using ```np.linspace()```
+    2. Assign values to scalar variables $K_d$, $D/A_{monomer}$, and $D/A_{dimer}$
+    3. Code the quadratic equation shown in eq (7) to obtain $[monomer]$ 
+    4. Use $[monomer]$ and $[total]$ to calculate $[dimer]$ according to eq. (5)
+    5. Use eq (1) to calculate the observed D/A.
+    
+2. You can now plot the D/A signal vs $[total]$, which is the experimental observable. However, you can now also plot the **monomer and dimer concentrations** as function of total concentration. Plot all of these - do they make sense?
 
-Remember that the fitting function needs to return the same observable as our experimental data – that means the output of this function needs to be D/A
+3. Think also about how you would do some sanity checks: For example, we know that $K_d$ should remain constant throughout. You can calculate it explicitly using Eq. 3 above, and see if it remains constant for every $[total]$ concentration. 
 
-What would be the parameters you input to the function?
-
-Code it up and try running it and plotting the results. It’s a good idea to not have this function plot anything, because that would be problematic when you call it iteratively through curve_fit. 
-
-Hint: The end result should be a function that accepts a vector x and 3 scalars and returns a vector of D/A values.
+4. We also want [total] to stay constant – you can check that by summing the monomer and dimer concentrations (Eq. 4) to see if they are not changing.
 
 
+## IV. Turning the code to a function
 
-Fitting our model to our data – Homework #2
+Now that the model works – we need to turn it into a function so that we can use it with ```scipy.optimize.curve_fit()``` to fit our experimental data. How do you do this? 
+
+1. Looking back, the parameters we need to use as input for our model are:
+    * $[total]$ – this is the x axis, and a known quantity for the experiment 
+    * $D/A_{monomer}$ and $D/A_{dimer}$ – the FRET value of the monomer and dimer conformations. 
+    * $K_d$ – the equilibrium constant for the dissociation reaction
+
+2. The output we'll want to receive:
+    * the total, observable D/A - as described by eq. (1)
+
+3. Code it up and try running it and plotting the results. It’s a good idea to not have this function plot anything, because that would be problematic when you call it iteratively through curve_fit. 
+
+# Fitting our model to our data – Homework #2
 
 Import the experimental data (download DA_vs_conc.csv from Canvas) and import it into your python using pandas or numpy.
 
