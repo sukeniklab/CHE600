@@ -17,7 +17,7 @@ Class sessions: Tuesdays and Thursdays, 12:30-1:50 PM, LSC 215
 | 2/11,2/13 | Python II | [9](/Class_09/README.md)-[10](/Class_10/README.md) | Numpy and Matplotlib - board simulations |
 | 2/18,2/20 | Modelling I| [11](./Class_11/README.md)-[12](./Class_12/README.md) | Cellular automaton, game of life, homework I, Dataframes with pandas |
 | 2/25,2/27 | Python III | [13](./Class_13/README.md)-[14](./Class_14/README.md) | Visualization with Seaborn, Optimization using SciPy |
-| 3/4,3/6 | Modelling II | 15-16 | Models II – master equations, numerical integration, homework II |
+| 3/4,3/6 | Modelling II | [15](./Class_15/README.md)-16 | Models II – numerical integration, master equations, homework II |
 | 3/11,3/13 | **Spring break** |     |     |
 | 3/18,3/20 | Application I | 17-18 | Python Object Oriented programming (Classes) |
 | 3/25,3/27 | Application II | 19-20 | Database accession and parsing (REST and other tools), homework III |
