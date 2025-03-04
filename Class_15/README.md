@@ -47,7 +47,9 @@ plt.bar(x2,f(x2),width=x2[1],edgecolor='k')
 8. As spacing between points becomes smaller and smaller, our estimate of the area under the graph becomes better. Let’s try this. Define an array with increasing numbers to use as a spacing parameter for our linspace range of (0,10).
 
 ```python
-
+x2 = np.linspace(0,10,12)    # to visualize bar integration
+plt.plot(x1,f(x1),c='r')
+plt.bar(x2,f(x2),width=x2[1],edgecolor='k')
 ```
 
 9. Now iterate over this array to plot the function and sum over each of the rectangles to get the final integrand. Since spacing between adjacent x-values is not 1, we will need to calculate this and multiple it by the y-value. Since our x-axis is linearly spaced, we can do this by simple taking two adjacent x values, say x[1]-x[0]
@@ -179,6 +181,8 @@ We’ll next use ODE solvers for a famous example that’s a bit out of the chem
 
 $$
 \frac{dx}{dt}=x(a-by)
+$$
+$$
 \frac{dy}{dt}=-y(c-dx)
 $$
 
