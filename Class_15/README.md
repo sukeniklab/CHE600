@@ -18,54 +18,64 @@ Many tasks require integration of datasets. You've probably seen many functions 
 
 ```python
 def f(x):
-y=np.sin(x)**2*x**3+12*x**2+35*x
-return(y)
+    y=np.sin(x)**2*x**3+12*x**2+35*x
+    return(y)
 ```
 
-4. We’re interested in the integral under this curve, between 0 and 10. My function itself looks like this (yours might look different):
-
-<img src="./images/fxn.png" width=450>
-
-
-5. Let’s start by integrating with bars. How many bars do we need? We’ll start with 4 points on it:
+4. We’re interested in the integral under this curve, between 0 and 10. Let's first draw the function
 
 ```python
 x1 = np.linspace(0,10,1000) # to visualize the curve
 plt.plot(x1,f(x1),c='r')
+```
+
+<img src="./images/fxn.png" width=450>
+
+5. Let’s start by integrating with bars. How many bars do we need? We’ll start with 4 points on it:
+
+```python
 x2 = np.linspace(0,10,4)    # to visualize bar integration
+plt.plot(x1,f(x1),c='r')
 plt.bar(x2,f(x2),width=x2[1],edgecolor='k')
 ```
 
-6. The "integral" will basically involve summing the area of the four bars. What do you think? Will we get the right value for our integration?
+6. The "integral" will basically involve summing the area of the four bars. What do you think? Will we get the right value for our integration? 
 
-7. Now lets try the same thing with smaller spacing, say 50. Plot the same graphs again after adjusting your np.linspace() spacing. What does the graph looks like now? Will the integration improve?
+
+7. Now lets try the same thing with more bars, say 50. Plot the same graphs again after adjusting your ```np.linspace()``` spacing. What does the graph looks like now? Will the integration improve?
 
 8. As spacing between points becomes smaller and smaller, our estimate of the area under the graph becomes better. Let’s try this. Define an array with increasing numbers to use as a spacing parameter for our linspace range of (0,10).
 
 ```python
-dx = np.array([5,10,50,100,500,1000,10000,100000])
+
 ```
 
 9. Now iterate over this array to plot the function and sum over each of the rectangles to get the final integrand. Since spacing between adjacent x-values is not 1, we will need to calculate this and multiple it by the y-value. Since our x-axis is linearly spaced, we can do this by simple taking two adjacent x values, say x[1]-x[0]
 
 ```python
-fig,ax=plt.subplots(1,2,figsize=[12,6])
+# dx is number of "bars"
+dx = np.array([4,6,8,10,50,100,500,1000])
+# make subplots
+fig,ax=plt.subplots(1,len(dx),figsize=[12,3])
+# make an array to hold the value of the integrand
 integrand=np.zeros_like(dx)
+# loop over dx
 for i in range(len(dx)):
-x = np.linspace(0,10,dx[i])
-y = f(x) 
-integrand[i] = sum(y*(x[1]-x[0]))
-ax[0].plot(x,y,label=str(1/(dx[i])))
-ax[1].semilogx(1/dx,integrand,marker='o',markersize=10)
-ax[0].set_xlabel("x")
-ax[0].set_ylabel("y")
-ax[1].set_xlabel("dx")
-ax[1].set_ylabel(r'$\int f(x)\ dx$')
-ax[0].legend(fontsize=14,title='dx')
+    x = np.linspace(0,10,dx[i])
+    y = f(x)
+    # calculate integrand 
+    integrand[i] = sum(y*(x[1]))
+    ax[i].bar(x,y,label=str(1/(dx[i])),width=x[1])
+    ax[i].plot(x1,f(x1),c='r')
+    ax[i].set_xlabel('x')
+    ax[i].text(0,1750,'dx: %i \nint: %i'%(dx[i],integrand[i]),fontsize=6)
+ax[0].set_ylabel('y')
+#ax[1].set_xlabel("dx")
+#ax[1].set_ylabel(r'$\int f(x)\ dx$')
 plt.tight_layout()
 ```
 
-10. This will plot both f(x) and the integrand for each dx. See how the integrand converges as we decrease the x-axis spacing! However, with these summation methods we are always limited to using rectangles, and so will never be able to accurately fit smooth functions!
+10. See how the integrand converges as we decrease the x-axis spacing! However, with these summation methods we are always limited to using rectangles, and so will never be able to accurately fit smooth functions!
 
 11. This may seem redundant – we manage to get a very good estimate of our integral even with this simple method! BUT some computations require millions and millions of integration steps. Making the step size very small will increase computational costs; accruing even small errors in each of our million steps ensures that total integration error will increase with every iteration. As a result, the rectangle summation method is woefully inadequate for pretty much any function.
 
@@ -74,54 +84,41 @@ plt.tight_layout()
 13. Define a new function trapez(x,y):
 
 ```python
-def trapez(x,y):
-w = x[1]-x[0] #width
-int_y = w*y[:-1]+w*(y[1:]-y[:-1])/2 #trapeze area
-return(sum(int_y))
+def trapeze(x,y):
+    w = x[1]-x[0] #width
+    int_y = w*y[:-1]+w*(y[1:]-y[:-1])/2 #trapeze area
+    return(sum(int_y))
 ```
 
 14. The equation for int_y is derived from the area of the trapeze defined by (x1,y1) and (x2,y2). We return the sum of this entire array of trapeze areas at the end (a scalar). Now let’s use this to calculate the integrand and see how it converges compared to the rectangle method:
 
 ```python
-fig,ax=plt.subplots(figsize=[8,6])
+fig,ax=plt.subplots(1,len(dx),figsize=[12,3])
 integrand_trapeze=np.zeros_like(dx)
 for i in range(len(dx)):
-x = np.linspace(0,10,dx[i])
-y = f(x) 
-integrand_trapeze[i] = trapez(x,y)
-ax.semilogx(1/dx,integrand.T,marker='o',markersize=10,label="summation")
-ax.semilogx(1/dx,integrand_trapeze.T,marker='o',markersize=10,label="trapeze")
-ax.set_xlabel("dx")
-ax.set_ylabel(r'$\int f(x)\ dx$')
-ax.legend()
+    x = np.linspace(0,10,dx[i])
+    y = f(x) 
+    integrand_trapeze[i] = trapez(x,y)
+    ax[i].plot(x,y,label=str(1/(dx[i])))
+    ax[i].scatter(x,y,s=5)
+    ax[i].plot(x1,f(x1),c='r')
+    ax[i].set_xlabel('x')
+    ax[i].text(0,1750,'dx: %i \nint: %i'%(dx[i],integrand_trapeze[i]),fontsize=6)
+ax[0].set_ylabel('y')
+#ax[1].set_xlabel("dx")
+#ax[1].set_ylabel(r'$\int f(x)\ dx$')
 plt.tight_layout()
 ```
 
 15. We can see that the trapeze method converges much better than the rectangle method. The trapeze method is actually an exact solution for linear relationships at any dx!
 
-16. Fancier integration methods have higher-order polynomials between points, and can be more efficient, but also slower to calculate. These can involve both interpolation and extrapolation from known points for increased accuracy. For example, Simpson's method is a 3rd order integration method. We won’t code it ourselves, and instead use the scipy implementation: ```scipy.integrate.simps()```
-
-```python
-from scipy import integrate
-fig,ax=plt.subplots(figsize=[8,6])
-integrand_simpson=np.zeros_like(dx)
-for i in range(len(dx)):
-x = np.linspace(0,10,dx[i])
-y = f(x) 
-integrand_simpson[i] = integrate.simps(y,x)
-ax.semilogx(1/dx,integrand.T,marker='o',markersize=10,label="bar")
-ax.semilogx(1/dx,integrand_trapeze.T,marker='o',markersize=10,label="trapeze")
-ax.semilogx(1/dx,integrand_simpson.T,marker='o',markersize=10,label="Simpson's")
-ax.set_xlabel("dx")
-ax.set_ylabel(r'$\int f(x)\ dx$')
-ax.legend()
-```
+16. Fancier integration methods have higher-order polynomials between points, and can be more efficient, but also slower to calculate. These can involve both interpolation and extrapolation from known points for increased accuracy.
 
 # Integrating ODEs
 
 Generally – we don’t need the computer to integrate simple functions like polynomials since we can do this analytically. Instead, we will often need to integrate to solve differential equations. These equations combine functions and their (n-th order) derivatives to describe natural laws. For example:
 
-$$dy/dx+y=x$$
+$$\frac{dy}{dx}+y=x$$
 
 1. This is a first order, ordinary differential equation (ODE). The solution to this equation will give us an integrated equation equating y to x. 
 
@@ -129,15 +126,24 @@ $$dy/dx+y=x$$
 
 3. Regardless of how we solve them, we will always need to know some initial value since the differential form does not include any constants that may be present in the integrated equation. 
 
-4. Spoiler: the solution for this ODE, assuming y(x=0)=1,  is:
+4. Spoiler: the solution for this ODE, assuming y(x=0)=1, is:
 
-$$y=x-1+2e^(-x)$$
+$$y=x-1+2e^{-x}$$
 
 5. How do we solve ODEs with python? First, let’s separate the derivative from the non-derivative parts of our equation. In this case we isolate the derivative on the left hand side, and the function over which to integrate will be on the right hand side:
 
-$$dy/dx=x-y$$
+$$\int \frac{dy}{dx}=\int(x-y)$$
 
-6. Scipy has a range of different ODE solvers. We will use the ```solve_ivp()``` function (solve initial value problem), which is a wrapper for a range of different ODE solving algorithms. Open a new script called ODE.ipynb. Calling this solver requires need the following input:
+6. Scipy has a range of different ODE solvers. We will use the ```solve_ivp()``` function (solve initial value problem), which is a wrapper for a range of different ODE solving algorithms. Open a new notebook called ODE.ipynb. 
+
+7. After adding your imports, let's write down our ODE as a function:
+
+```python
+def dy_dx(x, y):
+return(x-y)
+```
+
+8. Calling this solver requires need the following input:
 
 ```python
 solve_ivp(func,x_span,y0[,x_eval])
@@ -145,10 +151,7 @@ solve_ivp(func,x_span,y0[,x_eval])
 
 where x_eval is the x-values we want to evaluate the function at, y0 is the boundary condition (the value of y at x=0), x_span is the bounds of integration (given as a tuple), and func is callable function that is the right-hand side of the derivative and accepts the x-axis and y values as input (in that order!). In our case:
 
-```python
-def dy_dx(x, y):
-return(x-y)
-```
+
 
 Let’s see it all work together:
 
