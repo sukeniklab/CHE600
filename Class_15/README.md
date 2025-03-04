@@ -134,26 +134,16 @@ $$y=x-1+2e^{-x}$$
 
 $$\int \frac{dy}{dx}=\int(x-y)$$
 
-6. Scipy has a range of different ODE solvers. We will use the ```solve_ivp()``` function (solve initial value problem), which is a wrapper for a range of different ODE solving algorithms. Open a new notebook called ODE.ipynb. 
+6. Scipy has a range of different ODE solvers. We will use the ```solve_ivp()``` [function](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html) (solve initial value problem), which is a wrapper for a range of different ODE solving algorithms. Open a new notebook called ODE.ipynb. 
 
 7. After adding your imports, let's write down our ODE as a function:
 
 ```python
 def dy_dx(x, y):
-return(x-y)
+    return(x-y)
 ```
 
-8. Calling this solver requires need the following input:
-
-```python
-solve_ivp(func,x_span,y0[,x_eval])
-```
-
-where x_eval is the x-values we want to evaluate the function at, y0 is the boundary condition (the value of y at x=0), x_span is the bounds of integration (given as a tuple), and func is callable function that is the right-hand side of the derivative and accepts the x-axis and y values as input (in that order!). In our case:
-
-
-
-Let’s see it all work together:
+8. Calling this solver requires need the following input: ```x_eval``` is the x-values we want to evaluate the function at, ```y0``` is the boundary condition (the value of y at x=0), ```x_span``` is the bounds of integration (given as a two-member list or tuple), and ```func``` is callable function that is the right-hand side of the derivative and accepts the x-axis and y values as input (in that order!). Let’s see it all work together:
 
 ```python
 #import
@@ -183,27 +173,27 @@ plt.tight_layout()
 
 # Class work - predator-prey equations
 
-We’ll next use ODE solvers for a famous example that’s a bit out of the chemistry field: Predator-prey equations. This is famous set of differential equations in ecology, sometimes called the Lotka-Volterra equations, that describe the population dynamics in a system with predator and prey. 
+We’ll next use ODE solvers for a famous example that’s a bit out of the chemistry field: Predator-prey equations. This is famous set of differential equations in ecology, sometimes called the [Lotka-Volterra equations](https://en.wikipedia.org/wiki/Lotka%E2%80%93Volterra_equations), that describe the population dynamics in a system with predator and prey. 
 
 1. Predators cannot survive without prey, but eat too much and prey will become scarce, causing predators to die off. This leads to interesting dynamics. These are described by two first-order differential equations:
 
 $$
-dx/dt=x(a-by)
-dy/dt=-y(c-dx)
+\frac{dx}{dt}=x(a-by)
+\frac{dy}{dt}=-y(c-dx)
 $$
 
 2. In these, x is the population of prey (eg rabbits) and y is the population of predators (eg foxes). The parameters a, b, c, and d are positive parameters which describe the interactions between the species (how effective are the predators, how many offspring do the prey have, etc.)
 
-3. We will use the r.h.s of the derivatives to write the function we want to integrate. Note that if we compare to the previous example, x is called “t” (time) and “y” is called “P”. Importantly, P is now an array that contains two elements – populations of predator and prey:
+3. We will use the r.h.s of the derivatives to write the function we want to integrate. Note that if we compare to the previous example, x is called "t" (time) and "y" is called "P". Importantly, P is now an array that contains two elements – populations of prey (P[:,0]) and predator predator (P[:,1]):
 
 ```python
 def dP_dt(t, P, a, b, c, d):
-prey = P[0]*(a - b*P[1])
-predator = -P[1]*(c - d*P[0])
-return [prey, predator]
+    prey = P[0]*(a - b*P[1])
+    predator = -P[1]*(c - d*P[0])
+    return [prey, predator]
 ```
 
-4. We now use solve_ivp to integrate over these ODEs:
+4. We now use ```solve_ivp()``` to integrate over these ODEs:
 
 ```python
 # define constants/ranges
