@@ -182,15 +182,16 @@ $$
 \frac{dy}{dt}=-y(c-dx)
 $$
 
-2. In these, x is the population of prey (eg rabbits) and y is the population of predators (eg foxes). The parameters a, b, c, and d are positive parameters which describe the interactions between the species (how effective are the predators, how many offspring do the prey have, etc.)
+2. In these, x is the population of prey (eg rabbits) and y is the population of predators (eg foxes). The parameters a, b, c, and d are positive parameters which describe the interactions between the species (how effective are the predators, how many offspring do the prey have, etc.). Start a new python notebook called LVeq.ipynb, and in the first cell do all your imports (```numpy```, ```matplotlib.pyplot```, and ``solve_ivp`` from ```scipy.integrate```)
 
-3. We will use the r.h.s of the derivatives to write the function we want to integrate. Note that if we compare to the previous example, x is called "t" (time) and "y" is called "P". Importantly, P is now an array that contains two elements – populations of prey (P[:,0]) and predator predator (P[:,1]):
+3. We will use the r.h.s of the derivatives to define the integration function. Note that if we compare to the previous example, x is called "t" (time) and "y" is called "P". Importantly, P is now an array that contains two elements – populations of prey (P[:,0]) and predator (P[:,1]):
 
 ```python
 def dP_dt(t, P, a, b, c, d):
     prey = P[0]*(a - b*P[1])
     predator = -P[1]*(c - d*P[0])
-    return [prey, predator]
+    P=[prey, predator]
+    return(P)
 ```
 
 4. We now use ```solve_ivp()``` to integrate over these ODEs:
@@ -209,9 +210,7 @@ prey = sol.y[0,:] # extract prey from solution
 predators = sol.y[1,:] # extract predator from solution
 ```
 
-5. Plot predator and prey vs time on the same graph using matplotlib. Upload the graph to class submission, and explain the behavior of the system.
-
-6. Please answer the following questions in the submission textbox. 
+5. Plot predator and prey vs time on the same graph using matplotlib. Upload the notebook to class 15 submission, and explain the behavior of the system. In addition, answer the following questions in the submission textbox:
     1. What happens if you play with the constants a,b,c,d? Guess, based on how the plot changes, what each of these parameters mean?
     2. What happens if you change the density of points your x-axis (by changing the number of points in the ts array)? Pay special attention to the number of points in your x-axis, and what happens if you set this to too few…
 
