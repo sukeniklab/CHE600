@@ -184,7 +184,7 @@ $$
 
 2. In these, x is the population of prey (eg rabbits) and y is the population of predators (eg foxes). The parameters a, b, c, and d are positive parameters which describe the interactions between the species (how effective are the predators, how many offspring do the prey have, etc.). Start a new python notebook called LVeq.ipynb, and in the first cell do all your imports (```numpy```, ```matplotlib.pyplot```, and ``solve_ivp`` from ```scipy.integrate```)
 
-3. We will use the r.h.s of the derivatives to define the integration function. Note that if we compare to the previous example, x is called "t" (time) and "y" is called "P". Importantly, P is now an array that contains two elements – populations of prey (P[:,0]) and predator (P[:,1]):
+3. We will use the r.h.s of the derivatives to define the integration function. Note that if we compare to the previous example, x is called "t" (time) and "y" is called "P". Importantly, the returned variable P is now an array that contains two elements – populations of prey (P[0,:]) and predator (P[1,:]):
 
 ```python
 def dP_dt(t, P, a, b, c, d):
@@ -204,7 +204,11 @@ a,b,c,d = 1,1,1,1 # model constants
 
 # solve
 sol = solve_ivp(dP_dt, (ts.min(),ts.max()), P0, t_eval=ts, args=(a,b,c,d)) 
+```
 
+5. Note that the returned object from sol_ivp contains multiple attributes. We're interested in the y-values, which are stored in ```sol.y```:
+
+```python
 # extract values from solution
 prey = sol.y[0,:] # extract prey from solution
 predators = sol.y[1,:] # extract predator from solution
