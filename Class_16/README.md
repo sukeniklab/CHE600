@@ -47,7 +47,7 @@ $$
 2. The function should be called ```ME(t, C, k_on, k_off)```. ```t``` is the integration parameter (time), ```C``` is a two-element list containing the concentrations of monomer and dimer, and the on and off rates are ```k_on``` and ```k_off```. Write the two differential equations in the same way we’ve seen for the predator-prey equations. Remember that the concentrations of monomer and dimer are ```C[0]``` and ```C[1]```, respectively.
 
 ```python
-def ME(t,C,k_on,l_off):
+def ME(t,C,k_on,k_off):
     # add your code to these variables:
     dC1 = equation for change in monomer 
     dC2 = equation for change in dimer
