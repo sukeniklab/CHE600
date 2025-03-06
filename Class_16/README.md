@@ -96,16 +96,20 @@ dC2 = k_off*(-C[1] + C[2]) + k_on*C[0]*(C[0] - C[1])
 
 3. As before, the function should accept a time vector t, a list with all 4 concentrations C, k_on, and k_off. There is an inherent assumption that rates are constant and do not change for different oligomers. The function should return a list of all concentrations. 
 
-4. Once the function is done, let’s try running it with some parameters. You will want to write a few lines to plot the solution variable sol.y. This is the same as before but remember C will now be a 5 x len(t) matrix!
+4. Once the function is done, let’s try running it with some parameters. You will want to write a few lines to plot the solution variable sol.y. This is the same as before but remember C will now be a 4 x len(t) matrix!
 
 ```python
+# define integration time range
 t = np.linspace(0,100,100)
+# define initial concentrations of all species
 C0 = [0.5,0,0,0]
+# define rates
 p0=[0.15,0.007]
+# solve ME
 sol=solve_ivp(ME,(0,100),C0,args=p0,t_eval=t)
 
+# plot solution
 fig,ax = plt.subplots(figsize=[10,10])
-
 for i in range(sol.y.shape[0]):
     ax.plot(t,sol.y[i],label=str(i+1)+'-mer')
 ax.legend(fontsize=12)
@@ -113,7 +117,7 @@ ax.set_ylabel('conc')
 ax.set_xlabel('t')
 ```
 
-5. You’ll quickly find out that constants need to be smaller than 1 or our simulation “explodes”. Try generating some solutions that would make sense, and plotting these as function of time. Note that the graph below is only one example with some arbitrary parameters – yours can look very different!
+5. You’ll quickly find out that constants need to be within a certain range or our system “explodes”. Try generating some solutions that would make sense, and plotting these as function of time. Note that the graph below is only one example with some arbitrary parameters – yours can look very different!
 
 <img src="./images/sim_data.png" width=450>
 
