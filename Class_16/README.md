@@ -1,17 +1,17 @@
 # CHE600 - Class 16
 
 Topics today:
-* Kinetic master equation
-* Integrating the master equation with solve_ivp
-* Homework II: fitting the master equation to experimental data
+* [Kinetic master equation](#kinetic-master-equations)
+* [Creating the observable](#recreating-our-observable)
+* [Homework II: fitting the master equation to experimental data (Due: 3/27)](#homework-ii-using-an-ode-model-to-fit-the-data)
 
 # Kinetic master equations
 
-In our work we often encounter a system with multiple populations that interact with each other. Kinetic theory dictates that the rates at which these interactions occur is set by their concentrations and a set of constants the describe the frequency of interactions. This can be applied to chemical species, organisms in a test tube, proteins in a cell, or anything else. Today we will learn how to model the evolution of such a system over time. 
+In our work we often encounter a system with multiple populations that interact with each other, propagating the system over time. Kinetic theory dictates that the rates at which these interactions occur is set by their concentrations and a set of constants the describe the frequency of interactions. This can be applied to chemical species, organisms in a test tube, proteins in a cell, or anything else. Today we will learn how to model the evolution of such a system. 
 
 ## I. Oligomerization
 
-We conducted a light scattering experiment on a protein that can oligomerize over time. The experimental data we collected (download the raw data [here]) looks like this:
+We conducted a light scattering experiment on a protein that can oligomerize over time. The experimental data we collected (download the raw data [here](./files/Aggregation.csv)) looks like this:
 
 <img src="./images/exp_data.png" width=450>
 
@@ -27,35 +27,34 @@ $$
 \frac{d[A]}{dt}=k_{off}[C] - k_{on}[A][B]
 $$
 
-3. Notice that this forms a first order ordinary differential equations. We know how to solve these with solve_ivp!
+3. Notice that this forms a first order ordinary differential equation. We know how to solve these with ```solve_ivp()```!
 
 4. With this strategy in hand, let’s think about the different species in our system: monomers, dimers, trimers, and tetramers. These interchange between each other by losing or gaining monomers. We can generate our observable by summing the concentration of trimers, and tetramers in our solution at any given time point!
 
-5. We’re going to take a two-step approach: 
-    1. We will write a function with our ODEs that will accept $k_{on}$ and $k_{off}$ as parameters and be solved by integration using ```solve_ivp()```. 
-    2. We will write a function that accepts guesses for $k_{on}$ and $k_{off}$, and returns our experimental observable. This will be used as the _fitting function_ for ```curve_fit()``` to fit our experimental data.
-
 ## II. A simple dimer kinetic model.
 
-We’ll start by coding up a function that describes a simple monomer-dimer master equation, where two monomers can come together to form a dimer, and a dimer can dissociate to two monomers. 
+We’ll start by coding up a function that describes simple monomer-dimer equilibrium, where two monomers can come together to form a dimer, and a dimer can dissociate to two monomers. 
 
 1. The differential equations are as follows:
 
 $$
-\frac{d[monomer]}{dt}= -2k_{on}[monomer]^2 + 2k_{off}[dimer]
+\frac{d[monomer]}{dt}= 2\times k_{off}[dimer] - 2\times k_{on}[monomer]^2
 $$
 $$
-\frac{d[dimer]}{dt}=k_{on}[monomer]^2 - k_{off}[dimer]
+\frac{d[dimer]}{dt}= -k_{off}[dimer] + k_{on}[monomer]^2 
 $$
 
 2. The function should be called ```ME(t, C, k_on, k_off)```. ```t``` is the integration parameter (time), ```C``` is a two-element list containing the concentrations of monomer and dimer, and the on and off rates are ```k_on``` and ```k_off```. Write the two differential equations in the same way we’ve seen for the predator-prey equations. Remember that the concentrations of monomer and dimer are ```C[0]``` and ```C[1]```, respectively.
 
 ```python
 def ME(t,C,k_on,l_off):
-    # your code here
+    # add your code to these variables:
+    dC1 = equation for change in monomer 
+    dC2 = equation for change in dimer
+    return([dC1,dC2])
 ```
 
-3. These coupled differential equations are sometimes refered to as a ["master equation"](https://en.wikipedia.org/wiki/Master_equation). The describe the accounting of all species in the system, given an initial concentration and rate constants. Notice that the overall number of monomers MUST be conserved (otherwise we refer to the system as "leaky"). 
+3. These coupled differential equations are sometimes refered to as a ["master equation"](https://en.wikipedia.org/wiki/Master_equation). They describe the concentrations of all species in the system as function of time given an initial concentration and rate constants. **Notice that the overall number of monomers MUST be conserved** (otherwise we refer to the system as "leaky"). 
 
 4. The call to ```solve_ivp()``` to intgrate ME should be as follows: ME is the master equation ODE function, t is the time vector (a numpy array) that provides the integration range, C0 is your initial concentrations (remember this should be a 2-member list!), ks is a two-member list with the values for $k_{on}$ and $k_{off}$ (the order is determined by the order in your function!).
 
@@ -83,15 +82,13 @@ ax.set_ylabel('conc')
 ax.set_xlabel('t')
 ```
 
-7. We’ve now built a master equation for a monomer-dimer equilibrium system. What do the results look like? Does it make sense? How would you debug this?
-
-# Extending to tetramers
+## III. Extending to tetramers
 
 Next we’ll expand our model to all oligomer structures inherent in our full model. It’s recommended to start a new cell so you keep your simple dimer model unchanged as reference. 
 
 1. Write a set of equilibria all the way to tetramers on a piece of paper - this will help you figure out the differential equations. 
 
-2. Write the differential equations all the way to tetramers. Remember that the system is built step-wise using monomers, so two monomers turn into a dimer, a dimer and a monomer turn into a trimer, etc. Remember also that the monomer addition is reversible, so a dimer can turn into two monomers, a trimer into a dimer and a monomer, etc. For example, the ODE that describes dimer change with time can look like:
+2. Write the differential equations all the way to tetramers. Remember that the system is built step-wise using monomers, so two monomers turn into a dimer, a dimer and a monomer turn into a trimer, etc. Remember also that the monomer addition is reversible, so a dimer can turn into two monomers, a trimer into a dimer and a monomer, etc. For example, the ODE that describes dimer change with time would now look like:
 
 ```python
 dC2 = k_off*(-C[1] + C[2]) + k_on*C[0]*(C[0] - C[1])
@@ -120,13 +117,25 @@ ax.set_xlabel('t')
 
 <img src="./images/sim_data.png" width=450>
 
-6. How can we test if our model is working right? One way to do this is to check that matter is conserved, and no monomers are destroyed our simulation. In other words, our simulation isn’t “leaky”. One way to do this is to use the ```np.sum()``` function to go over each line in the concentration matrix (```sol.y```), and sum the monomers. Remember to multiply each column by the number of monomers in the species! Write a function called ```checkModel()``` that accepts the sol.y matrix returned from the ODE solution and checks this for you easily.
+## IV. Troubleshooting
 
-7. Using your checkModel() function, make sure the number of monomers stays constant in your system through the integration. If it is not, find the error(s) in your differential equations! It is neccessary to make sure that there are no leaks in your equations before proceeding to the next step!
+How can we test if our model is working right? One key thing to check is that matter (monomers in this case) is conserved, and no monomers are destroyed our simulation. In other words, our simulation isn’t “leaky”. 
 
-# Recreating our observable
+1. One way to do this is to use the ```np.sum()``` function to go over each line in the concentration matrix (```sol.y```), and sum the monomers. Remember to multiply each column by the number of monomers in the species! 
 
-1. Our first goal is to create an objective function that will return the observable. Recall that our observable concentration (our y-axis) cannot see small species and cannot differentiate between the larger species. Write a function calcObs that accepts the sol.y matrix returned from the ODE, sums the total concentration of trimers and tetramers, and returns this summed concentration for each timepoint. 
+2. Write a function called ```checkModel()``` that accepts the sol.y matrix returned from the ODE solution and checks this for you easily.
+
+```python
+def checkModel(sol):
+    # put your code here
+    return(concSum)
+```
+
+7. Using your ```checkModel()``` function, make sure the number of monomers stays constant in your system through the integration. If it is not, find the error(s) in your differential equations! It is neccessary to make sure that there are no leaks in your equations before proceeding to the next step!
+
+# Recreating our observable from our solution
+
+1. In order to fit our experimental data, we need our model to output the same observable. Recall that our observable concentration (our y-axis) cannot see small species and cannot differentiate between the larger species. Write a function calcObs that accepts the sol.y matrix returned from the ODE, sums the total concentration of trimers and tetramers, and returns this summed concentration for each timepoint. 
 
 2. Write a script that will define initial concentrations and on and off rates, and use that to:
     1. Plot the change in monomer, 2-mer, 3-mer, etc species vs. time
