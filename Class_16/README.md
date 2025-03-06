@@ -178,7 +178,8 @@ def calcObs(sol):
 ```python
 # solve the ODE and return the observable - for use with curve_fit()
 def fitODE(t,k_on,k_off):
-    # the keywork global here tells the function to access the value of C0 from the main namespace, so we don't need to redfine it.
+    # the keywork global here tells the function to access the value 
+    # of C0 from the main namespace, so we don't need to redfine it.
     global C0
     sol = solve_ivp(ME, (t.min(),t.max()), C0, args=(k_on,k_off), t_eval=t) 
     return(calcObs(sol))
