@@ -206,9 +206,10 @@ popt, pcov = curve_fit(fitODE,data['t'],data['F'],p0=p0, bounds=bounds)
 # solve ODEs with results of the fit to comapre against experimental data
 y_model = solve_ivp(ME, (0,100), C0, args=popt, t_eval=data['t'])
 
-# In one plot, show the experimental data overlayed with the fitted model
-# In a seperate plot, show the concentrations vs. time of all species in the system, from monomer to tetramer
-# In the last plot, show that your system isn't leaky
+# plot the following three figures:
+# 1) the experimental data overlayed with the fitted model
+# 2) the concentrations vs. time of all species in the system, from monomer to tetramer
+# 3) a plot showing that your system isn't leaky
 ```
 
 6. Upload the entire notebook to the submission link on Blackboard. In the textbox, answer the following questions:
