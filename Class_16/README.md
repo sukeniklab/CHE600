@@ -214,7 +214,7 @@ y_model = solve_ivp(ME, (0,100), C0, args=popt, t_eval=data['t'])
 ```
 
 6. Upload the entire notebook to the submission link on Blackboard. In the textbox, answer the following questions:
-    1. What rates did you get from the fit? 
-    2. Use your model to make a prediction that can be observed using experiments. For example, you can propose to increase rates by heating the system, and using the model to predict the effect given the same initial concentrations.
+    1. What rates did you get from the fit? Do they make sense?
+    2. Use your model to make a prediction that can be observed using experiments. For example, you can propose to increase rates by heating the system, and using the model to predict the effect given the same initial concentrations. Explain your predictions and the result.
 
 7. This full program needs to be completed by 3/27. 
