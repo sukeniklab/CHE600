@@ -103,7 +103,7 @@ dC2 = k_off*(-C[1] + C[2]) + k_on*C[0]*(C[0] - C[1])
 
 ```python
 t = np.linspace(0,100,100)
-C0 = [0.5,0,0,0,0]
+C0 = [0.5,0,0,0]
 p0=[0.15,0.007]
 sol=solve_ivp(ME,(0,100),C0,args=p0,t_eval=t)
 
@@ -117,6 +117,8 @@ ax.set_xlabel('t')
 ```
 
 5. You’ll quickly find out that constants need to be smaller than 1 or our simulation “explodes”. Try generating some solutions that would make sense, and plotting these as function of time. Note that the graph below is only one example with some arbitrary parameters – yours can look very different!
+
+<img src="./images/sim_data.png" width=450>
 
 6. How can we test if our model is working right? One way to do this is to check that matter is conserved, and no monomers are destroyed our simulation. In other words, our simulation isn’t “leaky”. One way to do this is to use the ```np.sum()``` function to go over each line in the concentration matrix (```sol.y```), and sum the monomers. Remember to multiply each column by the number of monomers in the species! Write a function called ```checkModel()``` that accepts the sol.y matrix returned from the ODE solution and checks this for you easily.
 
