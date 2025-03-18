@@ -107,11 +107,14 @@ class card:
 2. The class itself is like an empty form. We need to create an instance of a card, with instructions on how to fill it. Once you’ve run the script, you can create an instance of the card class like so:
 
 ```python
-acard = card("S","A",14)
-acard.cardsuit #this calls an attribute
+acard = card("S","A",14) #this creates an instance of the card class
+type(acard)
 ```
 ```python
-acard.printcard() #this calls a function
+acard.cardsuit #this calls an attribute of the created instance
+```
+```python
+acard.printcard() #this calls a function from the created instance
 ```
 
 3. ```acard``` is an instance of the ```card``` class, with a property suite "S" (spade), a property type "A" (Ace), and a numeric property value of 14 (that allows convenient comparison between cards). Think about the usability of this class. Could our card accept any value of suite or type? Do we actually need to define the value? How would you improve this object?
