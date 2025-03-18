@@ -1,9 +1,9 @@
-CHE600 - Class 16
+# CHE600 - Class 17
 
 Topics today:
-1. Intro Object Oriented programming in python
-2. Object Orientd program demo: Card wars
-3. Independent work: adding new strategies
+1. [Intro Object Oriented programming in python](#intro-to-object-oriented-programming)
+2. [Object Orientd program demo: Card wars](#object-oriented-program-for-card-games)
+3. [Importing and using classes](#importing-and-using-classes)
 
 # Intro to Object oriented programming
 
@@ -68,7 +68,7 @@ We'll now see how this approach works by designing an object-oriented card game.
 
 3. Let’s code these into a class. The format for creating a class is fixed: 
     1. Define the class name using the ```class``` keyword
-    2. The first function must be the __init__ function. This function is called automatically every time an instance (object) of that class is created. Initializing the class sets all the properties assigned to the class. If the user is supposed to provide values to these properties, they need to be part of the function definition.
+    2. The first function must be the ```__init__()``` function. This function is called automatically every time an _instance_ of that _class_ is created. Initializing the class sets all the atributes of the class. If the user is supposed to provide values to these properties, they need to be passed as arguments to the ```__init__()``` function.
     3. After assigning the init function, we add any functions that class may have. The self keyword is used whenever we want to access properties or functions of the class (which we do by calling self.property) 
 
 ## I. The card class
@@ -77,100 +77,145 @@ We'll start by building the card class:
 1. In a notebook called cards.ipynb, write up the following code:
 
 ```python
+import numpy as np
+import random
+```
+```python
 class card:
     '''
     card class
     '''
     def __init__(self, suit, type, value):
+        ''' 
+        the __init__ function is called every time an instance of the class
+        is created. Notice that this init function needs 4 parameters - if 
+        not provided this will throw an error!
+        '''
         self.cardsuit=suit
         self.cardtype=type
         self.cardvalue=value
     
     def printcard(self): 
- 	print("%2s %s %2d"%(self.cardtype, self.cardsuit, self.cardvalue))
+        '''
+        this is a function that can be called from any instance of the card class.
+        It requires no parameters - self is passed automatically, allowing you to access
+        the attributes of that instance
+        '''
+ 	    print("%2s %s %2d"%(self.cardtype, self.cardsuit, self.cardvalue))
 ```
 
 2. The class itself is like an empty form. We need to create an instance of a card, with instructions on how to fill it. Once you’ve run the script, you can create an instance of the card class like so:
 
 ```python
 acard = card("S","A",14)
-acard.cardsuit #this is an attribute
-acard.printcard() #this is a function
+acard.cardsuit #this calls an attribute
+```
+```python
+acard.printcard() #this calls a function
 ```
 
 3. ```acard``` is an instance of the ```card``` class, with a property suite "S" (spade), a property type "A" (Ace), and a numeric property value of 14 (that allows convenient comparison between cards). Think about the usability of this class. Could our card accept any value of suite or type? Do we actually need to define the value? How would you improve this object?
 
-## II. The deck object
+## II. The deck class
 
 Next, let’s plan the other object, a deck. The deck will hold card objects. Because we’re going to program a game of war – each player should initially have a full, 52-card deck, but the decks need to be able to add and remove cards. What functions should ```deck``` have?
 
-1. An __init__ function that defines all the deck's attributes
+1. An ```__init__``` function that defines all the deck's attributes
 
 ```python
-def __init__(self):
-    #initialize the deck - essentially an empty list
-    self.deck=[]
-    # possible values for suits and rank
-    suits=['S','C','H','D']
-    ranks=['A','2','3','4','5','6','7','8','9','10','J','Q','K']
-    # a dictionary to map rank to a numerical value
-    values={'A':14,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'J':11,'Q':12,'K':13}
-    # generate a full deck of cards - all suites of each rank:
-    for suit in suits:
-        for rank in ranks:
-            # add a card object to the self.deck list for every suit/rank combo
-            self.deck.append(card(suit,rank,values[rank]))
+class deck:
+    def __init__(self):
+        #initialize the deck - essentially an empty list
+        self.deck=[]
+        # possible values for suits and rank
+        suits=['S','C','H','D']
+        ranks=['A','2','3','4','5','6','7','8','9','10','J','Q','K']
+        # a dictionary to map rank to a numerical value
+        values={'A':14,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'J':11,'Q':12,'K':13}
+        # generate a full deck of cards - all suites of each rank:
+        for suit in suits:
+            for rank in ranks:
+                # add a card object to the self.deck list for every suit/rank combo
+                self.deck.append(card(suit,rank,values[rank]))
 ```
 
-2. A function that will shuffle the deck (```shuffle()```)
+2. A function that will shuffle the deck (```shuffle()```). Notice that this and all other class function definitions need to go in the same cell as the class definition!
 
 ```python
-def shuffle(self):
-    #shuffle the deck
-    newdeck=[]
-    randCard=np.arange(len(self.deck))
-    np.random.shuffle(randCard)
-    for i in range(len(randCard)):
-        print(i, randCard[i])
-        newdeck.append(self.deck[randCard[i]])
-    self.deck=newdeck
+    def shuffle(self):
+        #shuffle the deck. Note that random must be imported!
+        random.shuffle(self.deck)
+
 ```
 3. A function that will let us look at thewhole deck:
 
 ```python
-def printdeck(self):
-    #print the contents of the deck
-    i=0
-    for card in self.deck:
-        print("%3d "%(i))
-        card.printcard()
-        i+=1
+    def printdeck(self):
+        #print the contents of the deck
+        i=0
+        for card in self.deck:
+            print("%3d "%(i))
+            card.printcard()
+            i+=1
 ```
 
 4. A function that will deal a card from the top of the deck (```dealCard()```)
 
 ```python
-def dealcard(self): 
-    #deal a card from the TOP deck
-    return(self.deck.pop())
+    def dealcard(self): 
+        #deal a card from the TOP deck
+        return(self.deck.pop())
 ```
 
 5. A function that will add a card to the bottom of the deck (```addCard()```)
 
 ```python
-def addcard(self,card):
-    #add a card to the BOTTOM of the deck
-    self.deck.insert(0,card)
+    def addcard(self,card):
+        #add a card to the BOTTOM of the deck
+        self.deck.insert(0,card)
 ```
 
 6. A function to print out how many cards are left in the deck (```cardsleft()```) 
 
 ```python
-def cardsleft(self): 
-    return len(self.deck)
+    def cardsleft(self): 
+        return len(self.deck)
 ```
 
-## III. Bringing it all together
+7. Let's try out our new deck:
+
+```python
+adeck = deck()
+adeck.deck
+```
+
+8. The deck attribute is a list containing 52 _card_ objects. Let's see what the first card in the deck is:
+
+```python
+adeck.deck[0].printcard()
+```
+
+9. Now lets shuffle the deck and see what the first card is after shuffling:
+
+```python
+adeck.shuffle
+adeck.deck[0].printcard()
+```
+
+10. Let's try to remove a card from the deck:
+
+```python
+print(adeck.cardsleft())
+adeck.dealcard()
+print(adeck.cardsleft())
+adeck.dealcard()
+print(adeck.cardsleft())
+```
+
+11. Create a new _card_ using the card class, and add it to the deck using the ```addcard()``` function!, then check if it's been added!
+
+# Importing and using classes
+
 We'll now combine the deck and card classes to a single library called cards.py, and code our game of war into a jupyter notebook called way.ipynb
 
 1. Copy and paste the card and deck classes into a single file called ```cards.py```, and place it in the same directory as your notebook. Note this is file should not be a jupyter notebook, just a regular python library (notebooks can't be easily imported!). 
@@ -187,8 +232,8 @@ adeck.shuffle()
 bdeck=cards.deck()
 bdeck.shuffle()
 
-#play five rounds of "war"
-for i in range(1000):
+#play a few rounds of "war"
+for i in range(10):
     print("--------round %i---------"%i)
     acard=adeck.dealcard()
     bcard=bdeck.dealcard()
@@ -205,10 +250,12 @@ for i in range(1000):
         print("cards equal")
         adeck.addcard(acard)
         bdeck.addcard(bcard)
-    print("Player a has %i cards left "%adeck.cardsleft())
-    print("Player b has %i cards left "%bdeck.cardsleft())
+print("End of round %i, Player A %i:%i Player B" %
+(i, adeck.cardsleft(), bdeck.cardsleft()))
 ```
 
-4. In an actual game of card war, when there is a tie, players draw three more cards, with the last one face up. The player with the highest-value face up card takes all the cards. Code this routine into the game, and run the game for another five rounds.
+3. Now that we have this coded, we can play much larger games. Let's play a game with 100, 1,000, and 10,000 rounds. What happens to the final score as you increase the number of rounds? **Explain why that makes sense.**
 
-5. Upload your notebook 
+4. In an actual game of card war, when there is a tie, players draw three more cards with the last one face up. The player with the highest-value face up card takes all the cards. Copy the previous war code to a new cell, add the "tie" routine into the game, and run the game for another five rounds. **Does this affect the results?**
+
+5. Upload your notebook with both the regular run and a run that includes the "tie" scenario to Blackboard, and answer the questions in (3) and (4) in the textbox.
