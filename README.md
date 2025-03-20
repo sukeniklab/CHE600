@@ -19,7 +19,7 @@ Class sessions: Tuesdays and Thursdays, 12:30-1:50 PM, LSC 215
 | 2/25,2/27 | Python III | [13](./Class_13/README.md)-[14](./Class_14/README.md) | Visualization with Seaborn, Optimization using SciPy |
 | 3/4,3/6 | Modelling II | [15](./Class_15/README.md)-[16](./Class_16/README.md) | Models II – numerical integration, master equations, homework II |
 | 3/11,3/13 | **Spring break** |     |     |
-| 3/18,3/20 | Application I | [17](./Class_17/README.md)-18 | Python Object Oriented programming (Classes) |
+| 3/18,3/20 | Application I | [17](./Class_17/README.md)-[18](./Class_18/README.md) | Python Object Oriented programming (Classes) |
 | 3/25,3/27 | Application II | 19-20 | Database accession and parsing (REST and other tools), homework III |
 | 4/1,4/3 | ML I | 21-22 | Machine learning basics – _de novo_ protein sequence generation |
 | 4/8, 4/10 | ML II | 23-24 | Machine learning – _de novo_ protein structure design, homework IV |
