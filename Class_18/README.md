@@ -7,14 +7,6 @@ Topics today:
 3. [Using pre-written classes](#using-classes-effectively)
 4. [Independent work](#independent-work)
 
-Takehome lessons:
-
-1.	Some strategies for understanding a pre-written program
-2.	Expanding our use of OOP in python
-3.	A simple evolutionary algorithm
-
-
-
 # The iterated prisoner’s dillema: 
 
 The [prisoner’s dilemma](http://en.wikipedia.org/wiki/Prisoner's_dilemma) (PD) is a “game” in which two players are asked to cooperate or defect in a particular transaction, with the following payoff matrix:
@@ -236,7 +228,5 @@ payoff={("Defect","Defect"):(1,1),
         ("Defect","Cooperate"):(6,0),
         ("Cooperate","Cooperate"):(5,5)}
 ```
-
-
 
 4. Submit your notebook, including answers to the question above.
