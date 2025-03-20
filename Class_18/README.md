@@ -37,13 +37,13 @@ The iterated prisoner’s dilemma (IPD) version of this game each player plays a
     * A ```response()``` function which will pass a defect or cooperate after evaluating some conditions
     * An ```inform()``` function which lets the player remember what happened in the last game with a specific opponent. Not all strategies use the inform function.
 
-6. We have three built-in strategies: always defect, always cooperate, and 'tit-for-tat'. Look at the code and figure out how each strategy works. (For a longer list of IPD strategies and an online pairwise tournament, see http://www.iterated-prisoners-dilemma.net/)
+6. We have two built-in strategies defect and cooperate. Look at the code and figure out how each strategy works. (For a longer list of IPD strategies and an online pairwise tournament, see http://www.iterated-prisoners-dilemma.net/)
 
 # Using classes effectively
 
 It is clear that as it is currently written, the classes do not do much. We will need to program the game manually. 
 
-1. Let's start simple: Create two _actors_ with two defined _strategies_, and have them play a single game. To do this, place [ipd_class.py](./files/ipd_class.py) in the same directory as a new notebook, and import the file in the first cell.
+1. Let's start simple: Create two _actors_ with one of the two defined _strategies_, and have them play a single game. To do this, place [ipd_class.py](./files/ipd_class.py) in the same directory as a new notebook, and import the file in the first cell.
 
 ```python
 from ipd_class import *
