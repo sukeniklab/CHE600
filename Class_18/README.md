@@ -4,7 +4,8 @@ Topics today:
 
 1. [Object Oriented programming in python: Iterated Prisoner’s Dilemma](#the-iterated-prisoners-dillema)
 2. [Understanding the logic of OO code](#understanding-the-oo-logic)
-3. [Using pre-written classes]
+3. [Using pre-written classes](#using-classes-effectively)
+4. [Independent work](#independent-work)
 
 Takehome lessons:
 
@@ -231,9 +232,9 @@ strats=[cooperate,defect,defect,defect,defect,defect,defect,tit_for_tat,wildcard
 
 ```python
 payoff={("Defect","Defect"):(1,1),
-        ("Cooperate","Defect"):(0,4),
-        ("Defect","Cooperate"):(4,0),
-        ("Cooperate","Cooperate"):(3,3)}
+        ("Cooperate","Defect"):(0,6),
+        ("Defect","Cooperate"):(6,0),
+        ("Cooperate","Cooperate"):(5,5)}
 ```
 
 
