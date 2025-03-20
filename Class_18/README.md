@@ -215,24 +215,19 @@ actor_0 = actorList[0]
 actor_1 = actorList[1]
 ```
 
-4. Pay attention to the final scores – specific match ups end up being very skewed! It is clear that some strategies do well against a subset of other strategies, but not against all.
+7. Pay attention to the final scores – specific match ups end up being very skewed! It is clear that some strategies do well against a subset of other strategies, but not against all.
 
-5. Let's try skewing the playing field a bit. Increase the number of players who defect by adding a couple more defect strategies to the strats list - this will increase the probability of choosing it! 
+# Independent work:
+
+1. Let's try skewing the playing field a bit. Increase the number of players who defect by adding a couple more defect strategies to the strats list - this will increase the probability of choosing it! 
 
 ```python
-strats=[cooperate,defect,defect,defect,defect,defect,defect,tit_for_tat]
+strats=[cooperate,defect,defect,defect,defect,defect,defect,tit_for_tat,wildcard]
 ```
 
-6. What happens to the overall score? Do the same thing by having more players cooperate. What happens then?
+2. What happens to the overall score? Do the same thing by having more players cooperate. What happens then?
 
-5. Let's write some new strategies. Design the following new strategy classes:
-    1. random - will randomly pick Defect or Cooperate
-    2. waffler - switches every time, starting from cooperate
-    3. tat_for_tit - the opposite of tit for tat - starts by defecting and always does the oposite of what another actor has done to them. So if actor 1 has defected, next round against actor 1 will be cooperate
-
-6. Incoporate these to your actors, and let's see how they do! Assuming all strategies are distributed equally, what is the best strategy to pick for this game?
-
-7. Let's change the payoff matrix slightly:
+3. Let's change the payoff matrix slightly. What strategy will win now? Explain:
 
 ```python
 payoff={("Defect","Defect"):(1,1),
@@ -241,6 +236,6 @@ payoff={("Defect","Defect"):(1,1),
         ("Cooperate","Cooperate"):(3,3)}
 ```
 
-What strategy will win now? Explain.
 
-7. Submit your notebook, including answers to question in 6, 7, and 8.
+
+4. Submit your notebook, including answers to the question above.
