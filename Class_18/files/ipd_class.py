@@ -31,15 +31,3 @@ class cooperate:
     def inform(self, other, other_response):
         return
 
-class tit_for_tat:
-    def __init__(self,Nactors,myid):
-        self.Nactors=Nactors
-        self.myid=myid
-        self.name="tit_for_tat"
-        self.responses=["Cooperate"]*Nactors
-    def response(self, other):
-        return self.responses[other]
-    def inform(self, other, other_response):
-        self.responses[other]=other_response
-        return
-

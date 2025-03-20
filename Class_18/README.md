@@ -2,7 +2,7 @@ CHE600 - Class 18
 
 Topics today:
 
-1.	[Object Oriented programming in python: Iterated Prisoner’s Dilemma](#the-iterated-prisoners-dillema)
+1. [Object Oriented programming in python: Iterated Prisoner’s Dilemma](#the-iterated-prisoners-dillema)
 2. [Understanding the logic of OO code](#understanding-the-oo-logic)
 3. [Using pre-written classes]
 
@@ -57,6 +57,21 @@ from ipd_class import *
 # this imports all classes to the main namespace (i.e. we wont have 
 # to call ipd_class.actor(), we can just call actor() directly.)
 ```
+
+```python
+# create two actors, bob and alice
+bob = actor(0,cooperate(2,0))
+alice = actor(1,defect(2,1))
+```
+```python
+# get their responses
+bob_response = bob.strategy.response(1)
+alice_response = alice.strategy.response(0)
+print(bob_response)
+print(alice response)
+```
+2. Right now, all our actors do is return "Deffect" or "Cooperate". This is clearly not enough. To turn this into a game, we'd need to incorporate the payoff matrix show above. Let's do that using a dictionary:
+
 ```python
 # set up the payoff matrix
 payoff={("Defect","Defect"):(1,1), \
@@ -64,15 +79,10 @@ payoff={("Defect","Defect"):(1,1), \
 ("Defect","Cooperate"):(3,0), \
 ("Cooperate","Cooperate"):(2,2)}
 ```
+
+3. Now we can calculate the payoff by looking up the response values:
+
 ```python
-# create two actors, bob and alice
-bob = actor(0,cooperate(2,0))
-alice = actor(1,defect(2,1))
-
-# get their responses
-bob_response = bob.strategy.response(1)
-alice_response = alice.strategy.response(0)
-
 # calculate payoff by looking up the payoff matrix
 bob_payoff,alice_payoff=payoff[(bob_response,alice_response)]
 
@@ -80,13 +90,48 @@ bob_payoff,alice_payoff=payoff[(bob_response,alice_response)]
 print("bob  : %i \n alice: %i"%(bob_payoff,alice_payoff))
 ```
 
-2. Now let's expand our game to multiple rounds:
+# Expanding our classes
+The iterative prisoner's dillema allows players to play multuple rounds of games against other players. They also provide the option for players to "remember" what other players have done to them, and retaliate. Let's add a new strategy to our ipd_class.py file called ```tit_for_tat()```. With this strategy, the player starts our cooperating, but whatever the player has done to them they will do in the next round. So if the player defected last round, they will defect in the next.
+
+1. In the ipd_class.py file, add two strategy classes. The first is the wildcard. What will this strategy do:
+
+```python
+class wildcard:
+    def __init__(self,Nactors,myid):
+        self.Nactors=Nactors
+        self.myid=myid
+        self.name="wildcard"
+    def response(self, other):
+        return(random.choice(["Defect","Cooperate"]))
+    def inform(self, other, other_response):
+        return
+```
+
+2. The second is the "tit for tat" strategy:
+
+```python
+class tit_for_tat:
+    def __init__(self,Nactors,myid):
+        self.Nactors=Nactors
+        self.myid=myid
+        self.name="tit_for_tat"
+        self.responses=["Cooperate"]*Nactors
+    def response(self, other):
+        return self.responses[other]
+    def inform(self, other, other_response):
+        self.responses[other]=other_response
+        return
+```
+
+3. Notice that this class has an additional attribute called ```responses``` which contains a list as long as the number of actors, and holds the value "Cooperate" for each element. Whenever the actor with this strategy is passed the other player's action (using the ```inform()``` function), the list gets updated, and the response is pulled from this list.
+
+4. This strategy really requires multiple rounds to work, so let's expand our main notebook to include multiple rounds:
 
 ```python
 # list to store our actors
 actorList=[]
 # number of actors
-N_actors=3
+N_actors=2
 # how many rounds they'll play
 rounds=10
 # define payoff matrix
@@ -96,23 +141,19 @@ payoff={("Defect","Defect"):(1,1),
         ("Cooperate","Cooperate"):(2,2)}
 
 # create the two actors with specifc strategies
-strat_0 = cooperate
-strat_1 = defect
-strat_2 = tit_for_tat
+strat_0 = tit_for_tat
+strat_1 = wildcard
+
 # actorID 0
 actorList.append(actor(0,strat_0(N_actors,0)))
 # actorID 1
 actorList.append(actor(1,strat_1(N_actors,1)))
-# actorID 2
-actorList.append(actor(2,strat_2(N_actors,2)))
-print(actorList)
 ```
 
-3. In the third cell, let's run the game:
+3. In the third cell, let's run the game for 10 rounds:
 
 ```python
 for i in range(10):
-    random.shuffle(actorList)
     actor_0 = actorList[0]
     actor_1 = actorList[1]
     
@@ -134,7 +175,6 @@ for i in range(10):
     print('id\'s \t\t %i \t\t\t %i' % (actor_0.myid,actor_1.myid))
     print('strat \t\t %s \t %s' % (actor_0.name,actor_1.name))
     print('response \t %s \t %s' % (response_0,response_1))
-    print('payoff \t\t %i \t\t\t %i' % (payoff_0,payoff_1))
     print('score \t\t %i \t\t %i' % (actor_0.score,actor_1.score))
     print('---------')
 ```
@@ -143,27 +183,36 @@ for i in range(10):
 
 ```python
 # dictionary containing all strategies
-scores = {'defect':0,'tit_for_tat':0,'cooperate':0}
-N_actors = {'defect':0,'tit_for_tat':0,'cooperate':0}
+scores = {'defect':0,'cooperate':0,'wildcard':0,'tit_for_tat':0}
+N_actors = {'defect':0,'cooperate':0,'wildcard':0,'tit_for_tat':0}
 # loop over all actors and add up their score
-for actor in actorList:
-    N_actors[actor.name]+=1
-    scores[actor.name]+=actor.score
+for i in actorList:
+    N_actors[i.name]+=1
+    scores[i.name]+=i.score
 
 # print the results
 print("strategy,no. actors,avg. score")
 for key in scores.keys():
-    print("%s,%i,%i"%(key,N_actors[key],scores[key]/N_actors[key]))
+    if N_actors[key]>0:
+        print("%s,%i,%i"%(key,N_actors[key],scores[key]/N_actors[key]))
 ```
 
 5. Finally, let's expand the game to 50 players with randomly chosen strategies and 1,000 rounds, and look at the scoring again! To do this, we'll expand our actorList:
 
 ```python
 actorList=[]
-strats=[cooperate,defect,tit_for_tat]
+strats=[cooperate,defect,wildcard,tit_for_tat]
 for i in range(50):
     actorList.append(actor(i,random.choice(strats)(50,i)))
 print(actorList)
+```
+
+6. And expand the code to make 1,000 games, each game between two randomly selected actors from ```actorList```. One strategy to do this would be to shuffle the list with every iteration of our loop:
+
+```python
+random.shuffle(actorList)
+actor_0 = actorList[0]
+actor_1 = actorList[1]
 ```
 
 4. Pay attention to the final scores – specific match ups end up being very skewed! It is clear that some strategies do well against a subset of other strategies, but not against all.
