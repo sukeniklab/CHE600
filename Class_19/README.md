@@ -1,4 +1,4 @@
-# CHE600 - Class 18
+# CHE600 - Class 19
 
 Topics:
 
