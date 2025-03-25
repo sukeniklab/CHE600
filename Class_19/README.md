@@ -98,7 +98,7 @@ agonist = agonist.iloc[0:100]
 3. Let's look at a few of these CIDs on pubchem:
 
 ```python
-print(agonist[0:2,'CID'])
+print(agonist['CID'])
 ```
 
 4. Place any one of these CIDs in the following URL to pull up the webpage:
