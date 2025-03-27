@@ -61,15 +61,19 @@ With the full length sequence for each protein, let's perform some further analy
 
 2. To do this, we will need to predict the disorder of each sequence. One way to do this is through a library called [metapredict](https://metapredict.readthedocs.io/en/latest/getting_started.html). Metapredict is a machine learning network trained to predict the degree of disorder (e.g. the percentage of residues that do not have a fixes 3D structure) directly from amino acid sequence. See the original paper [here](https://www.biorxiv.org/content/10.1101/2024.11.05.622168v1)
 
-3. Install the library on your computer, and read the documentation. Using a for loop, predict the disorder of each sequence in your dataset, and add the disorder as a column to your main DataFrame.
+3. Install the library on your computer, and read the documentation. 
 
-4. Display a scatterplot of the disorder score _vs_ the halftime. Note that since halftimes might span multiple orders of magnitude it is better to show them on a log scale.
+4. Using the predict_disorder() [function](https://metapredict.readthedocs.io/en/latest/usage/api.html#metapredict.meta.predict_disorder), predict the disorder of all sequences in your dataset. 
 
-5. Using [scipy.stats.spearmanr()](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.spearmanr.html) calculate and display the [spearman rank coefficient](https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient) between the disorder score and the halftime.
+5. Add the disorder as a column to your main DataFrame.
 
-6. Do you find a correlation? 
+6. Display a scatterplot of the disorder score _vs_ the halftime. Note that since halftimes might span multiple orders of magnitude it is better to show them on a log scale.
 
-6. Upload the full notebook, and answers written as comments or _markdown cells_ to blackboard by 4/18, 11:59 PM.
+7. Using [scipy.stats.spearmanr()](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.spearmanr.html) calculate and display the [spearman rank coefficient](https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient) between the disorder score and the halftime.
+
+8. Do you find a correlation? 
+
+9. Upload the full notebook, and answers written as comments or _markdown cells_ to blackboard by 4/18, 11:59 PM.
 
 ## Good luck!
 
