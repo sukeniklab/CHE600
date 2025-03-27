@@ -20,7 +20,7 @@ Class sessions: Tuesdays and Thursdays, 12:30-1:50 PM, LSC 215
 | 3/4,3/6 | Modelling II | [15](./Class_15/README.md)-[16](./Class_16/README.md) | Models II – numerical integration, master equations, homework II |
 | 3/11,3/13 | **Spring break** |     |     |
 | 3/18,3/20 | Application I | [17](./Class_17/README.md)-[18](./Class_18/README.md) | Python Object Oriented programming (Classes) |
-| 3/25,3/27 | Application II | [19](./Class_19/README.md)-20 | Database accession and parsing (REST and other tools), homework III |
+| 3/25,3/27 | Application II | [19](./Class_19/README.md)-[20](./Class_20/README.md) | Database accession and parsing (REST and other tools), homework III |
 | 4/1,4/3 | ML I | 21-22 | Machine learning basics – _de novo_ protein sequence generation |
 | 4/8, 4/10 | ML II | 23-24 | Machine learning – _de novo_ protein structure design, homework IV |
 | 4/15, 4/17 | ML III | 25-27 | Machine learning SMILES notation |
