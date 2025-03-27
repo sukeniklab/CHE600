@@ -23,5 +23,5 @@ Class sessions: Tuesdays and Thursdays, 12:30-1:50 PM, LSC 215
 | 3/25,3/27 | Application II | [19](./Class_19/README.md)-[20](./Class_20/README.md) | Database accession and parsing (REST and other tools), homework III |
 | 4/1,4/3 | ML I | 21-22 | Machine learning basics – _de novo_ protein sequence generation |
 | 4/8, 4/10 | ML II | 23-24 | Machine learning – _de novo_ protein structure design, homework IV |
-| 4/15, 4/17 | ML III | 25-27 | Machine learning SMILES notation |
+| 4/15, 4/17 | Projects | 25-27 | Final project work |
 | 4/22, 4/24 | Projects | 26-27 | Final Project presentations |
