@@ -1,9 +1,9 @@
 CHE600 - Class 21
 
 Topics today:
-[What is machine learning?](#what-is-machine-learning)
-[Predictions with ML](#predictions-with-ml)
-[train, test, and use an ML algorithm ](#recurrent-neural-networks-to-analyze-protein-sequences)
+* [What is machine learning?](#what-is-machine-learning)
+* [Predictions with ML](#predictions-with-ml)
+* [train, test, and use an ML algorithm ](#recurrent-neural-networks-to-analyze-protein-sequences)
 
 # What is machine learning?
 
@@ -25,7 +25,7 @@ ML has some terminology it will be important to understand before we dive in. Yo
 
 <img src="./images/Colored_neural_network.png" width=300>
 
-1. The input is the data you're feeding into the model. For example, a protein sequence. We won't talk about this much, but this is hands down the most important factor in building an ML network. Bad or poorly acquired data will still provide predictions - but they will be useless predictions (the famous "garbage in garbage out"). ML networks are also highly specific - trained to do one thing - and so will not perform other (even highly related) tasks. We will see more of this next class.
+1. The input is the data you're feeding into the model. For example, a protein sequence. This is hands down the most important factor in building an ML network. Bad or poorly acquired data will still provide predictions - but they will be useless predictions (the famous "garbage in garbage out"). ML networks are also highly specific - trained to do one thing - and so will not perform other (even highly related) tasks. We will see more of this next class.
 
 2. The data is then turned into a numerical representation - also known as _encoding_. For example, we can assign a number to each of the amino acids, or we can use a "one hot" representation - this is a binary matrix of Nx22 Booleans, where N is the length of the sequence and amino acid identity depends on which colum contains a one (with two additional position for N- and C-terminal).
 
@@ -85,10 +85,12 @@ Frag8 LQPSSYSVHERAC 2
     * class '1' sequences are randomly generated in a manner that favors acidic amino (D, E) acids. 
     * class '2' sequences are generated such that all amino acids have the same probability. 
 
-4. Open a new jupyter notebook. In the first cell, install PARROT and torch by typing:
+4. To run Parrot, we will need python 3.9 - it won't work well with newer versions. I can help do this with you If needed! 
+
+5. Open a new jupyter notebook, and make sure to use Python 3.9 as your interpreter. In the first cell, install PARROT and torch by typing:
 
 ```python
-!pip install torch idptools-parrot
+!pip install idptools-parrot
 ```
 
 5. While this is progressing, let’s have a look together at the first lines of code:
