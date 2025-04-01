@@ -21,7 +21,7 @@ Class sessions: Tuesdays and Thursdays, 12:30-1:50 PM, LSC 215
 | 3/11,3/13 | **Spring break** |     |     |
 | 3/18,3/20 | Application I | [17](./Class_17/README.md)-[18](./Class_18/README.md) | Python Object Oriented programming (Classes) |
 | 3/25,3/27 | Application II | [19](./Class_19/README.md)-[20](./Class_20/README.md) | Database accession and parsing (REST and other tools), homework III |
-| 4/1,4/3 | ML I | 21-22 | Machine learning basics – _de novo_ protein sequence generation |
+| 4/1,4/3 | ML I | [21](./Class_21/README.md)-22 | Machine learning basics – _de novo_ protein sequence generation |
 | 4/8, 4/10 | ML II | 23-24 | Machine learning – _de novo_ protein structure design, homework IV |
 | 4/15, 4/17 | Projects | 25-27 | Final project work |
 | 4/22, 4/24 | Projects | 26-27 | Final Project presentations |
