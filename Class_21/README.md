@@ -3,7 +3,7 @@ CHE600 - Class 21
 Topics today:
 * [What is machine learning?](#what-is-machine-learning)
 * [Predictions with ML](#predictions-with-ml)
-* [train, test, and use an ML algorithm ](#recurrent-neural-networks-to-analyze-protein-sequences)
+
 
 # What is machine learning?
 
@@ -48,9 +48,9 @@ protein data, assigning things like cellular localization, presence of PTMs, bio
 
 5. It is important to note that ML can only _predict_. It cannot validate a result on its own, and is most effective when combined with follow-up experimental validation.
 
-# Recurrent neural networks to analyze protein sequences
+## I. Recurrent neural networks to analyze protein sequences
 
-1. Today we will use PARROT – a general framework for training and applying predictors for large sequence-based datasets. Sequences can be composed of any string, so PARROT can be used for amino acids, nucleic acids, or similar.
+1. Today we will use [PARROT](https://idptools-parrot.readthedocs.io/en/latest/) – a general framework for training and applying predictors for large sequence-based datasets. Sequences can be composed of any string, so PARROT can be used for amino acids, nucleic acids, or similar.
 
 2. Note that PARROT only provides the _framework_ for training - essentially pilling together algorithms from a bigger library called [pytorch](https://pytorch.org/) - one of the most popular, open-source, machine learning python libraries. PARROT on its own does NOT contain any trained networks - but it can be used to load and use them to make predictions.
 
