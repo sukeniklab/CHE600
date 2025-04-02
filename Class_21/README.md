@@ -337,6 +337,6 @@ print(value)
     * class '1' sequences are randomly generated in a manner that favors acidic amino acids. (D or E)
     * class '2' sequences are generated such that all amino acids have the same probability. 
 
-5. Now let’s try running this on a set of sequences. You can find a list of some generated sequences in the seqfile.txt file on CatCourses. Feel free to copy paste into the predictor, or alternatively feed them line by line using a for loop. Notice how quickly predictions are made! 
+5. Now let’s try running this on a set of sequences. You can find a list of some generated sequences in the [seqfile.txt](./files/seqfile.txt) file. Feel free to copy paste into the predictor, or alternatively feed them line by line using a for loop. Notice how quickly predictions are made! 
 
 6. Class assignment: Write a script to iteratively go over each sequence in seqfile.txt, make a prediction using your trained network, and assign a class based on the prediction. Upload a csv file with sequence, the result of the network, and the predicted class (0, 1, or 2) for each one. Upload this to Blackboard. 
