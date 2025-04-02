@@ -1,4 +1,4 @@
-CHE600 - Class 21
+# CHE600 - Class 21
 
 Topics today:
 * [What is machine learning?](#what-is-machine-learning)
