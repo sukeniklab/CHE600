@@ -2,10 +2,10 @@
 
 Topics today:
 * Solving regression problems with PARROT
-* Homework III: comparisons between networks trained on similar but different datasets.
+* Homework IV: comparisons between networks trained on similar but different datasets.
 
 
-# Regression problems
+# Regression training with PARROTT
 
 1. Last week we saw how PARROT can be used to classify amino acid sequences into one of 3 classes. This is a broad problem that can be applied to many types of datasets. However, other datasets map a dataset (in our case a sequences) onto a value that is non-discrete. For example, one can design train a network to predict the average radius of a protein given its sequence. The average radius is not a class, and can assume any positive real number. This is a regression problem.
 
@@ -31,13 +31,13 @@ $$y_{norm}=\frac{y-y_{min}}{y_{max}-y_{min}}$$
 
 4. Here y is the activity, and $y_{min}$ and $y_{max}$ are the global minimum and maximum activity in the entire dataset. Each dataset should have its own minimum and maximum.
 
-5. Assign these values into a new column on your pandas dataframe, and plot the histograms again to compare the two datasets. 
+5. Assign these values into a new column on your pandas dataframe, and plot the histograms again to compare the two datasets. Pay attention to differences between these.
 
 ## II. Creating training datasets for PARROT
 
 We next want to create a text file that will be used for ML training. We've seen the format for a classification training set last week. 
 
-1. For this, we'll create a new dataset using the ```.to_csv()``` command that includes the normalized activation instead of the old one:
+1. For this, we'll create a new dataset using the ```.to_csv()``` command that includes the normalized activation. Below is an example of such an export:
 
 ```python
 df[['index','seq','norm_act']].to_csv('staller_ad_norm.tsv',sep=' ',header=False, index=False)
