@@ -53,7 +53,7 @@ Next we want to use PARROT to train a network to predict "activation" from seque
 
 2. Adapt the code we wrote [last week](../Class_21/README.md) to run the regression. Because the dataset is 10-20 times larger than what we’ve seen before, training will take longer.
 
-3. Use this code to train two networks – one on the normalized Staller dataset, and one on the normalized Wrijman dataset.
+3. Use this code to train two networks – one on the normalized Staller dataset, and one on the normalized Erijman dataset.
 
 # Assessing the accuracy of a regression network
 
@@ -72,7 +72,7 @@ For regression networks, we no longer get a confusion matrix like we did for cla
 
 4. We can see that there is a strong positive correlation – but it is by no means perfect. Some points miss by a lot. The output text file contains only two parameters – the Spearman and Pearson R values – both relate to the correlations between the predicted value and the true value, where 0 implies very poor correlation and 1 is a perfect correlation.
 
-5. Upload the correlation plots for both the staller and erijman networks to the PARROT homework submission link in Blackboard
+5. **Make sure the correlation plot for each network is displayed in your notebook for homework submission (or upload it directly)!**
 
 # Using networks on different datasets
 
@@ -80,11 +80,10 @@ For regression networks, we no longer get a confusion matrix like we did for cla
 
 2. To answer the question, you will take the network trained on one experiment, and use it to predict the activity values of the other experiment. The code to use PARROT for prediction is available in [class 21](../Class_21/README.md#predictions-with-ml). 
 
-3. Plot the value of the activity predictions vs their experimental values for each of the two experiments using the other network. 
+3. **Plot the value of the activity predictions vs their experimental values for each of the two experiments using the other network, and calcuate the pearson correlation (using ```scipy.stats.pearsonr()```). Display the r value in text or in the graph.**
 
-4. In a markdown cell, write your insights about this process. Do the networks do a good job of predicting experimental results from a different experiment? 
+4. **In a markdown cell, write your insights about this process. Do the networks do a good job of predicting experimental results from a different experiment? **
 
-[Bonus] Training on both datasets
+# **Bonus** Training on both datasets
 
-Finally, to see if we can do better, let’s combine both datasets to train a single network. Repeat all the operations we’ve done so far. Show the results of each training on the test dataset. 
-With this network, predict only the staller dataset, then only the erijman datasets, and sho
+Finally, to see if we can do better, let’s combine both datasets to train a single network. Repeat all the operations we’ve done so far. Show the results of each training on the test dataset. With this network, predict only the staller dataset, then only the erijman datasets, and show the pearson correlation coefficient. Is it any better than individually trained networks?
