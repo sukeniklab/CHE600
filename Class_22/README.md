@@ -1,4 +1,4 @@
-# CHE600 Class 21
+# CHE600 Class 22
 
 Topics today:
 * Solving regression problems with PARROT
@@ -82,7 +82,7 @@ For regression networks, we no longer get a confusion matrix like we did for cla
 
 3. **Plot the value of the activity predictions vs their experimental values for each of the two experiments using the other network, and calcuate the pearson correlation (using ```scipy.stats.pearsonr()```). Display the r value in text or in the graph.**
 
-4. **In a markdown cell, write your insights about this process. Do the networks do a good job of predicting experimental results from a different experiment? **
+4. **In a markdown cell, write your insights about this process. Do the networks do a good job of predicting experimental results from a different experiment?**
 
 # **Bonus** Training on both datasets
 
