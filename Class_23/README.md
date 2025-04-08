@@ -202,11 +202,11 @@ for var in data.index:
     # append the log2FC (activity) value to ys
     y.append(data.loc[var,'log2FC'])
     # load the embedding of the variant
-    emb = torch.load('./embeddings/embeddings/'+var+'.pt')
+    emb = torch.load('./embeddings/'+var+'.pt')
     # append the embedding to Xs
     X.append(emb['mean_representations'][33])
-# convert Xs to a pytorch tensor
-X = torch.stack(Xs, dim=0).numpy()
+# convert X to a pytorch tensor
+X = torch.stack(X, dim=0).numpy()
 ```
 ```python
 print(X.shape)
