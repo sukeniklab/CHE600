@@ -6,6 +6,7 @@ Topics today:
 * [Introduction to ESM](#introduction-to-esm)
 * [ESM Embeddings](#esm-embeddings)
 * [Using embeddings for prediction](#using-embeddings-for-prediction)
+* [Turning embeddings into a predictor](#turning-embeddings-into-a-predictor)
 
 # Using pretrained networks
 
@@ -214,7 +215,7 @@ print(len(y))
 
 4. We now have a 5,397 x 1,280 matrix - the 1,280 element embedding for each of our 5,397 sequences.
 
-## Turning embeddings into a predictor
+# Turning embeddings into a predictor
 
 1. Now that we have our embeddings, we can use regression to find the relationship between an embedded sequences and its activity value. The problem we are trying to solve is:
 
