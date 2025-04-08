@@ -2,10 +2,10 @@
 
 Topics today:
 
-* [Using pre-trained networks]
-* [Introduction to ESM]
-* [ESM Embeddings]
-* [Using embeddings for prediction]
+* [Using pre-trained networks](#using-pretrained-networks)
+* [Introduction to ESM](#introduction-to-esm)
+* [ESM Embeddings](#esm-embeddings)
+* [Using embeddings for prediction](#using-embeddings-for-prediction)
 
 # Using pretrained networks
 
