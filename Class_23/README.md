@@ -173,6 +173,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 import xgboost as xgb
+import esm
 ```
 
 ## III. Embedding single-point mutation variants into ESM
@@ -322,11 +323,20 @@ loaded_model.load_model('model.json')
 3. We can now use this loaded model to get a prediction for an all new sequence - but we will first need to embed the sequence in ESM:
 
 ```python
+# define the sequence list
 seq = [('test_seq','MSIQHFRVALIPFFAAFCLPVFAHPETLVKVKDAEDQLGARVGYIELDLNSGKILESFRPEERFPMMSTFKVLLCGAVLSRVDAGQEQLGRRIHYSQNDLVEYSPVTEKHLTDGMTVRELCSAAITMSDNTAANLLLTTIGGPKELTAFLHNMGDHVTRLDRWEPELNEAIPNDERDTTMPAAMATTLRKLLTGELLTLASRQQLIDWMEADKVAGPLLRSALPAGWFIADKSGAGERGSRGIIAALGPDGKPSRIVVIYTTGSQATMDERNRQIAEIGASLIKHW'),
        ('test_seq2','MSIQHFRVALIPFGGAFCLPVFAHPETLVKVKDAEDQLGAGGGGGLNSGKILESFRPEERFPMMSTFKVLLCGAVLSRVDAGQEQLGRRIHYSQNDLVEYSPVTEKHLTDGMTVRELCSAAITMSDNTAANLLLTTIGGPKELTAFLHNMGDHVTRLDRWEPELNEAIPNDERDTTMPAAMATTLRKLLTGELLTLASRQQLIDWMEADKVAGPLLRSALPAGWFIADKSGAGERGSRGIIAALGPDGKPSRIVVIYTTGSQATMDERNRQIAEIGASLIKHW')]
+```
+```python
+# create the model and alphabet
 model,alphabet = esm.pretrained.esm2_t33_650M_UR50D()
+# get the batch converter
+batch_converter = alphabet.get_batch_converter()
+# tokenize sequences using batch converter
 batch_labels, batch_strs, batch_tokens = batch_converter(seq)
+# create the emebeddings
 results = model(batch_tokens, repr_layers=[33])
+# extract the final layer of the embedding and average it
 emb = results['representations'][33].mean(1).detach().numpy()
 ```
 
@@ -341,6 +351,6 @@ xgb_model.predict(emb)
 loaded_model.predict(emb)
 ```
 
-6. Play around with the sequences to see what kind of values you can get.
+6. Feel free to add more sequences and introduce more mutations to see what kind of values you can get.
 
 7. Upload your notebook to Blackboard.
