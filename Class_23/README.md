@@ -64,24 +64,31 @@ import esm
 ```python
 seqs = [
     ("protein1", "MKTVRQERLKSIVRILERSKEPVSGAQLAEELSVSRQVIVQDIAYLRSLGYNIVATPRGYVLAGG"),
-    ("protein2", "KALTARQQEVFDLIRDHISQTGMPPTRAEIAQRLGFRSPNAAEEHLKALARKGVIEIVSGASRGIRLLQEE"),
+    ("protein2", "KALTARQQEVFDLIRDHISQTGMPPTRAEIAQRLGFRSPNAAEEHLKALARKGVIEIVSGASRGIRLLQEE")]
 ```
 
 3. We're now going to import the model, and the alphabet that converts our sequence into numerical tokens:
 
 ```python
-# Load ESM-2 model
+# Load ESM-2 model and the tokenizer (alphabet)
 model, alphabet = esm.pretrained.esm2_t33_650M_UR50D()
+# helper tool to tokenize multiple sequences
 batch_converter = alphabet.get_batch_converter()
 ```
 
 4. Next we're going to use the alphabet's batch converter to convert both of our sequences to tokens:
 
 ```python
+# create tokens for all proteins in seqs
 batch_labels, batch_strs, batch_tokens = batch_converter(seqs)
+# get the protein lengths (because tokenizing will be of the length of the longest sequence!)
 batch_lens = (batch_tokens != alphabet.padding_idx).sum(1)
+# print out the tokens
 print(batch_tokens)
+# print out the shape of the tokens
 print(batch_tokens.shape)
+# print out the length of the proteins
+print(batch_lens)
 ```
 
 5. You'll notice that this tokenized version of our sequences contains a list of integers. In ESM2, the index 0 is the start of the sequence (N-terminal), the index 2 is the end of the sequence (C-terminal), and the index 1 is used for padding. There are integers for each of the amino acids, and then several values for other options (e.g. masking)
@@ -89,27 +96,43 @@ print(batch_tokens.shape)
 6. Next we are going to take these tokens and embed them in the model:
 
 ```python
-results = model(batch_tokens)
-token_representations = results["representations"][33]
-token_representations.shape
+# do not include gradients
+with torch.no_grad():
+    # embed the tokens into ESM2
+    results = model(batch_tokens, repr_layers=[33])
+```
+```python
+# let's look at the results (which contrain the embeddings):
+print(type(results))
+print(results.keys())
+print(type(results['representations']))
+print(results['representations'].keys())
+print(type(results['representations'][33]))
+print(results['representations'][33])
+print(results['representations'][33].shape)
 ```
 
-7. The embedded representations of our sequences is taken from the final hidden layer (aka the output layer) consist of a 1280 matrix for every position in the token. To get a more useful value, we will average all of these that represent amino aicds to a single 1280 vector for each sequence using averaging:
+7. The embedded representations of our sequences is taken from the final hidden layer (aka the output layer) consist of a 1280 matrix for every position in the token. To get a more useful value, we will average all of these that represent amino aicds to a single 1280 vector for each amino acid:
 
 ```python
-batch_tokens.shape
+# extract the token representation from the results
+token_representations = results["representations"][33]
+# create a list that will not contain SEQUENCE representation
 sequence_representations = []
 for i, tokens_len in enumerate(batch_lens):
+    # average the embeddings of each sequence according to their length
     sequence_representations.append(token_representations[i,1:tokens_len-1].mean(0))
 ```
 ```python
-print(token_representations.shape)
+# now let's look at the representation of each sequence
+print(sequence_representations[0].shape)
+print(sequence_representations[1].shape)
 ```
 
 8. Note that now we have a 1,280 vector for each of our two sequences - these are the sequences _embedded_ into the ESM algorithm.
 
 ```python
-print(token_representations)
+print(sequence_representation[0])
 ```
 
 9. The actual content of these vectors is a series of numbers - it is meaningless to us, but it contains information not only about the actual sequence but its context and patterns in relation to the training set (that is hundreds of millions of sequences strong)!
@@ -169,19 +192,23 @@ data['log2FC'].hist()
 
 ```python
 # sequence embedding list
-Xs = []
+X = []
 # activity value list
-ys = []
+y = []
 # loop over every variant
 for var in data.index:
     # append the log2FC (activity) value to ys
-    ys.append(data.loc[var,'log2FC'])
+    y.append(data.loc[var,'log2FC'])
     # load the embedding of the variant
     emb = torch.load('./embeddings/embeddings/'+var+'.pt')
     # append the embedding to Xs
-    Xs.append(emb['mean_representations'][33])
+    X.append(emb['mean_representations'][33])
 # convert Xs to a pytorch tensor
-Xs = torch.stack(Xs, dim=0).numpy()
+X = torch.stack(Xs, dim=0).numpy()
+```
+```python
+print(X.shape)
+print(len(y))
 ```
 
 4. We now have a 5,397 x 1,280 matrix - the 1,280 element embedding for each of our 5,397 sequences.
@@ -190,16 +217,16 @@ Xs = torch.stack(Xs, dim=0).numpy()
 
 1. Now that we have our embeddings, we can use regression to find the relationship between an embedded sequences and its activity value. The problem we are trying to solve is:
 
-$$y = \bm{X}\beta + \epsilon$$
+$$y = \textbf{X}\beta + \epsilon$$
 
 * $y$ is an n-element vector (our activities)
-* $\bm{X}$ is an $n \times p$ matrix of inputs (our embeddings)
+* $\textbf{X}$ is an $n \times p$ matrix of inputs (our 5397 X 1280 embedding matrix)
 * $\beta$ is a p-element vector of coefficients
 * $\epsilon$ is an error vector
 
 2. We solve to find $\beta$ such that the error is minimized (notice this is an optimization problem!):
 
-$$\min_\beta ||y-\bm{X}\beta||^2$$
+$$\min_\beta ||y-\textbf{X}\beta||^2$$
 
 3. With $\beta$ found, we can now use beta on ANY embedding to get a prediction (remember there is still an error $\epsilon$ for the activity:
 
@@ -215,7 +242,7 @@ $$ y + \epsilon = x\times \beta$$
 
 ```python
 # first create the training dataset (70% of the data)
-X_train, X_temp, y_train, y_temp = train_test_split(Xs, ys, test_size=0.7)
+X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.7)
 # next split the remaining 30% into validation and testing (15% each)
 X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5)
 ```
