@@ -202,11 +202,11 @@ for var in data.index:
     # append the log2FC (activity) value to ys
     y.append(data.loc[var,'log2FC'])
     # load the embedding of the variant
-    emb = torch.load('./embeddings/embeddings/'+var+'.pt')
+    emb = torch.load('./embeddings/'+var+'.pt')
     # append the embedding to Xs
     X.append(emb['mean_representations'][33])
 # convert Xs to a pytorch tensor
-X = torch.stack(Xs, dim=0).numpy()
+X = torch.stack(X, dim=0).numpy()
 ```
 ```python
 print(X.shape)
@@ -303,7 +303,6 @@ importance = xgb_model.feature_importances_
 # Plot feature importance
 fig,ax = plt.subplots(figsize=(10, 6))
 ax.bar(range(len(importance)), importance)
-ax.title('Feature Importance')
 ```
 
 ## III. Saving our model for reuse
@@ -351,7 +350,3 @@ xgb_model.predict(emb)
 ```python
 loaded_model.predict(emb)
 ```
-
-6. Feel free to add more sequences and introduce more mutations to see what kind of values you can get.
-
-7. Upload your notebook to Blackboard.
