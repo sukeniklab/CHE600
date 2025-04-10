@@ -25,9 +25,9 @@ import xgboost as xgb
 
 ```python
 # create an empty regression model object
-model = xgb.XGBRegressor()
+xgb_model = xgb.XGBRegressor()
 # load our model into it using the model.load() function
-model.load_model('model.json')
+xgb_model.load_model('model.json')
 ```
 
 3. We can now use this loaded model to get a prediction for an all new sequence - but we will first need to embed the sequence in ESM:
@@ -52,14 +52,12 @@ emb = results['representations'][33].mean(1).detach().numpy()
 
 4. Look at the embeddings to see that they make sense
 
-5. Try the prediction, both from the original trained model and the loaded model:
+5. Try the prediction using the loaded model:
 
 ```python
 xgb_model.predict(emb)
 ```
-```python
-loaded_model.predict(emb)
-```
+
 
 # Insights from predictors
 
@@ -70,6 +68,8 @@ Our regression model was trained only on single-point mutations. Can it predict 
 ```
 MSIQHFRVALIPFFAAFCLPVFAHPETLVKVKDAEDQLGARVGYIELDLNSGKILESFRPEERFPMMSTFKVLLCGAVLSRVDAGQEQLGRRIHYSQNDLVEYSPVTEKHLTDGMTVRELCSAAITMSDNTAANLLLTTIGGPKELTAFLHNMGDHVTRLDRWEPELNEAIPNDERDTTMPAAMATTLRKLLTGELLTLASRQQLIDWMEADKVAGPLLRSALPAGWFIADKSGAGERGSRGIIAALGPDGKPSRIVVIYTTGSQATMDERNRQIAEIGASLIKHW
 ```
+
+<img src="./images/sequence.png" width=450>
 
 2. I recommend making these mutations in a text editor. Here are some ideas for hypotheses:
 
